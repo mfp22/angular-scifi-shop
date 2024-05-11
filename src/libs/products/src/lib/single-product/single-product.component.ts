@@ -38,7 +38,7 @@ import {
   updateActiveId,
 } from 'src/app/ngrx/reviews/reviews.actions';
 import { ReviewDialogComponent } from '@scifi/reviews/review-dialog/review-dialog.component';
-import { selectData } from '../../../../ngrx/notification/notification.feature';
+import { selectData } from '../../../../../app/ngrx/notification/notification.feature';
 import { Title } from '@angular/platform-browser';
 
 @Component({

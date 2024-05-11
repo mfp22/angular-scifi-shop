@@ -8,7 +8,7 @@ import { selectLoggedInUserId } from 'src/app/ngrx/auth/auth.feature';
 import { notify } from 'src/app/ngrx/notification/notification.actions';
 import { clearSingleOrder, deleteOrder, loadSingleOrder, resetStatus } from 'src/app/ngrx/orders/orders.actions';
 import { selectDeleteStatus, selectLoadStatus, selectNewOrder, selectSingleOrder } from 'src/app/ngrx/orders/orders.feature';
-import { selectData } from '../../../../ngrx/notification/notification.feature';
+import { selectData } from '../../../../../app/ngrx/notification/notification.feature';
 
 @Component({
   selector: 'app-single-order',
