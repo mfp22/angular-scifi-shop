@@ -7,6 +7,7 @@ import {
   selectFavorites,
   selectLoadStatus,
 } from '@scifi/ngrx/reviews/reviews.feature';
+import { AppState, Customer, Review, Status } from '@scifi/types';
 
 @Component({
   selector: 'app-favorites',

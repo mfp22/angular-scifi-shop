@@ -14,6 +14,15 @@ import {
 } from '@scifi/ngrx/account/account.feature';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { AccountService } from '../account.service';
+import {
+  AccountActiveItem,
+  Address,
+  AddressEmitData,
+  AddressFormGroup,
+  AddressId,
+  AppState,
+  Status,
+} from '@scifi/types';
 
 @Component({
   selector: 'app-addresses',

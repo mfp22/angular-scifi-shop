@@ -1,25 +1,33 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { resetWishlistStatus, updateActiveId, updateWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
+import {
+  resetWishlistStatus,
+  updateActiveId,
+  updateWishlist,
+} from '@scifi/ngrx/wishlist/wishlist.actions';
+import {
+  AppState,
+  Product,
+  Wishlist,
+  WishlistBasic,
+  WishlistItem,
+} from '@scifi/types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WishlistService {
-  baseUrl = "https://taliphus.vercel.app/api/customers";
+  baseUrl = 'https://taliphus.vercel.app/api/customers';
 
-  constructor(
-    private _http: HttpClient,
-    private _store: Store<AppState>
-  ) { }
+  constructor(private _http: HttpClient, private _store: Store<AppState>) {}
 
   getWishlistItems(customerId: number, format: string) {
     const options = {
-      params: new HttpParams().append("format", format),
-      withCredentials: true
-    }
-  
+      params: new HttpParams().append('format', format),
+      withCredentials: true,
+    };
+
     return this._http.get<{ wishlist: Wishlist }>(
       `${this.baseUrl}/${customerId}/wishlist`,
       options
@@ -34,37 +42,45 @@ export class WishlistService {
     );
   }
 
-  dispatchWishlistActions(operation: "add" | "remove" | "removeAll", wishlist: Wishlist, productId: number): void {
+  dispatchWishlistActions(
+    operation: 'add' | 'remove' | 'removeAll',
+    wishlist: Wishlist,
+    productId: number
+  ): void {
     this._store.dispatch(resetWishlistStatus());
 
-    if (operation === "removeAll") {
+    if (operation === 'removeAll') {
       this._store.dispatch(updateActiveId({ activeId: -1 }));
-      this._store.dispatch(updateWishlist({
-        updatedWishlist: [],
-        customerId: wishlist.id
-      }));
+      this._store.dispatch(
+        updateWishlist({
+          updatedWishlist: [],
+          customerId: wishlist.id,
+        })
+      );
       return;
     }
-    
+
     this._store.dispatch(updateActiveId({ activeId: productId }));
     let wishlistArray: WishlistItem[] | [] = [];
-    const transformWishlistArray = (item: { product: Product }) => ({ 
+    const transformWishlistArray = (item: { product: Product }) => ({
       customerId: wishlist.id,
-      productId: item.product.id
+      productId: item.product.id,
     });
 
-    if (operation === "add") {
+    if (operation === 'add') {
       wishlistArray = wishlist.wishlistItems.map(transformWishlistArray);
       wishlistArray.unshift({ customerId: wishlist.id, productId });
     } else {
       wishlistArray = wishlist.wishlistItems
-      .filter(item => item.product.id !== productId)
-      .map(transformWishlistArray);
+        .filter((item) => item.product.id !== productId)
+        .map(transformWishlistArray);
     }
-      
-    this._store.dispatch(updateWishlist({
-      updatedWishlist: wishlistArray,
-      customerId: wishlist.id
-    }));
+
+    this._store.dispatch(
+      updateWishlist({
+        updatedWishlist: wishlistArray,
+        customerId: wishlist.id,
+      })
+    );
   }
 }

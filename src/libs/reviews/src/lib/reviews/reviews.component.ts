@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   deleteReview,
@@ -9,12 +8,22 @@ import {
   updateActiveId,
 } from '@scifi/ngrx/reviews/reviews.actions';
 import {
-  selectReviews,
-  selectLoadStatus,
-  selectReviewStatus,
   selectActiveId,
+  selectLoadStatus,
   selectPagination,
+  selectReviewStatus,
+  selectReviews,
 } from '@scifi/ngrx/reviews/reviews.feature';
+import {
+  AppState,
+  NewReviewRequest,
+  Pagination,
+  Product,
+  Review,
+  Status,
+  UpdateReviewRequest,
+} from '@scifi/types';
+import { Observable } from 'rxjs';
 import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
 
 @Component({

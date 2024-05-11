@@ -1,21 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {
+  NewOrderRequest,
+  NewOrderResponse,
+  OrdersResponse,
+  SingleOrderResponse,
+} from '@scifi/types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
-  private _url = "https://taliphus.vercel.app/api/customers";
+  private _url = 'https://taliphus.vercel.app/api/customers';
 
-  constructor(
-    private _http: HttpClient
-  ) { }
+  constructor(private _http: HttpClient) {}
 
   getOrders(customerId: number) {
-    return this._http.get<OrdersResponse>(
-      `${this._url}/${customerId}/orders`,
-      { withCredentials: true }
-    );
+    return this._http.get<OrdersResponse>(`${this._url}/${customerId}/orders`, {
+      withCredentials: true,
+    });
   }
 
   getSingleOrder(orderId: string, customerId: number) {
@@ -33,10 +36,10 @@ export class OrdersService {
     );
   }
 
-  updateOrder(requestBody: { 
-    status: string, 
-    orderId: number,
-    customerId: number
+  updateOrder(requestBody: {
+    status: string;
+    orderId: number;
+    customerId: number;
   }) {
     return this._http.put<SingleOrderResponse>(
       `${this._url}/${requestBody.customerId}/orders/${requestBody.orderId}`,

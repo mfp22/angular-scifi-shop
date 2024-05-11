@@ -15,6 +15,7 @@ import {
   SocialUser,
 } from '@abacritt/angularx-social-login';
 import { AuthService } from '../auth.service';
+import { AppState } from '@scifi/types';
 
 @Component({
   selector: 'app-auth',

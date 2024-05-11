@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import { selectAccount } from '@scifi/ngrx/account/account.feature';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { notify } from '@scifi/ngrx/notification/notification.actions';
+import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import {
   clearSingleOrder,
   deleteOrder,
@@ -18,7 +18,15 @@ import {
   selectNewOrder,
   selectSingleOrder,
 } from '@scifi/ngrx/orders/orders.feature';
-import { selectData } from '@scifi/ngrx/notification/notification.feature';
+import {
+  Customer,
+  DialogContent,
+  NewOrderResponse,
+  Order,
+  SingleOrderResponse,
+  Status,
+} from '@scifi/types';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-single-order',

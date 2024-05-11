@@ -1,50 +1,58 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap, catchError } from 'rxjs/operators';
-import { ProductService } from "@scifi/products/product.service";
-import { 
-  loadProducts, 
+import { ProductService } from '@scifi/products/product.service';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { dispatchErrorAction } from '..';
+import {
+  loadProducts,
   loadProductsSuccess,
   loadSingleProduct,
   loadSingleProductSuccess,
   searchOrderHistory,
-  searchOrderHistorySuccess
-} from "./products.actions";
-import { dispatchErrorAction } from "..";
+  searchOrderHistorySuccess,
+} from './products.actions';
 
 @Injectable()
 export class ProductsEffects {
-  loadProducts$ = createEffect(() => this._actions$.pipe(
-    ofType(loadProducts),
-    exhaustMap(queryParams => this._productsService.getProducts(queryParams)
-    .pipe(
-      map(productsResponse => loadProductsSuccess(productsResponse)),
-      catchError(dispatchErrorAction)
-    ))
-  ));
-
-  loadSingleProduct$ = createEffect(() => this._actions$.pipe(
-    ofType(loadSingleProduct),
-    exhaustMap(payload => this._productsService.getSingleProduct(payload.productId)
-      .pipe(
-        map(singleProductResponse => {
-          return loadSingleProductSuccess(singleProductResponse);
-        }),
-        catchError(dispatchErrorAction)
+  loadProducts$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadProducts),
+      exhaustMap((queryParams) =>
+        this._productsService.getProducts(queryParams).pipe(
+          map((productsResponse) => loadProductsSuccess(productsResponse)),
+          catchError(dispatchErrorAction)
+        )
       )
     )
-  ));
+  );
 
-  searchOrderHistory$ = createEffect(() => this._actions$.pipe(
-    ofType(searchOrderHistory),
-    exhaustMap(payload => this._productsService.getProductFromOrderHistory(
-      payload.customerId, payload.productId
-    ).pipe(
-      map(searchResponse => searchOrderHistorySuccess(searchResponse)),
-      catchError(dispatchErrorAction)
+  loadSingleProduct$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadSingleProduct),
+      exhaustMap((payload) =>
+        this._productsService.getSingleProduct(payload.productId).pipe(
+          map((singleProductResponse) => {
+            return loadSingleProductSuccess(singleProductResponse);
+          }),
+          catchError(dispatchErrorAction)
+        )
+      )
     )
+  );
+
+  searchOrderHistory$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(searchOrderHistory),
+      exhaustMap((payload) =>
+        this._productsService
+          .getProductFromOrderHistory(payload.customerId, payload.productId)
+          .pipe(
+            map((searchResponse) => searchOrderHistorySuccess(searchResponse)),
+            catchError(dispatchErrorAction)
+          )
+      )
     )
-  ));
+  );
 
   constructor(
     private _actions$: Actions,

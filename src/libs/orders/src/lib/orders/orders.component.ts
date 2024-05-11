@@ -2,7 +2,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { map, Observable, shareReplay, Subscription } from 'rxjs';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   deleteOrder,
@@ -15,6 +14,8 @@ import {
   selectNewOrder,
   selectOrders,
 } from '@scifi/ngrx/orders/orders.feature';
+import { NewOrderResponse, Order, OrdersResponse, Status } from '@scifi/types';
+import { map, Observable, shareReplay, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-orders',

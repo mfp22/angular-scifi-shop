@@ -1,31 +1,42 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {
+  CustomerReviewsResponse,
+  FavoritesResponse,
+  NewReviewRequest,
+  Review,
+  ReviewsResponse,
+  UpdateReviewRequest,
+} from '@scifi/types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReviewsService {
-  private _baseUrl = "https://taliphus.vercel.app/api";
+  private _baseUrl = 'https://taliphus.vercel.app/api';
 
-  constructor(
-    private _http: HttpClient
-  ) { }
+  constructor(private _http: HttpClient) {}
 
-  getAllReviews(queryParams: { page: number, limit: number }) {
-    return this._http.get<ReviewsResponse>(
-      `${this._baseUrl}/reviews`,
-      { params: new HttpParams().appendAll(queryParams) }
-    );
+  getAllReviews(queryParams: { page: number; limit: number }) {
+    return this._http.get<ReviewsResponse>(`${this._baseUrl}/reviews`, {
+      params: new HttpParams().appendAll(queryParams),
+    });
   }
 
-  getProductReviews(productId: number, queryParams: { page: number, limit: number }) {
+  getProductReviews(
+    productId: number,
+    queryParams: { page: number; limit: number }
+  ) {
     return this._http.get<ReviewsResponse>(
       `${this._baseUrl}/products/${productId}/reviews`,
       { params: new HttpParams().appendAll(queryParams) }
     );
   }
 
-  getCustomerReviews(customerId: number, queryParams: { page: number, limit: number }) {
+  getCustomerReviews(
+    customerId: number,
+    queryParams: { page: number; limit: number }
+  ) {
     return this._http.get<CustomerReviewsResponse>(
       `${this._baseUrl}/customers/${customerId}/reviews`,
       { params: new HttpParams().appendAll(queryParams) }

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { notify } from '@scifi/ngrx/notification/notification.actions';
 import { updateOrder } from '@scifi/ngrx/orders/orders.actions';
+import { AppState } from '@scifi/types';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-new-order-redirect',

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs';
+import { AppState, Wishlist } from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
+import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs';
 import { dispatchErrorAction } from '..';
 import {
   loadWishlist,

@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
 import {
   loadAllReviews,
   loadCustomerReviews,
@@ -12,13 +11,15 @@ import {
   selectLoadStatus,
   selectPagination,
 } from '@scifi/ngrx/reviews/reviews.feature';
+import { AppState, Pagination, Status } from '@scifi/types';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reviews-pagination',
   templateUrl: './reviews-pagination.component.html',
   styleUrls: [
     './reviews-pagination.component.sass',
-    '../../products/products-pagination/products-pagination.component.sass',
+    '../../../../products/src/lib/products-pagination/products-pagination.component.sass',
   ],
 })
 export class ReviewsPaginationComponent {

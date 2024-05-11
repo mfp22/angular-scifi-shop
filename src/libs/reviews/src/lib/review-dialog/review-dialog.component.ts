@@ -1,8 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
 import {
   createReview,
   deleteReview,
@@ -11,6 +10,15 @@ import {
   updateReview,
 } from '@scifi/ngrx/reviews/reviews.actions';
 import { selectReviewStatus } from '@scifi/ngrx/reviews/reviews.feature';
+import {
+  AppState,
+  NewReviewRequest,
+  Rating,
+  Review,
+  Status,
+  UpdateReviewRequest,
+} from '@scifi/types';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-review-dialog',

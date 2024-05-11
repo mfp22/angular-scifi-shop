@@ -2,44 +2,55 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  combineLatest,
-  map,
-  Observable,
-  shareReplay,
-  Subscription,
-} from 'rxjs';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   selectActiveId,
   selectUpdateStatus,
 } from '@scifi/ngrx/cart/cart.feature';
-import {
-  selectCreateStatus,
-  selectUpdateStatus as selectReviewUpdateStatus,
-  selectDeleteStatus,
-  selectReviewStatus,
-} from '@scifi/ngrx/reviews/reviews.feature';
+import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import {
   loadSingleProduct,
   searchOrderHistory,
 } from '@scifi/ngrx/products/products.actions';
 import {
-  selectSingleProduct,
   selectLoadStatus,
   selectOrderSearchResult,
   selectSearchStatus,
+  selectSingleProduct,
 } from '@scifi/ngrx/products/products.feature';
 import {
   deleteReview,
   resetReviewsStatus,
   updateActiveId,
 } from '@scifi/ngrx/reviews/reviews.actions';
+import {
+  selectCreateStatus,
+  selectDeleteStatus,
+  selectReviewStatus,
+  selectUpdateStatus as selectReviewUpdateStatus,
+} from '@scifi/ngrx/reviews/reviews.feature';
 import { ReviewDialogComponent } from '@scifi/reviews/review-dialog/review-dialog.component';
-import { selectData } from '@scifi/ngrx/notification/notification.feature';
-import { Title } from '@angular/platform-browser';
+import {
+  AppState,
+  DialogContent,
+  NewReviewRequest,
+  OrderSearchResponse,
+  Product,
+  Rating,
+  Review,
+  SingleProduct,
+  Status,
+} from '@scifi/types';
+import {
+  Observable,
+  Subscription,
+  combineLatest,
+  map,
+  shareReplay,
+} from 'rxjs';
 
 @Component({
   selector: 'app-single-product',

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { AccountService } from '@scifi/account/account.service';
 import { loginRequest, signupRequest } from '@scifi/ngrx/auth/auth.actions';
 import { selectAuthIsLoading } from '@scifi/ngrx/auth/auth.feature';
+import { AppState, AuthCredentials } from '@scifi/types';
 
 type AuthForm = FormGroup<{
   username: FormControl<string | null>;

@@ -6,6 +6,7 @@ import {
   selectCartItemsCount,
   selectLoadStatus,
 } from '@scifi/ngrx/cart/cart.feature';
+import { AppState, Customer, Status } from '@scifi/types';
 
 @Component({
   selector: 'app-cart-page',

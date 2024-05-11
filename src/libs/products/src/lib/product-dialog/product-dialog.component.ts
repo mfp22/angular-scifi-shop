@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { addExpressCheckoutItem } from '@scifi/ngrx/orders/orders.actions';
+import { AppState, Product } from '@scifi/types';
 
 @Component({
   selector: 'app-product-dialog',

@@ -10,15 +10,11 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
+import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   selectActiveId as selectActiveCartId,
   selectUpdateStatus as selectCartUpdateStatus,
 } from '@scifi/ngrx/cart/cart.feature';
-import {
-  selectActiveId as selectActiveWishlistId,
-  selectUpdateStatus as selectWishlistUpdateStatus,
-} from '@scifi/ngrx/wishlist/wishlist.feature';
 import {
   selectCategories,
   selectSuppliers,
@@ -29,9 +25,22 @@ import {
   selectProducts,
 } from '@scifi/ngrx/products/products.feature';
 import { resetWishlistStatus } from '@scifi/ngrx/wishlist/wishlist.actions';
-import { selectWishlist } from '@scifi/ngrx/wishlist/wishlist.feature';
+import {
+  selectActiveId as selectActiveWishlistId,
+  selectWishlist,
+  selectUpdateStatus as selectWishlistUpdateStatus,
+} from '@scifi/ngrx/wishlist/wishlist.feature';
+import {
+  AppState,
+  Category,
+  Pagination,
+  Product,
+  Status,
+  Supplier,
+  Wishlist,
+} from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
-import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 const placeholderProduct = {
   id: 2,

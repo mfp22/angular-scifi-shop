@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of } from 'rxjs';
 import { OrdersService } from '@scifi/orders/orders.service';
+import { catchError, exhaustMap, map } from 'rxjs';
 import { dispatchErrorAction } from '..';
-import { httpError } from '../notification/notification.actions';
 import {
   createOrder,
   createOrderSuccess,

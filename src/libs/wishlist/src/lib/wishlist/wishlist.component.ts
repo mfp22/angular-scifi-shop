@@ -2,7 +2,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { map, Observable, shareReplay, Subscription } from 'rxjs';
 import { resetWishlistStatus } from '@scifi/ngrx/wishlist/wishlist.actions';
 import {
   selectActiveId,
@@ -10,6 +9,8 @@ import {
   selectUpdateStatus,
   selectWishlist,
 } from '@scifi/ngrx/wishlist/wishlist.feature';
+import { AppState, Status, Wishlist } from '@scifi/types';
+import { map, Observable, shareReplay, Subscription } from 'rxjs';
 import { WishlistService } from '../wishlist.service';
 
 @Component({

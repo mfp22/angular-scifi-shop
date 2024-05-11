@@ -28,6 +28,7 @@
       "@scifi/reviews/*": ["src/libs/reviews/src/lib/*"],
       "@scifi/search/*": ["src/libs/search/src/lib/*"],
       "@scifi/spinner/*": ["src/libs/spinner/src/lib/*"],
+      "@scifi/types": ["src/libs/types/src/index.ts"],
       "@scifi/wishlist/*": ["src/libs/wishlist/src/lib/*"]
     }
   }

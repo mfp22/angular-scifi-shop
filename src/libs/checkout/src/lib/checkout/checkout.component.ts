@@ -24,6 +24,14 @@ import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import { Router } from '@angular/router';
 import { AccountService } from '@scifi/account/account.service';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import {
+  Address,
+  AddressEmitData,
+  AppState,
+  ExpressCheckoutItem,
+  NewOrderResponse,
+  PaymentEvent,
+} from '@scifi/types';
 
 @Component({
   selector: 'app-checkout',

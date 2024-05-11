@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { map, exhaustMap, catchError, withLatestFrom } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { CartService } from '@scifi/cart/cart.service';
+import { AppState, Cart } from '@scifi/types';
+import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs/operators';
+import { dispatchErrorAction } from '..';
 import {
+  addToCart,
   clearCart,
   loadCart,
   loadCartSuccess,
-  removeCartItem,
-  addToCart,
-  updateCartSuccess,
   modifyQuantity,
+  removeCartItem,
+  updateCartSuccess,
 } from './cart.actions';
-import { httpError } from '../notification/notification.actions';
-import { CartService } from '@scifi/cart/cart.service';
-import { Store } from '@ngrx/store';
 import { selectCartItems } from './cart.feature';
-import { dispatchErrorAction } from '..';
 
 @Injectable()
 export class CartEffects {

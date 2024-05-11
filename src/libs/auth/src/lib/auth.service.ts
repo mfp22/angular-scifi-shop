@@ -5,38 +5,41 @@ import { authenticateWithSSO } from '@scifi/ngrx/auth/auth.actions';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import {
+  AppState,
+  AuthCredentials,
+  Customer,
+  OAuthCredentials,
+} from '@scifi/types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private  _baseUrl = "https://taliphus.vercel.app/api";
+  private _baseUrl = 'https://taliphus.vercel.app/api';
   private _httpOptions = {
-    headers: new HttpHeaders({ 
-      "Content-Type": "application/json"
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
     }),
     observe: 'response' as 'response',
-    withCredentials: true
+    withCredentials: true,
   };
   public loggedInUserId: string | number | null = null;
   public accountData: Customer | null = null;
 
-  constructor(
-    private _http: HttpClient,
-    private _store: Store<AppState>
-  ) {
-    _store.select(selectLoggedInUserId).subscribe(id => {
+  constructor(private _http: HttpClient, private _store: Store<AppState>) {
+    _store.select(selectLoggedInUserId).subscribe((id) => {
       this.loggedInUserId = id;
     });
 
-    _store.select(selectAccount).subscribe(accountData => {
+    _store.select(selectAccount).subscribe((accountData) => {
       this.accountData = accountData;
     });
   }
 
-  loginOrSignup(requestBody: AuthCredentials, endpoint: "/login" | "/signup") {
+  loginOrSignup(requestBody: AuthCredentials, endpoint: '/login' | '/signup') {
     const response = this._http.post<{ customer: Customer }>(
-      this._baseUrl + endpoint, 
+      this._baseUrl + endpoint,
       requestBody,
       this._httpOptions
     );
@@ -46,7 +49,7 @@ export class AuthService {
 
   authenticateWithSSO(requestBody: OAuthCredentials) {
     const response = this._http.post<{ customer: Customer }>(
-      this._baseUrl + "/sso", 
+      this._baseUrl + '/sso',
       requestBody,
       this._httpOptions
     );
@@ -55,16 +58,20 @@ export class AuthService {
   }
 
   dispatchSocialLoginAction(user: SocialUser) {
-    this._store.dispatch(authenticateWithSSO({
-      requestBody: {
-        name: user.name,
-        email: user.email,
-        authId: user.id,
-        provider: `${user.provider[0].toUpperCase()}${user.provider.slice(1).toLowerCase()}`,
-        thumbnail: user.photoUrl
-      },
-      socialUser: user
-    }));
+    this._store.dispatch(
+      authenticateWithSSO({
+        requestBody: {
+          name: user.name,
+          email: user.email,
+          authId: user.id,
+          provider: `${user.provider[0].toUpperCase()}${user.provider
+            .slice(1)
+            .toLowerCase()}`,
+          thumbnail: user.photoUrl,
+        },
+        socialUser: user,
+      })
+    );
   }
 
   logout() {

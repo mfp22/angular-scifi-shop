@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import { selectAccount } from '@scifi/ngrx/account/account.feature';
 import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import { resetReviewsStatus } from '@scifi/ngrx/reviews/reviews.actions';
@@ -11,9 +10,17 @@ import {
   selectDeleteStatus,
   selectPagination,
   selectReviews,
-  selectReviewStatus,
   selectUpdateStatus,
 } from '@scifi/ngrx/reviews/reviews.feature';
+import {
+  AppState,
+  Customer,
+  DialogContent,
+  Pagination,
+  Review,
+  Status,
+} from '@scifi/types';
+import { combineLatest, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reviews-page',

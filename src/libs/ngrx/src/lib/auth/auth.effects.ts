@@ -1,8 +1,13 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { AuthService } from '@scifi/auth/auth.service';
+import { ApiError, Customer } from '@scifi/types';
+import { of } from 'rxjs';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { clearCurrentUser } from '../account/account.actions';
+import { httpError, notify } from '../notification/notification.actions';
 import {
   authenticateWithSSO,
   authenticateWithSSOSuccess,
@@ -13,10 +18,6 @@ import {
   signupRequest,
   signupSuccess,
 } from './auth.actions';
-import { httpError, notify } from '../notification/notification.actions';
-import { Router } from '@angular/router';
-import { clearCurrentUser } from '../account/account.actions';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable()
 export class AuthEffects {

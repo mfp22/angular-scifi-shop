@@ -8,13 +8,20 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
 import { loadProducts } from '@scifi/ngrx/products/products.actions';
 import {
   selectLoadStatus,
   selectPagination,
   selectProducts,
 } from '@scifi/ngrx/products/products.feature';
+import {
+  AppState,
+  Pagination,
+  Product,
+  ProductsUrlParams,
+  Status,
+} from '@scifi/types';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products-pagination',

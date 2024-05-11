@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { deleteUser, resetStatus } from '@scifi/ngrx/account/account.actions';
 import { selectDeleteStatus } from '@scifi/ngrx/account/account.feature';
+import { AppState, Status } from '@scifi/types';
 
 @Component({
   selector: 'app-delete-dialog',

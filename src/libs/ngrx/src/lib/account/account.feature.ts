@@ -1,20 +1,47 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { httpError } from '../notification/notification.actions';
-import { clearCurrentUser, createOrUpdateAddress, createOrUpdateAddressSuccess, deleteAddress, deleteAddressSuccess, deleteUser, deleteUserSuccess, loadAccount, loadAccountSuccess, updateAccount, updateAccountSuccess, updateActiveItem, resetStatus } from './account.actions';
+import {
+  clearCurrentUser,
+  createOrUpdateAddress,
+  createOrUpdateAddressSuccess,
+  deleteAddress,
+  deleteAddressSuccess,
+  deleteUser,
+  deleteUserSuccess,
+  loadAccount,
+  loadAccountSuccess,
+  updateAccount,
+  updateAccountSuccess,
+  updateActiveItem,
+  resetStatus,
+} from './account.actions';
+import {
+  AccountState,
+  Address,
+  Customer,
+  CustomerNewAddress,
+} from '@scifi/types';
 
 const initialState: AccountState = {
   account: null,
   activeItem: null,
-  loadStatus: "pending",
-  updateStatus: "pending",
-  deleteStatus: "pending"
+  loadStatus: 'pending',
+  updateStatus: 'pending',
+  deleteStatus: 'pending',
 };
 
-const removeAddressFromAccount = (account: Customer, deletedAddressId: number) => {
-  const accountCopy: Customer = { 
-    ...account, 
-    billingAddress: account.billingAddress ? { ...account.billingAddress } : null,
-    shippingAddress: account.shippingAddress ? { ...account.shippingAddress } : null
+const removeAddressFromAccount = (
+  account: Customer,
+  deletedAddressId: number
+) => {
+  const accountCopy: Customer = {
+    ...account,
+    billingAddress: account.billingAddress
+      ? { ...account.billingAddress }
+      : null,
+    shippingAddress: account.shippingAddress
+      ? { ...account.shippingAddress }
+      : null,
   };
 
   if (accountCopy.billingAddress?.id === deletedAddressId) {
@@ -25,89 +52,96 @@ const removeAddressFromAccount = (account: Customer, deletedAddressId: number) =
   }
 
   return accountCopy;
-}
+};
 
 export const accountReducer = createReducer(
   initialState,
-  on(loadAccount, state => ({ 
+  on(loadAccount, (state) => ({
     ...state,
-    loadStatus: "loading" as const 
+    loadStatus: 'loading' as const,
   })),
   on(loadAccountSuccess, (state, payload) => ({
     ...state,
     account: payload,
-    loadStatus: "success" as const
+    loadStatus: 'success' as const,
   })),
-  on(updateAccount, createOrUpdateAddress, state => ({
+  on(updateAccount, createOrUpdateAddress, (state) => ({
     ...state,
-    updateStatus: "loading" as const
+    updateStatus: 'loading' as const,
   })),
   on(updateAccountSuccess, (state, payload) => ({
     ...state,
     account: payload,
-    updateStatus: "success" as const
+    updateStatus: 'success' as const,
   })),
   on(createOrUpdateAddressSuccess, (state, payload) => {
-    if (payload.hasOwnProperty("newAddress")) {
+    if (payload.hasOwnProperty('newAddress')) {
       return {
         ...state,
         account: (payload as CustomerNewAddress).customer,
-        updateStatus: "success" as const
-      }
+        updateStatus: 'success' as const,
+      };
     } else {
       return {
         ...state,
         account: payload as Customer,
-        updateStatus: "success" as const
-      }
+        updateStatus: 'success' as const,
+      };
     }
   }),
-  on(deleteAddress, deleteUser, state => ({
+  on(deleteAddress, deleteUser, (state) => ({
     ...state,
-    deleteStatus: "loading" as const
+    deleteStatus: 'loading' as const,
   })),
   on(deleteAddressSuccess, (state, payload) => {
-    if (payload.hasOwnProperty("deletedAddress")) {
-      const deletedAddressId = (payload as { deletedAddress: Address }).deletedAddress.id!;
-      const updatedAccount = removeAddressFromAccount(state.account!, deletedAddressId);
+    if (payload.hasOwnProperty('deletedAddress')) {
+      const deletedAddressId = (payload as { deletedAddress: Address })
+        .deletedAddress.id!;
+      const updatedAccount = removeAddressFromAccount(
+        state.account!,
+        deletedAddressId
+      );
       return {
         ...state,
         account: updatedAccount,
-        deleteStatus: "success" as const
-      }
+        deleteStatus: 'success' as const,
+      };
     } else {
       return {
         ...state,
         account: payload as Customer,
-        deleteStatus: "success" as const
-      }
+        deleteStatus: 'success' as const,
+      };
     }
   }),
-  on(deleteUserSuccess, state => ({
+  on(deleteUserSuccess, (state) => ({
     ...state,
     account: null,
-    deleteStatus: "success" as const
+    deleteStatus: 'success' as const,
   })),
-  on(updateActiveItem, (state, payload) => ({ ...state, activeItem: payload.activeItem })),
-  on(clearCurrentUser, state => ({ ...state, account: null })),
-  on(resetStatus, state => ({
+  on(updateActiveItem, (state, payload) => ({
     ...state,
-    loadStatus: "pending" as const,
-    updateStatus: "pending" as const,
-    deleteStatus: "pending" as const
+    activeItem: payload.activeItem,
   })),
-  on(httpError, state => ({ 
-    ...state, 
-    loadStatus: "error" as const,
-    updateStatus: "error" as const,
-    deleteStatus: "error" as const
+  on(clearCurrentUser, (state) => ({ ...state, account: null })),
+  on(resetStatus, (state) => ({
+    ...state,
+    loadStatus: 'pending' as const,
+    updateStatus: 'pending' as const,
+    deleteStatus: 'pending' as const,
+  })),
+  on(httpError, (state) => ({
+    ...state,
+    loadStatus: 'error' as const,
+    updateStatus: 'error' as const,
+    deleteStatus: 'error' as const,
   }))
 );
 
 export const accountFeature = createFeature({
-  name: "account",
+  name: 'account',
   reducer: accountReducer,
-  extraSelectors: (({ selectAccount }) => ({
+  extraSelectors: ({ selectAccount }) => ({
     selectBillingAddress: createSelector(
       selectAccount,
       (account: Customer | null) => account?.billingAddress
@@ -115,8 +149,8 @@ export const accountFeature = createFeature({
     selectShippingAddress: createSelector(
       selectAccount,
       (account: Customer | null) => account?.shippingAddress
-    )
-  }))
+    ),
+  }),
 });
 
 export const {
@@ -126,5 +160,5 @@ export const {
   selectDeleteStatus,
   selectBillingAddress,
   selectShippingAddress,
-  selectActiveItem
+  selectActiveItem,
 } = accountFeature;

@@ -1,5 +1,6 @@
 import { isDevMode } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { ApiError, AppState } from '@scifi/types';
 import { of } from 'rxjs';
 import { accountReducer } from './account/account.feature';
 import { authReducer } from './auth/auth.feature';
@@ -21,12 +22,12 @@ export const reducers: ActionReducerMap<AppState> = {
   wishlistSlice: wishlistReducer,
   reviewsSlice: reviewsReducer,
   notificationSlice: notificationReducer,
-  categoriesSlice: categoriesReducer
+  categoriesSlice: categoriesReducer,
 };
 
 // log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     //console.log('state', state);
     //console.log('action', action);
     return reducer(state, action);
@@ -35,4 +36,5 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
 
 export const metaReducers: MetaReducer<AppState>[] = isDevMode() ? [debug] : [];
 
-export const dispatchErrorAction = ({ error }: { error: ApiError }) => of(httpError(error));
+export const dispatchErrorAction = ({ error }: { error: ApiError }) =>
+  of(httpError(error));

@@ -17,6 +17,7 @@ import {
 } from '@scifi/ngrx/cart/cart.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import { AppState, Cart, Status } from '@scifi/types';
 
 @Component({
   selector: 'app-cart',

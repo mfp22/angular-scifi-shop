@@ -23,6 +23,13 @@ import {
 } from '@scifi/ngrx/auth/auth.feature';
 import { AccountService } from '../account.service';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import {
+  AccountActiveItem,
+  AppState,
+  Customer,
+  Status,
+  UpdateCustomerRequest,
+} from '@scifi/types';
 
 @Component({
   selector: 'app-account',

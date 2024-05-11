@@ -11,6 +11,7 @@ import {
 } from '@scifi/ngrx/cart/cart.actions';
 import { selectCartItems } from '@scifi/ngrx/cart/cart.feature';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
+import { AppState, CartItem, Product } from '@scifi/types';
 
 @Component({
   selector: 'app-action-buttons',
