@@ -49,3 +49,4 @@ scrap
 .env
 
 .nx/cache
+.angular

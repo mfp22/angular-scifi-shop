@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { loadAccount } from './ngrx/account/account.actions';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import { loadCart } from './ngrx/cart/cart.actions';
@@ -11,7 +11,7 @@ import { loadWishlist } from './ngrx/wishlist/wishlist.actions';
 import { selectLoggedInUserId, selectShowOverlay } from './ngrx/auth/auth.feature';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from '@scifi/auth/auth.service';
 import { selectAccount } from './ngrx/account/account.feature';
 
 @Component({

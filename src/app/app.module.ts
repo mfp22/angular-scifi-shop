@@ -8,28 +8,28 @@ import { NgLetModule } from 'ng-let';
 
 import { reducers, metaReducers } from './ngrx';
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from './material/material.module';
-import { AuthModule } from './auth/auth.module';
-import { ProductsModule } from './products/products.module';
+import { MaterialModule } from '@scifi/material/material.module';
+import { AuthModule } from '@scifi/auth/auth.module';
+import { ProductsModule } from '@scifi/products/products.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
-import { AccountModule } from './account/account.module';
-import { DialogComponent } from './dialog/dialog.component';
-import { CartModule } from './cart/cart.module';
-import { CheckoutModule } from './checkout/checkout.module';
+import { HomeComponent } from '@scifi/home/home.component';
+import { NavComponent } from '@scifi/nav/nav.component';
+import { AccountModule } from '@scifi/account/account.module';
+import { DialogComponent } from '@scifi/dialog/dialog.component';
+import { CartModule } from '@scifi/cart/cart.module';
+import { CheckoutModule } from '@scifi/checkout/checkout.module';
 import { accountFeature } from './ngrx/account/account.feature';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { OrdersModule } from './orders/orders.module';
+import { OrdersModule } from '@scifi/orders/orders.module';
 import { notificationFeature } from './ngrx/notification/notification.feature';
 import { categoriesFeature } from './ngrx/categories/categories.feature';
 import { CategoriesEffects } from './ngrx/categories/categories.effects';
-import { WishlistModule } from './wishlist/wishlist.module';
+import { WishlistModule } from '@scifi/wishlist/wishlist.module';
 import { wishlistFeature } from './ngrx/wishlist/wishlist.feature';
 import { WishlistEffects } from './ngrx/wishlist/wishlist.effects';
-import { SearchComponent } from './search/search.component';
-import { FooterComponent } from './footer/footer.component';
+import { SearchComponent } from '@scifi/search/search.component';
+import { FooterComponent } from '@scifi/footer/footer.component';
 
 @NgModule({
   declarations: [

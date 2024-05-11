@@ -1,19 +1,19 @@
 import { inject, NgModule } from '@angular/core';
 import { CanActivateFn, Router, RouterModule, Routes } from '@angular/router';
-import { ProductListComponent } from './products/product-list/product-list.component';
-import { HomeComponent } from './home/home.component';
-import { AccountComponent } from './account/account/account.component';
-import { CheckoutComponent } from './checkout/checkout/checkout.component';
-import { OrdersComponent } from './orders/orders/orders.component';
-import { SingleOrderComponent } from './orders/single-order/single-order.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NewOrderRedirectComponent } from './orders/new-order-redirect/new-order-redirect.component';
-import { SingleProductComponent } from './products/single-product/single-product.component';
-import { WishlistComponent } from './wishlist/wishlist/wishlist.component';
-import { CartPageComponent } from './cart/cart-page/cart-page.component';
-import { FavoritesComponent } from './products/favorites/favorites.component';
-import { ReviewsPageComponent } from './reviews/reviews-page/reviews-page.component';
-import { AuthService } from './auth/auth.service';
+import { ProductListComponent } from '@scifi/products/product-list/product-list.component';
+import { HomeComponent } from '@scifi/home/home.component';
+import { AccountComponent } from '@scifi/account/account/account.component';
+import { CheckoutComponent } from '@scifi/checkout/checkout/checkout.component';
+import { OrdersComponent } from '@scifi/orders/orders/orders.component';
+import { SingleOrderComponent } from '@scifi/orders/single-order/single-order.component';
+import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
+import { NewOrderRedirectComponent } from '@scifi/orders/new-order-redirect/new-order-redirect.component';
+import { SingleProductComponent } from '@scifi/products/single-product/single-product.component';
+import { WishlistComponent } from '@scifi/wishlist/wishlist/wishlist.component';
+import { CartPageComponent } from '@scifi/cart/cart-page/cart-page.component';
+import { FavoritesComponent } from '@scifi/products/favorites/favorites.component';
+import { ReviewsPageComponent } from '@scifi/reviews/reviews-page/reviews-page.component';
+import { AuthService } from '@scifi/auth/auth.service';
 
 const authenticationGuard: CanActivateFn = () => {
   const customerAccount = inject(AuthService).accountData;
