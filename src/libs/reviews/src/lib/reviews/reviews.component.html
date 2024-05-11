@@ -1,17 +1,22 @@
-<section class="reviews-tab" *ngLet="(loggedInUserId$ | async) as loggedInUserId">
-
+<section class="reviews-tab" *ngLet="loggedInUserId$ | async as loggedInUserId">
   <div class="paginator">
     <app-reviews-pagination [productId]="productId"></app-reviews-pagination>
   </div>
 
-  <ng-container *ngIf="(reviews$ | async) as reviews; else loading">
-    <h2>Reviews <span *ngIf="(pagination$ | async) as pagination">({{ pagination.totalResults }})</span></h2>
+  <ng-container *ngIf="reviews$ | async as reviews; else loading">
+    <h2>
+      Reviews <span *ngIf="pagination$ | async as pagination">({{ pagination.totalResults }})</span>
+    </h2>
     <mat-divider></mat-divider>
 
     <ng-container *ngIf="reviews.length > 0; else noReviews">
-      
       <ng-container *ngIf="component === 'product'">
-        <ng-container *ngTemplateOutlet="productInfo; context: { product: reviews[0].product!, class: 'reviews-tab-header' }"></ng-container>
+        <ng-container
+          *ngTemplateOutlet="
+            productInfo;
+            context: { product: reviews[0].product!, class: 'reviews-tab-header' }
+          "
+        ></ng-container>
       </ng-container>
 
       <mat-divider></mat-divider>
@@ -22,21 +27,29 @@
           Post a review
         </button>
       </div>
-      
+
       <mat-list>
         <mat-list-item *ngFor="let review of reviews">
           <mat-card>
             <mat-card-header>
-              <ng-container *ngIf="component === 'product' || review.customerId != loggedInUserId; else noLink">
-                <div routerLink="/reviews" [queryParams]="{ customerId: review.customerId}" class="customer-info reviews-link" [matTooltip]="'View reviews posted by ' + review.customer!.username" matTooltipPosition="after">
-                  <img [src]="review.customer!.avatar">
+              <ng-container
+                *ngIf="component === 'product' || review.customerId != loggedInUserId; else noLink"
+              >
+                <div
+                  routerLink="/reviews"
+                  [queryParams]="{ customerId: review.customerId }"
+                  class="customer-info reviews-link"
+                  [matTooltip]="'View reviews posted by ' + review.customer!.username"
+                  matTooltipPosition="after"
+                >
+                  <img [src]="review.customer!.avatar" />
                   <p class="bold">{{ review.customer!.username }}</p>
                 </div>
               </ng-container>
 
               <ng-template #noLink>
                 <div class="customer-info">
-                  <img [src]="review.customer!.avatar">
+                  <img [src]="review.customer!.avatar" />
                   <p class="bold">{{ review.customer!.username }}</p>
                 </div>
               </ng-template>
@@ -51,8 +64,10 @@
               </mat-card-title>
 
               <mat-card-subtitle class="list-item-subtitle">
-                  <p>Reviewed on {{ review.createdAt | date: 'short' }}</p>
-                  <span *ngIf="review.recommend" class="icon-with-text"><mat-icon color="primary">thumb_up</mat-icon>Recommended</span>
+                <p>Reviewed on {{ review.createdAt | date : 'short' }}</p>
+                <span *ngIf="review.recommend" class="icon-with-text"
+                  ><mat-icon color="primary">thumb_up</mat-icon>Recommended</span
+                >
               </mat-card-subtitle>
             </mat-card-header>
 
@@ -73,23 +88,29 @@
                 Delete review
               </button>
             </mat-card-actions>
-            <mat-progress-bar *ngIf="(reviewStatus$ | async) === 'loading' && (activeId$ | async) === review.id" mode="indeterminate"></mat-progress-bar>
-          
+            <mat-progress-bar
+              *ngIf="(reviewStatus$ | async) === 'loading' && (activeId$ | async) === review.id"
+              mode="indeterminate"
+            ></mat-progress-bar>
+
             <ng-container *ngIf="component === 'reviews'">
               <mat-divider class="review-product-info-divider"></mat-divider>
               <h4 class="review-product-info-heading">Product details:</h4>
-              <ng-container *ngTemplateOutlet="productInfo; context: { product: review.product!, class: 'review-product-info' }"></ng-container>
+              <ng-container
+                *ngTemplateOutlet="
+                  productInfo;
+                  context: { product: review.product!, class: 'review-product-info' }
+                "
+              ></ng-container>
             </ng-container>
-
           </mat-card>
         </mat-list-item>
       </mat-list>
     </ng-container>
-    
+
     <ng-template #noReviews>
-      <p>There are no reviews for this {{ component === "product" ? "product" : "customer" }}.</p>
+      <p>There are no reviews for this {{ component === 'product' ? 'product' : 'customer' }}.</p>
     </ng-template>
-    
   </ng-container>
 
   <ng-template #loading>
@@ -102,9 +123,15 @@
 
 <ng-template let-product="product" let-class="class" #productInfo>
   <div [ngClass]="class">
-    <img [routerLink]="['/products', product.id]" [ngClass]="{'product-image': true, 'disabled': component === 'product'}" [src]="'assets/icons/black/' + product.thumbnail">
+    <img
+      [routerLink]="['/products', product.id]"
+      [ngClass]="{ 'product-image': true, disabled: component === 'product' }"
+      [src]="'assets/icons/black/' + product.thumbnail"
+    />
     <div>
-      <h3 [routerLink]="['/products', product.id]" [class.disabled]="component === 'product'">{{ product.name }}</h3>
+      <h3 [routerLink]="['/products', product.id]" [class.disabled]="component === 'product'">
+        {{ product.name }}
+      </h3>
       <app-chips [product]="product"></app-chips>
       <h4 class="product-description">{{ product.description }}</h4>
     </div>

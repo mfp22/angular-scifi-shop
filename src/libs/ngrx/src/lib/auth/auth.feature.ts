@@ -85,7 +85,7 @@ export const authReducer = createReducer(
     loginStatus: 'error' as const,
     logoutStatus: 'error' as const,
     signupStatus: 'error' as const,
-  }))
+  })),
 );
 
 export const authFeature = createFeature({
@@ -98,25 +98,23 @@ export const authFeature = createFeature({
       state.selectSignupStatus,
       (loginStatus, logoutStatus, signupStatus) => {
         return (
-          loginStatus === 'loading' ||
-          logoutStatus === 'loading' ||
-          signupStatus === 'loading'
+          loginStatus === 'loading' || logoutStatus === 'loading' || signupStatus === 'loading'
         );
-      }
+      },
     ),
     selectAuthIsLoading: createSelector(
       state.selectLoginStatus,
       state.selectSignupStatus,
       (loginStatus, signupStatus) => {
         return loginStatus === 'loading' || signupStatus === 'loading';
-      }
+      },
     ),
     selectAuthIsSuccess: createSelector(
       state.selectLoginStatus,
       state.selectSignupStatus,
       (loginStatus, signupStatus) => {
         return loginStatus === 'success' || signupStatus === 'success';
-      }
+      },
     ),
   }),
 });

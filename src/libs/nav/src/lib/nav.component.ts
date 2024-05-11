@@ -30,25 +30,15 @@ import { AppState, Category, Customer, Status } from '@scifi/types';
 export class NavComponent {
   @ViewChild('drawer') drawer: MatDrawer | undefined;
   private _breakpointObserver = inject(BreakpointObserver);
-  categories$: Observable<Category[] | null> =
-    this._store.select(selectCategories);
-  suppliers$: Observable<Category[] | null> =
-    this._store.select(selectSuppliers);
-  categoriesLoadStatus$: Observable<Status> = this._store.select(
-    selectCategoriesLoadStatus
-  );
-  suppliersLoadStatus$: Observable<Status> = this._store.select(
-    selectSuppliersLoadStatus
-  );
-  loggedInUserId$: Observable<number | string | null> =
-    this._store.select(selectLoggedInUserId);
-  authIsLoading$: Observable<boolean> = this._store.select(
-    selectAnyLoadingState
-  );
+  categories$: Observable<Category[] | null> = this._store.select(selectCategories);
+  suppliers$: Observable<Category[] | null> = this._store.select(selectSuppliers);
+  categoriesLoadStatus$: Observable<Status> = this._store.select(selectCategoriesLoadStatus);
+  suppliersLoadStatus$: Observable<Status> = this._store.select(selectSuppliersLoadStatus);
+  loggedInUserId$: Observable<number | string | null> = this._store.select(selectLoggedInUserId);
+  authIsLoading$: Observable<boolean> = this._store.select(selectAnyLoadingState);
   logoutStatus$: Observable<Status> = this._store.select(selectLogoutStatus);
   currentUser$: Observable<Customer | null> = this._store.select(selectAccount);
-  cartItemsCount$: Observable<number | undefined> =
-    this._store.select(selectCartItemsCount);
+  cartItemsCount$: Observable<number | undefined> = this._store.select(selectCartItemsCount);
   private _logoutSubscription = Subscription.EMPTY;
   private _routerEvents = Subscription.EMPTY;
   rippleRadius = 30;
@@ -58,14 +48,14 @@ export class NavComponent {
     .observe('(max-width: 800px)')
     .pipe(
       map((result) => result.matches),
-      shareReplay()
+      shareReplay(),
     );
 
   mobileViewport$: Observable<boolean> = this._breakpointObserver
     .observe('(max-width: 380px)')
     .pipe(
       map((result) => result.matches),
-      shareReplay()
+      shareReplay(),
     );
 
   dataStream$ = combineLatest([
@@ -96,18 +86,15 @@ export class NavComponent {
           loggedInUserId,
           cartItemsCount,
         };
-      }
-    )
+      },
+    ),
   );
 
-  navigationStream$ = combineLatest([
-    this.mediumViewport$,
-    this._router.events,
-  ]).pipe(
+  navigationStream$ = combineLatest([this.mediumViewport$, this._router.events]).pipe(
     map(([viewportIsMedium, routerEvent]) => ({
       viewportIsMedium,
       routerEvent,
-    }))
+    })),
   );
 
   constructor(private _store: Store<AppState>, private _router: Router) {}
@@ -119,13 +106,11 @@ export class NavComponent {
       }
     });
 
-    this._routerEvents = this.navigationStream$.subscribe(
-      ({ viewportIsMedium, routerEvent }) => {
-        if (routerEvent instanceof NavigationEnd && viewportIsMedium) {
-          this.drawer!.close();
-        }
+    this._routerEvents = this.navigationStream$.subscribe(({ viewportIsMedium, routerEvent }) => {
+      if (routerEvent instanceof NavigationEnd && viewportIsMedium) {
+        this.drawer!.close();
       }
-    );
+    });
   }
 
   get lightModeEnabled() {

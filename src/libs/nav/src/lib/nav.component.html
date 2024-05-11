@@ -1,29 +1,84 @@
-<ng-container *ngIf="(dataStream$ | async) as dataStream">
+<ng-container *ngIf="dataStream$ | async as dataStream">
   <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav background" fixedInViewport
-        [attr.role]="dataStream.mediumViewport ? 'dialog' : 'navigation'"
-        [mode]="dataStream.mediumViewport ? 'over' : 'side'"
-        [opened]="dataStream.mediumViewport === false">
-      <mat-toolbar class="menu-toolbar" [class.light]="lightModeEnabled"><strong>Pages</strong></mat-toolbar>
+    <mat-sidenav
+      #drawer
+      class="sidenav background"
+      fixedInViewport
+      [attr.role]="dataStream.mediumViewport ? 'dialog' : 'navigation'"
+      [mode]="dataStream.mediumViewport ? 'over' : 'side'"
+      [opened]="dataStream.mediumViewport === false"
+    >
+      <mat-toolbar class="menu-toolbar" [class.light]="lightModeEnabled"
+        ><strong>Pages</strong></mat-toolbar
+      >
       <mat-nav-list>
-        <a mat-list-item routerLink="/" [routerLinkActive]="activeLink" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page"><span>Home</span></a>
-        <a mat-list-item routerLink="/products" [routerLinkActive]="activeLink" ariaCurrentWhenActive="page"><span>Products</span></a>
+        <a
+          mat-list-item
+          routerLink="/"
+          [routerLinkActive]="activeLink"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ariaCurrentWhenActive="page"
+          ><span>Home</span></a
+        >
+        <a
+          mat-list-item
+          routerLink="/products"
+          [routerLinkActive]="activeLink"
+          ariaCurrentWhenActive="page"
+          ><span>Products</span></a
+        >
 
-        <a *ngIf="dataStream.loggedInUserId" mat-list-item routerLink="/account" [routerLinkActive]="activeLink"><span>My account</span></a>
+        <a
+          *ngIf="dataStream.loggedInUserId"
+          mat-list-item
+          routerLink="/account"
+          [routerLinkActive]="activeLink"
+          ><span>My account</span></a
+        >
 
-        <a *ngIf="dataStream.loggedInUserId" mat-list-item routerLink="/orders" [routerLinkActive]="activeLink"><span>My orders</span></a>
+        <a
+          *ngIf="dataStream.loggedInUserId"
+          mat-list-item
+          routerLink="/orders"
+          [routerLinkActive]="activeLink"
+          ><span>My orders</span></a
+        >
 
-        <a *ngIf="dataStream.loggedInUserId" mat-list-item routerLink="/cart" [routerLinkActive]="activeLink"><span>My cart</span></a>
+        <a
+          *ngIf="dataStream.loggedInUserId"
+          mat-list-item
+          routerLink="/cart"
+          [routerLinkActive]="activeLink"
+          ><span>My cart</span></a
+        >
 
-        <a *ngIf="dataStream.loggedInUserId" mat-list-item routerLink="/wishlist" [routerLinkActive]="activeLink"><span>My wishlist</span></a>
+        <a
+          *ngIf="dataStream.loggedInUserId"
+          mat-list-item
+          routerLink="/wishlist"
+          [routerLinkActive]="activeLink"
+          ><span>My wishlist</span></a
+        >
 
-        <a *ngIf="dataStream.loggedInUserId" mat-list-item routerLink="/favorites" [routerLinkActive]="activeLink"><span>My favorites</span></a>
+        <a
+          *ngIf="dataStream.loggedInUserId"
+          mat-list-item
+          routerLink="/favorites"
+          [routerLinkActive]="activeLink"
+          ><span>My favorites</span></a
+        >
 
-        <a mat-list-item routerLink="/reviews" [routerLinkActive]="activeLink" ariaCurrentWhenActive="page"><span>Reviews</span></a>
+        <a
+          mat-list-item
+          routerLink="/reviews"
+          [routerLinkActive]="activeLink"
+          ariaCurrentWhenActive="page"
+          ><span>Reviews</span></a
+        >
       </mat-nav-list>
-  
+
       <mat-toolbar class="nav-header" [class.light]="lightModeEnabled">
-        <img class="toolbar-image" [src]="'/assets/categories.svg'">
+        <img class="toolbar-image" [src]="'/assets/categories.svg'" />
       </mat-toolbar>
       <ng-container *ngIf="(categoriesLoadStatus$ | async) === 'loading'">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -31,13 +86,20 @@
       </ng-container>
       <mat-nav-list *ngIf="categories$ | async as categories; else break">
         <ng-container *ngFor="let category of categories">
-          <a mat-list-item routerLink="/products" [queryParams]="{category: category.name}" [routerLinkActive]="activeLink" ariaCurrentWhenActive="page"><span>{{ category.name }}</span></a>
+          <a
+            mat-list-item
+            routerLink="/products"
+            [queryParams]="{ category: category.name }"
+            [routerLinkActive]="activeLink"
+            ariaCurrentWhenActive="page"
+            ><span>{{ category.name }}</span></a
+          >
         </ng-container>
       </mat-nav-list>
-      <ng-template #break><br><br></ng-template>
-  
+      <ng-template #break><br /><br /></ng-template>
+
       <mat-toolbar class="nav-header" [class.light]="lightModeEnabled">
-        <img class="toolbar-image" [src]="'/assets/suppliers.svg'">
+        <img class="toolbar-image" [src]="'/assets/suppliers.svg'" />
       </mat-toolbar>
       <ng-container *ngIf="(suppliersLoadStatus$ | async) === 'loading'">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -45,58 +107,93 @@
       </ng-container>
       <mat-nav-list *ngIf="suppliers$ | async as suppliers">
         <ng-container *ngFor="let supplier of suppliers">
-          <a mat-list-item routerLink="/products" [queryParams]="{supplier: supplier.name}" [routerLinkActive]="activeLink" ariaCurrentWhenActive="page"><span>{{ supplier.name }}</span></a>
+          <a
+            mat-list-item
+            routerLink="/products"
+            [queryParams]="{ supplier: supplier.name }"
+            [routerLinkActive]="activeLink"
+            ariaCurrentWhenActive="page"
+            ><span>{{ supplier.name }}</span></a
+          >
         </ng-container>
       </mat-nav-list>
-  
     </mat-sidenav>
-  
+
     <mat-sidenav-content>
       <mat-toolbar color="primary" class="topnav">
         <div class="logo-container">
           <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="dataStream.mediumViewport">
-          <mat-icon aria-label="Side nav toggle icon" color="primary">menu</mat-icon>
-        </button>
-        <img class="logo" [src]="lightModeEnabled ? 'assets/logo-alt-2.png' : 'assets/logo-alt.svg'">
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+            *ngIf="dataStream.mediumViewport"
+          >
+            <mat-icon aria-label="Side nav toggle icon" color="primary">menu</mat-icon>
+          </button>
+          <img
+            class="logo"
+            [src]="lightModeEnabled ? 'assets/logo-alt-2.png' : 'assets/logo-alt.svg'"
+          />
         </div>
 
         <app-search *ngIf="dataStream.mediumViewport === false"></app-search>
-        
+
         <div class="active-user-controls" [class.reduced-gap]="dataStream.loggedInUserId">
           <ng-container *ngIf="dataStream.currentUser || dataStream.loggedInUserId; else showLogin">
-  
-            <button (click)="emitEventToChild()" mat-mini-fab color="primary" matRipple [matRippleRadius]="rippleRadius"
-            [matBadge]="dataStream.cartItemsCount" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="dataStream.cartItemsCount === 0">
+            <button
+              (click)="emitEventToChild()"
+              mat-mini-fab
+              color="primary"
+              matRipple
+              [matRippleRadius]="rippleRadius"
+              [matBadge]="dataStream.cartItemsCount"
+              matBadgePosition="before"
+              matBadgeColor="accent"
+              [matBadgeHidden]="dataStream.cartItemsCount === 0"
+            >
               <mat-icon>shopping_cart</mat-icon>
             </button>
-  
+
             <ng-container *ngIf="dataStream.mediumViewport === false">
               <ng-container *ngIf="dataStream.currentUser?.avatar; else noAvatar">
                 <a routerLink="/account" class="account-icon" aria-label="User account">
-                  <img [src]="dataStream.currentUser?.avatar" [matTooltip]="dataStream.currentUser?.username || ''" matTooltipPosition="left">
+                  <img
+                    [src]="dataStream.currentUser?.avatar"
+                    [matTooltip]="dataStream.currentUser?.username || ''"
+                    matTooltipPosition="left"
+                  />
                 </a>
               </ng-container>
-              
+
               <ng-template #noAvatar>
                 <a routerLink="/account" class="account-icon" aria-label="User account">
-                  <button mat-mini-fab routerLink="/account" color="primary" matRipple [matRippleRadius]="rippleRadius" [matTooltip]="dataStream.currentUser?.username || ''" matTooltipPosition="left">
+                  <button
+                    mat-mini-fab
+                    routerLink="/account"
+                    color="primary"
+                    matRipple
+                    [matRippleRadius]="rippleRadius"
+                    [matTooltip]="dataStream.currentUser?.username || ''"
+                    matTooltipPosition="left"
+                  >
                     <mat-icon>account_circle</mat-icon>
                   </button>
                 </a>
               </ng-template>
             </ng-container>
-          
+
             <ng-container *ngTemplateOutlet="themeToggle"></ng-container>
-  
-            <button mat-icon-button [matMenuTriggerFor]="menu" color="primary" aria-label="icon-button with a menu">
+
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              color="primary"
+              aria-label="icon-button with a menu"
+            >
               <mat-icon>more_vert</mat-icon>
             </button>
-            
+
             <mat-menu #menu="matMenu">
               <button mat-menu-item routerLink="/">
                 <mat-icon>home</mat-icon>
@@ -122,19 +219,29 @@
                 <mat-icon>favorite</mat-icon>
                 <span>Favorites</span>
               </button>
-              <button mat-menu-item routerLink="/reviews" [queryParams]="{ customerId: dataStream.loggedInUserId }">
+              <button
+                mat-menu-item
+                routerLink="/reviews"
+                [queryParams]="{ customerId: dataStream.loggedInUserId }"
+              >
                 <mat-icon>rate_review</mat-icon>
                 <span>Reviews</span>
               </button>
-              <button mat-menu-item (click)="handleLogout()" [disabled]="dataStream.logoutStatus === 'loading'">
+              <button
+                mat-menu-item
+                (click)="handleLogout()"
+                [disabled]="dataStream.logoutStatus === 'loading'"
+              >
                 <mat-icon>logout</mat-icon>
-                <span>{{ dataStream.logoutStatus === "loading" ? "Logging out..." : "Logout"}}</span>
+                <span>{{
+                  dataStream.logoutStatus === 'loading' ? 'Logging out...' : 'Logout'
+                }}</span>
               </button>
             </mat-menu>
           </ng-container>
-  
+
           <ng-template #showLogin>
-            <ng-container >
+            <ng-container>
               <ng-container *ngTemplateOutlet="themeToggle"></ng-container>
               <button class="login" (click)="showOverlay()" mat-raised-button color="primary">
                 <mat-icon>account_box</mat-icon>
@@ -145,23 +252,31 @@
         </div>
 
         <ng-container *ngIf="dataStream.authIsLoading">
-          <mat-progress-bar color="accent" class="progress-bar" mode="indeterminate"></mat-progress-bar>
+          <mat-progress-bar
+            color="accent"
+            class="progress-bar"
+            mode="indeterminate"
+          ></mat-progress-bar>
         </ng-container>
-
       </mat-toolbar>
-      
+
       <!-- Add Content Here -->
       <app-search *ngIf="dataStream.mediumViewport === true"></app-search>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
-  
+
   <app-cart-sidebar [events]="eventsSubject.asObservable()"></app-cart-sidebar>
 </ng-container>
 
 <ng-template #themeToggle>
   <div class="theme-toggle">
-    <mat-slide-toggle (change)="toggleTheme($event)" matTooltip="Toggle dark/light mode" matTooltipPosition="left" color="accent"></mat-slide-toggle>
+    <mat-slide-toggle
+      (change)="toggleTheme($event)"
+      matTooltip="Toggle dark/light mode"
+      matTooltipPosition="left"
+      color="accent"
+    ></mat-slide-toggle>
     <mat-icon color="primary">brightness_4</mat-icon>
   </div>
 </ng-template>

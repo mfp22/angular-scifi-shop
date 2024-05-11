@@ -22,18 +22,14 @@ import { AppState, Cart, Status } from '@scifi/types';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: [
-    './cart.component.sass',
-    '../cart-sidebar/cart-sidebar.component.sass',
-  ],
+  styleUrls: ['./cart.component.sass', '../cart-sidebar/cart-sidebar.component.sass'],
 })
 export class CartComponent {
   @Input() component: 'cart-page' | 'cart-sidebar' | undefined;
   @Output() closeSidebarEvent = new EventEmitter();
   cart$: Observable<Cart | null> = this._store.select(selectCart);
   cartTotal$: Observable<number> = this._store.select(selectCartTotal);
-  loggedInUserId$: Observable<string | number | null> =
-    this._store.select(selectLoggedInUserId);
+  loggedInUserId$: Observable<string | number | null> = this._store.select(selectLoggedInUserId);
   loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
   updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
   activeId$: Observable<number> = this._store.select(selectActiveId);
@@ -47,7 +43,7 @@ export class CartComponent {
   ]).pipe(
     map(([cart, cartTotal, loadStatus, updateStatus, activeId]) => {
       return { cart, cartTotal, loadStatus, updateStatus, activeId };
-    })
+    }),
   );
   private _loggedInUserId: number | undefined;
   private _loggedInUserIdSubscription = Subscription.EMPTY;
@@ -58,10 +54,7 @@ export class CartComponent {
   quantities: { [productId: number]: number } = {};
   isSidebar: boolean | undefined;
 
-  constructor(
-    private _store: Store<AppState>,
-    private _snackBar: MatSnackBar
-  ) {}
+  constructor(private _store: Store<AppState>, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.isSidebar = this.component === 'cart-sidebar';
@@ -106,7 +99,7 @@ export class CartComponent {
         removeCartItem({
           productId,
           customerId: this._loggedInUserId!,
-        })
+        }),
       );
     } else {
       this._store.dispatch(
@@ -114,7 +107,7 @@ export class CartComponent {
           productId,
           quantity,
           customerId: this._loggedInUserId!,
-        })
+        }),
       );
     }
   }
@@ -125,7 +118,7 @@ export class CartComponent {
       removeCartItem({
         productId,
         customerId: this._loggedInUserId!,
-      })
+      }),
     );
   }
 

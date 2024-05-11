@@ -24,10 +24,10 @@ export class OrdersEffects {
       exhaustMap(({ customerId }) =>
         this._ordersService.getOrders(customerId).pipe(
           map((ordersResponse) => loadOrdersSuccess(ordersResponse)),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   loadSingleOrder$ = createEffect(() =>
@@ -35,13 +35,11 @@ export class OrdersEffects {
       ofType(loadSingleOrder),
       exhaustMap(({ orderId, customerId }) => {
         return this._ordersService.getSingleOrder(orderId, customerId).pipe(
-          map((singleOrderResponse) =>
-            loadSingleOrderSuccess(singleOrderResponse)
-          ),
-          catchError(dispatchErrorAction)
+          map((singleOrderResponse) => loadSingleOrderSuccess(singleOrderResponse)),
+          catchError(dispatchErrorAction),
         );
-      })
-    )
+      }),
+    ),
   );
 
   createOrder$ = createEffect(() =>
@@ -52,10 +50,10 @@ export class OrdersEffects {
           map((newOrderResponse) => {
             return createOrderSuccess(newOrderResponse);
           }),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   updateOrder$ = createEffect(() =>
@@ -64,10 +62,10 @@ export class OrdersEffects {
       exhaustMap((payload) =>
         this._ordersService.updateOrder(payload).pipe(
           map((singleOrderResponse) => updateOrderSuccess(singleOrderResponse)),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   deleteOrder$ = createEffect(() =>
@@ -75,17 +73,12 @@ export class OrdersEffects {
       ofType(deleteOrder),
       exhaustMap(({ orderId, customerId }) =>
         this._ordersService.deleteOrder(orderId, customerId).pipe(
-          map((deletedOrderResponse) =>
-            deleteOrderSuccess(deletedOrderResponse)
-          ),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          map((deletedOrderResponse) => deleteOrderSuccess(deletedOrderResponse)),
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
-  constructor(
-    private _actions$: Actions,
-    private _ordersService: OrdersService
-  ) {}
+  constructor(private _actions$: Actions, private _ordersService: OrdersService) {}
 }

@@ -1,39 +1,44 @@
 <ng-container *ngLet="products$ | async as products">
-  
   <div class="bg heading">
     <div class="header-flex">
-      <img 
+      <img
         [src]="headerImageSrc"
         [class.negative-margin]="headerImageSrc.includes('suppliers')"
-        [class.products-header-image]="headerImageSrc.includes('products')">
-    <ng-container *ngIf="category">
-      <p>{{ category.description }}</p>
-    </ng-container>
+        [class.products-header-image]="headerImageSrc.includes('products')"
+      />
+      <ng-container *ngIf="category">
+        <p>{{ category.description }}</p>
+      </ng-container>
 
-    <ng-container *ngIf="supplier">
-      <p>{{ supplier.description }}</p>
-    </ng-container>
+      <ng-container *ngIf="supplier">
+        <p>{{ supplier.description }}</p>
+      </ng-container>
 
-    <ng-container *ngIf="!category && !supplier">
-      <p>Browse all products. Use the filter/sort tool by opening the expansion panel below.</p>
-    </ng-container>
+      <ng-container *ngIf="!category && !supplier">
+        <p>Browse all products. Use the filter/sort tool by opening the expansion panel below.</p>
+      </ng-container>
     </div>
 
     <app-products-pagination
-      (toggleStyleEvent)="toggleStyle($event)" 
-      [showDisplayToggle]="showDisplayToggle">
+      (toggleStyleEvent)="toggleStyle($event)"
+      [showDisplayToggle]="showDisplayToggle"
+    >
     </app-products-pagination>
   </div>
 
   <main>
     <ng-container *ngIf="products && products.length > 0; else placeholder">
-      <div class="results-subtitle" *ngIf="searchTerm && (pagination$ | async) as pagination" #scrollRef>
+      <div
+        class="results-subtitle"
+        *ngIf="searchTerm && (pagination$ | async) as pagination"
+        #scrollRef
+      >
         <h2>Found {{ pagination.totalResults }} matches for "{{ searchTerm }}".</h2>
         <button mat-mini-fab color="warn" (click)="reloadResults()" aria-label="Reload products">
           <mat-icon>close</mat-icon>
         </button>
       </div>
-      
+
       <section [ngClass]="productListClass">
         <ng-container *ngFor="let product of products">
           <ng-container *ngTemplateOutlet="productCard; context: { product, loading: false }">
@@ -58,44 +63,66 @@
         <div class="empty" #scrollRef>
           <ng-container *ngIf="searchTerm; else noResultsNoSearchTerm">
             <p class="bold">No matches found for "{{ searchTerm }}".</p>
-            <p>No products were found using the provided search term. Try another search or reload all products.</p>
+            <p>
+              No products were found using the provided search term. Try another search or reload
+              all products.
+            </p>
           </ng-container>
 
           <ng-template #noResultsNoSearchTerm>
             <p>No products found. Try reloading the full list of products.</p>
           </ng-template>
-         
-          <img class="filter" src="assets/empty-4.svg">
-          <button mat-raised-button color="primary" (click)="reloadResults()">Load all products</button>
+
+          <img class="filter" src="assets/empty-4.svg" />
+          <button mat-raised-button color="primary" (click)="reloadResults()">
+            Load all products
+          </button>
         </div>
       </ng-container>
     </ng-template>
- 
   </main>
 </ng-container>
 
 <ng-template let-product="product" let-loading="loading" #productCard>
-  <mat-card [ngClass]="{ 'product-card': true, 'product-card-placeholder': loading }" class="product-card">
-    
+  <mat-card
+    [ngClass]="{ 'product-card': true, 'product-card-placeholder': loading }"
+    class="product-card"
+  >
     <div *ngIf="listDisplayStyle === 'list'" class="list-image">
-      <img class="product-image" mat-card-image [src]="'assets/icons/transparent/' + product.thumbnail">
+      <img
+        class="product-image"
+        mat-card-image
+        [src]="'assets/icons/transparent/' + product.thumbnail"
+      />
     </div>
 
     <div class="product-card-content">
       <mat-card-header class="product-card-header" [class.dark]="listDisplayStyle === 'grid'">
-        <mat-card-title [routerLink]="['/products', product.id]" class="product-title bring-to-front" [class.glow]="loading">{{ product.name }}</mat-card-title>
-        
+        <mat-card-title
+          [routerLink]="['/products', product.id]"
+          class="product-title bring-to-front"
+          [class.glow]="loading"
+          >{{ product.name }}</mat-card-title
+        >
+
         <div class="product-subtitle bring-to-front" [class.glow]="loading">
           <app-chips [product]="product"></app-chips>
         </div>
 
         <div class="product-header-stats bring-to-front" [class.glow]="loading">
           <mat-chip>
-            <igc-rating class="chip" [value]="product.averageRating" min="0" max="5" disabled></igc-rating>
+            <igc-rating
+              class="chip"
+              [value]="product.averageRating"
+              min="0"
+              max="5"
+              disabled
+            ></igc-rating>
           </mat-chip>
           <span class="icon-with-text">
             <mat-icon color="primary">stars</mat-icon>
-            {{ product.averageRating | number: '1.0-1' }} <span class="italic">({{ product.numOfReviews }} reviews)</span>
+            {{ product.averageRating | number : '1.0-1' }}
+            <span class="italic">({{ product.numOfReviews }} reviews)</span>
           </span>
         </div>
 
@@ -110,13 +137,24 @@
           </span>
         </div>
 
-        <img *ngIf="listDisplayStyle === 'grid'" [routerLink]="['/products', product.id]" class="product-image" mat-card-image [src]="productImgSrc(product)">
+        <img
+          *ngIf="listDisplayStyle === 'grid'"
+          [routerLink]="['/products', product.id]"
+          class="product-image"
+          mat-card-image
+          [src]="productImgSrc(product)"
+        />
 
-        <ng-container *ngIf="(wishlist$ | async) as wishlist">
+        <ng-container *ngIf="wishlist$ | async as wishlist">
           <div class="product-card-overlay">
             <ng-container *ngIf="!productIsInWishlist(product.id, wishlist); else alt">
               <div class="wishlist-button" [class.fit-content]="listDisplayStyle === 'list'">
-                <button mat-fab extended (click)="updateWishlist('add', wishlist, product.id)" color="primary">
+                <button
+                  mat-fab
+                  extended
+                  (click)="updateWishlist('add', wishlist, product.id)"
+                  color="primary"
+                >
                   <mat-icon>library_books</mat-icon>
                   Add to wishlist
                 </button>
@@ -124,19 +162,29 @@
             </ng-container>
 
             <ng-template #alt>
-              <mat-card class="wishlist-message-card" [class.push-right]="listDisplayStyle === 'list'">
-                <p [class.black]="lightModeEnabled">You have added this product to your wishlist.</p>
+              <mat-card
+                class="wishlist-message-card"
+                [class.push-right]="listDisplayStyle === 'list'"
+              >
+                <p [class.black]="lightModeEnabled">
+                  You have added this product to your wishlist.
+                </p>
                 <mat-card-actions>
-                <button class="remove" mat-fab extended (click)="updateWishlist('remove', wishlist, product.id)" color="warn">
-                  <mat-icon>delete</mat-icon>
-                  Remove
-                </button>
+                  <button
+                    class="remove"
+                    mat-fab
+                    extended
+                    (click)="updateWishlist('remove', wishlist, product.id)"
+                    color="warn"
+                  >
+                    <mat-icon>delete</mat-icon>
+                    Remove
+                  </button>
                 </mat-card-actions>
               </mat-card>
             </ng-template>
           </div>
         </ng-container>
-       
       </mat-card-header>
       <mat-divider></mat-divider>
 
@@ -144,16 +192,17 @@
         <p class="product-description" [class.glow]="loading">{{ product.description }}</p>
         <div class="price">
           <p class="stock" [ngClass]="{ stock: true, red: product.stock === 0, glow: loading }">
-            <mat-icon [color]="product.stock > 0 ? 'white' : 'warn'">{{ product.stock > 0 ? "label" : "highlight_off" }}</mat-icon>
-            {{ product.stock > 0 ? product.stock + " in stock" : "Out of stock" }}
+            <mat-icon [color]="product.stock > 0 ? 'white' : 'warn'">{{
+              product.stock > 0 ? 'label' : 'highlight_off'
+            }}</mat-icon>
+            {{ product.stock > 0 ? product.stock + ' in stock' : 'Out of stock' }}
           </p>
           <mat-chip class="bold">
-            <p [class.glow]="loading">{{ product.price | currency: 'GBP' }}</p>
+            <p [class.glow]="loading">{{ product.price | currency : 'GBP' }}</p>
           </mat-chip>
         </div>
       </mat-card-content>
       <div>
-        
         <mat-divider></mat-divider>
         <mat-card-actions [class.glow]="loading">
           <app-action-buttons [product]="product"></app-action-buttons>
@@ -161,7 +210,7 @@
       </div>
 
       <ng-container *ngIf="product.stock === 0; else notLoggedIn">
-        <div class="unavailable" >
+        <div class="unavailable">
           <mat-icon>highlight_off</mat-icon>
           <p>Item is out of stock.</p>
         </div>
@@ -175,10 +224,16 @@
           </div>
         </ng-container>
       </ng-template>
-      
-    <ng-container *ngIf="((cartUpdateStatus$ | async) === 'loading' && (cartActiveId$ | async) === product.id) || ((wishlistUpdateStatus$ | async) === 'loading' && (wishlistActiveId$ | async) === product.id)">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </ng-container>
-  </div>
+
+      <ng-container
+        *ngIf="
+          ((cartUpdateStatus$ | async) === 'loading' && (cartActiveId$ | async) === product.id) ||
+          ((wishlistUpdateStatus$ | async) === 'loading' &&
+            (wishlistActiveId$ | async) === product.id)
+        "
+      >
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+    </div>
   </mat-card>
 </ng-template>

@@ -1,11 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { NotificationState } from '@scifi/types';
-import {
-  hideDialog,
-  httpError,
-  notify,
-  showDialog,
-} from './notification.actions';
+import { hideDialog, httpError, notify, showDialog } from './notification.actions';
 
 export const initialState: NotificationState = {
   showDialog: false,
@@ -34,7 +29,7 @@ export const notificationReducer = createReducer(
         buttons,
       },
     };
-  })
+  }),
 );
 
 export const notificationFeature = createFeature({

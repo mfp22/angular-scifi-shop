@@ -6,15 +6,9 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
-import {
-  selectActiveId,
-  selectUpdateStatus,
-} from '@scifi/ngrx/cart/cart.feature';
+import { selectActiveId, selectUpdateStatus } from '@scifi/ngrx/cart/cart.feature';
 import { selectData } from '@scifi/ngrx/notification/notification.feature';
-import {
-  loadSingleProduct,
-  searchOrderHistory,
-} from '@scifi/ngrx/products/products.actions';
+import { loadSingleProduct, searchOrderHistory } from '@scifi/ngrx/products/products.actions';
 import {
   selectLoadStatus,
   selectOrderSearchResult,
@@ -44,13 +38,7 @@ import {
   SingleProduct,
   Status,
 } from '@scifi/types';
-import {
-  Observable,
-  Subscription,
-  combineLatest,
-  map,
-  shareReplay,
-} from 'rxjs';
+import { Observable, Subscription, combineLatest, map, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-single-product',
@@ -63,28 +51,19 @@ export class SingleProductComponent {
   private _orderId: number | undefined;
   readonly singleProduct$: Observable<SingleProduct | null> =
     this._store.select(selectSingleProduct);
-  readonly loadStatus$: Observable<Status> =
-    this._store.select(selectLoadStatus);
-  readonly cartUpdateStatus$: Observable<Status> =
-    this._store.select(selectUpdateStatus);
-  readonly reviewStatus$: Observable<Status> =
-    this._store.select(selectReviewStatus);
-  readonly reviewCreateStatus$: Observable<Status> =
-    this._store.select(selectCreateStatus);
-  readonly reviewUpdateStatus$: Observable<Status> = this._store.select(
-    selectReviewUpdateStatus
-  );
-  readonly reviewDeleteStatus$: Observable<Status> =
-    this._store.select(selectDeleteStatus);
+  readonly loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
+  readonly cartUpdateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
+  readonly reviewStatus$: Observable<Status> = this._store.select(selectReviewStatus);
+  readonly reviewCreateStatus$: Observable<Status> = this._store.select(selectCreateStatus);
+  readonly reviewUpdateStatus$: Observable<Status> = this._store.select(selectReviewUpdateStatus);
+  readonly reviewDeleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
   readonly activeId$: Observable<number> = this._store.select(selectActiveId);
   readonly orderSearchResult$: Observable<OrderSearchResponse | null> =
     this._store.select(selectOrderSearchResult);
-  readonly searchStatus$: Observable<Status> =
-    this._store.select(selectSearchStatus);
+  readonly searchStatus$: Observable<Status> = this._store.select(selectSearchStatus);
   readonly loggedInUserId$: Observable<string | number | null> =
     this._store.select(selectLoggedInUserId);
-  readonly errorData$: Observable<DialogContent | null> =
-    this._store.select(selectData);
+  readonly errorData$: Observable<DialogContent | null> = this._store.select(selectData);
   private _customerId: number | undefined;
   private _subscription = Subscription.EMPTY;
   private _searchResultSubscription = Subscription.EMPTY;
@@ -93,12 +72,10 @@ export class SingleProductComponent {
   private _isHandset = false;
   showCreateReviewButton = false;
   render404 = false;
-  isHandset$: Observable<boolean> = this._breakpointObserver
-    .observe('(max-width: 540px)')
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  isHandset$: Observable<boolean> = this._breakpointObserver.observe('(max-width: 540px)').pipe(
+    map((result) => result.matches),
+    shareReplay(),
+  );
 
   readonly dataStream$ = combineLatest([
     this._route.paramMap,
@@ -108,23 +85,14 @@ export class SingleProductComponent {
     this.reviewDeleteStatus$,
     this.loggedInUserId$,
   ]).pipe(
-    map(
-      ([
-        paramMap,
-        isHandset,
-        createStatus,
-        updateStatus,
-        deleteStatus,
-        loggedInUserId,
-      ]) => ({
-        paramMap,
-        isHandset,
-        createStatus,
-        updateStatus,
-        deleteStatus,
-        loggedInUserId,
-      })
-    )
+    map(([paramMap, isHandset, createStatus, updateStatus, deleteStatus, loggedInUserId]) => ({
+      paramMap,
+      isHandset,
+      createStatus,
+      updateStatus,
+      deleteStatus,
+      loggedInUserId,
+    })),
   );
 
   constructor(
@@ -133,38 +101,27 @@ export class SingleProductComponent {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _breakpointObserver: BreakpointObserver,
-    private _titleService: Title
+    private _titleService: Title,
   ) {}
 
   ngOnInit() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    this._searchResultSubscription = this.orderSearchResult$.subscribe(
-      (orderSearchResult) => {
-        if (orderSearchResult) {
-          if (orderSearchResult.lastOrdered && !orderSearchResult.review) {
-            this.showCreateReviewButton = true;
-            this._orderId = orderSearchResult.lastOrdered.orderId;
-          } else {
-            this.showCreateReviewButton = false;
-          }
+    this._searchResultSubscription = this.orderSearchResult$.subscribe((orderSearchResult) => {
+      if (orderSearchResult) {
+        if (orderSearchResult.lastOrdered && !orderSearchResult.review) {
+          this.showCreateReviewButton = true;
+          this._orderId = orderSearchResult.lastOrdered.orderId;
+        } else {
+          this.showCreateReviewButton = false;
         }
       }
-    );
+    });
 
     this._subscription = this.dataStream$.subscribe(
-      ({
-        paramMap,
-        isHandset,
-        createStatus,
-        updateStatus,
-        deleteStatus,
-        loggedInUserId,
-      }) => {
+      ({ paramMap, isHandset, createStatus, updateStatus, deleteStatus, loggedInUserId }) => {
         const productId = paramMap.get('id');
         if (this.productId !== productId) {
-          this._store.dispatch(
-            loadSingleProduct({ productId: Number(productId) })
-          );
+          this._store.dispatch(loadSingleProduct({ productId: Number(productId) }));
         }
         this.productId = productId;
         this.loggedInUserId = loggedInUserId;
@@ -172,9 +129,7 @@ export class SingleProductComponent {
 
         if (
           loggedInUserId &&
-          [createStatus, updateStatus, deleteStatus].some(
-            (status) => status === 'success'
-          )
+          [createStatus, updateStatus, deleteStatus].some((status) => status === 'success')
         ) {
           const snackBarMessage =
             createStatus === 'success'
@@ -188,7 +143,7 @@ export class SingleProductComponent {
             searchOrderHistory({
               customerId: Number(loggedInUserId),
               productId: Number(productId),
-            })
+            }),
           );
           this._snackBar.open(snackBarMessage, 'Dismiss', {
             horizontalPosition: 'start',
@@ -200,7 +155,7 @@ export class SingleProductComponent {
         if (loggedInUserId) {
           this._customerId = Number(loggedInUserId);
         }
-      }
+      },
     );
 
     this._404Subscription = this.errorData$.subscribe((data) => {
@@ -209,20 +164,18 @@ export class SingleProductComponent {
       }
     });
 
-    this._singleProductSubscription = this.singleProduct$.subscribe(
-      (product) => {
-        if (product) {
-          this._titleService.setTitle(product.name);
-        }
+    this._singleProductSubscription = this.singleProduct$.subscribe((product) => {
+      if (product) {
+        this._titleService.setTitle(product.name);
       }
-    );
+    });
 
     if (this._customerId) {
       this._store.dispatch(
         searchOrderHistory({
           customerId: this._customerId,
           productId: Number(this.productId),
-        })
+        }),
       );
     }
   }
@@ -243,10 +196,7 @@ export class SingleProductComponent {
     };
   }
 
-  showDialog(
-    review: NewReviewRequest | Review,
-    operation: 'create' | 'update'
-  ) {
+  showDialog(review: NewReviewRequest | Review, operation: 'create' | 'update') {
     this._store.dispatch(resetReviewsStatus());
     this.dialog.open(ReviewDialogComponent, {
       data: { review, operation },

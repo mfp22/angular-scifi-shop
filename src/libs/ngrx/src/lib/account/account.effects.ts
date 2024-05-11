@@ -33,10 +33,10 @@ export class AccountEffects {
           catchError(() => {
             window.localStorage.removeItem('userId');
             return of(authFailure());
-          })
-        )
-      )
-    )
+          }),
+        ),
+      ),
+    ),
   );
 
   updateAccount$ = createEffect(() =>
@@ -47,40 +47,36 @@ export class AccountEffects {
           map((accountResponse) => {
             return updateAccountSuccess(accountResponse);
           }),
-          catchError(dispatchErrorAction)
+          catchError(dispatchErrorAction),
         );
-      })
-    )
+      }),
+    ),
   );
 
   createOrUpdateAddress$ = createEffect(() =>
     this._actions$.pipe(
       ofType(createOrUpdateAddress),
       exhaustMap(({ requestBody, customerId }) => {
-        return this._accountService
-          .createOrUpdateAddress(requestBody, customerId)
-          .pipe(
-            map((response) => {
-              return createOrUpdateAddressSuccess(response);
-            }),
-            catchError(dispatchErrorAction)
-          );
-      })
-    )
+        return this._accountService.createOrUpdateAddress(requestBody, customerId).pipe(
+          map((response) => {
+            return createOrUpdateAddressSuccess(response);
+          }),
+          catchError(dispatchErrorAction),
+        );
+      }),
+    ),
   );
 
   deleteAddress$ = createEffect(() =>
     this._actions$.pipe(
       ofType(deleteAddress),
       exhaustMap(({ addressId, addressIdType, customerId }) => {
-        return this._accountService
-          .deleteAddress(addressId, addressIdType, customerId)
-          .pipe(
-            map((response) => deleteAddressSuccess(response)),
-            catchError(dispatchErrorAction)
-          );
-      })
-    )
+        return this._accountService.deleteAddress(addressId, addressIdType, customerId).pipe(
+          map((response) => deleteAddressSuccess(response)),
+          catchError(dispatchErrorAction),
+        );
+      }),
+    ),
   );
 
   deleteUser$ = createEffect(() =>
@@ -91,10 +87,10 @@ export class AccountEffects {
           map((deleteUserResponse) => {
             return deleteUserSuccess(deleteUserResponse);
           }),
-          catchError(dispatchErrorAction)
+          catchError(dispatchErrorAction),
         );
-      })
-    )
+      }),
+    ),
   );
 
   deleteUserNotification$ = createEffect(() =>
@@ -108,13 +104,13 @@ export class AccountEffects {
           content: payload.msg,
           deletedUser: payload.deletedUser,
         });
-      })
-    )
+      }),
+    ),
   );
 
   constructor(
     private _actions$: Actions,
     private _router: Router,
-    private _accountService: AccountService
+    private _accountService: AccountService,
   ) {}
 }

@@ -7,10 +7,7 @@ import {
   loadCustomerReviews,
   loadProductReviews,
 } from '@scifi/ngrx/reviews/reviews.actions';
-import {
-  selectLoadStatus,
-  selectPagination,
-} from '@scifi/ngrx/reviews/reviews.feature';
+import { selectLoadStatus, selectPagination } from '@scifi/ngrx/reviews/reviews.feature';
 import { AppState, Pagination, Status } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
 
@@ -25,10 +22,8 @@ import { Observable, Subscription } from 'rxjs';
 export class ReviewsPaginationComponent {
   @Input() component: 'reviews' | 'product' | undefined;
   @Input() productId: number | undefined;
-  readonly pagination$: Observable<Pagination> =
-    this._store.select(selectPagination);
-  readonly loadStatus$: Observable<Status> =
-    this._store.select(selectLoadStatus);
+  readonly pagination$: Observable<Pagination> = this._store.select(selectPagination);
+  readonly loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
   currentPage = 1;
   currentLimit = 25;
   private _subscription = Subscription.EMPTY;
@@ -36,13 +31,10 @@ export class ReviewsPaginationComponent {
   constructor(
     private _store: Store<AppState>,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
   ) {}
 
-  validateNumericalParam(
-    param: 'page' | 'limit',
-    value: string | null
-  ): number {
+  validateNumericalParam(param: 'page' | 'limit', value: string | null): number {
     if (!value || isNaN(Number(value)) || Number(value) === 0) {
       return param === 'page' ? 1 : 25;
     } else {
@@ -56,46 +48,38 @@ export class ReviewsPaginationComponent {
         loadProductReviews({
           productId: this.productId,
           queryParams: { page: 1, limit: 25 },
-        })
+        }),
       );
     }
 
-    this._subscription = this._route.queryParamMap.subscribe(
-      (queryParamMap) => {
-        const customerId = queryParamMap.get('customerId');
-        const page = this.validateNumericalParam(
-          'page',
-          queryParamMap.get('page')
-        );
-        const limit = this.validateNumericalParam(
-          'limit',
-          queryParamMap.get('limit')
-        );
+    this._subscription = this._route.queryParamMap.subscribe((queryParamMap) => {
+      const customerId = queryParamMap.get('customerId');
+      const page = this.validateNumericalParam('page', queryParamMap.get('page'));
+      const limit = this.validateNumericalParam('limit', queryParamMap.get('limit'));
 
-        if (customerId) {
-          if (!isNaN(Number(customerId))) {
-            // query param ID is valid
-            this._store.dispatch(
-              loadCustomerReviews({
-                customerId: Number(customerId),
-                queryParams: { page, limit },
-              })
-            );
-          } else {
-            this._store.dispatch(loadAllReviews({ page, limit }));
-          }
-        } else if (!customerId && !this.productId) {
-          this._store.dispatch(loadAllReviews({ page, limit }));
-        } else if (this.productId && (page > 1 || limit !== 25)) {
+      if (customerId) {
+        if (!isNaN(Number(customerId))) {
+          // query param ID is valid
           this._store.dispatch(
-            loadProductReviews({
-              productId: this.productId,
+            loadCustomerReviews({
+              customerId: Number(customerId),
               queryParams: { page, limit },
-            })
+            }),
           );
+        } else {
+          this._store.dispatch(loadAllReviews({ page, limit }));
         }
+      } else if (!customerId && !this.productId) {
+        this._store.dispatch(loadAllReviews({ page, limit }));
+      } else if (this.productId && (page > 1 || limit !== 25)) {
+        this._store.dispatch(
+          loadProductReviews({
+            productId: this.productId,
+            queryParams: { page, limit },
+          }),
+        );
       }
-    );
+    });
   }
 
   handlePageEvent(e: PageEvent) {

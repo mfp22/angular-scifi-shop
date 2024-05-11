@@ -20,10 +20,10 @@ export class ProductsEffects {
       exhaustMap((queryParams) =>
         this._productsService.getProducts(queryParams).pipe(
           map((productsResponse) => loadProductsSuccess(productsResponse)),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   loadSingleProduct$ = createEffect(() =>
@@ -34,10 +34,10 @@ export class ProductsEffects {
           map((singleProductResponse) => {
             return loadSingleProductSuccess(singleProductResponse);
           }),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   searchOrderHistory$ = createEffect(() =>
@@ -48,14 +48,11 @@ export class ProductsEffects {
           .getProductFromOrderHistory(payload.customerId, payload.productId)
           .pipe(
             map((searchResponse) => searchOrderHistorySuccess(searchResponse)),
-            catchError(dispatchErrorAction)
-          )
-      )
-    )
+            catchError(dispatchErrorAction),
+          ),
+      ),
+    ),
   );
 
-  constructor(
-    private _actions$: Actions,
-    private _productsService: ProductService
-  ) {}
+  constructor(private _actions$: Actions, private _productsService: ProductService) {}
 }

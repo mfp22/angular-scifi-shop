@@ -19,28 +19,23 @@ import { WishlistService } from '../wishlist.service';
   styleUrls: ['./wishlist.component.sass'],
 })
 export class WishlistComponent {
-  readonly wishlist$: Observable<Wishlist | null> =
-    this._store.select(selectWishlist);
-  readonly loadStatus$: Observable<Status> =
-    this._store.select(selectLoadStatus);
-  readonly updateStatus$: Observable<Status> =
-    this._store.select(selectUpdateStatus);
+  readonly wishlist$: Observable<Wishlist | null> = this._store.select(selectWishlist);
+  readonly loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
+  readonly updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
   readonly activeId$: Observable<number> = this._store.select(selectActiveId);
   private _subscription = Subscription.EMPTY;
   operation: 'remove' | 'removeAll' | undefined;
 
-  smallViewport$: Observable<boolean> = this._breakpointObserver
-    .observe('(max-width: 500px)')
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  smallViewport$: Observable<boolean> = this._breakpointObserver.observe('(max-width: 500px)').pipe(
+    map((result) => result.matches),
+    shareReplay(),
+  );
 
   constructor(
     private _store: Store<AppState>,
     private _wishlistService: WishlistService,
     private _snackBar: MatSnackBar,
-    private _breakpointObserver: BreakpointObserver
+    private _breakpointObserver: BreakpointObserver,
   ) {}
 
   ngOnInit() {
@@ -63,17 +58,9 @@ export class WishlistComponent {
     return document.body.classList.contains('light-mode');
   }
 
-  updateWishlist(
-    operation: 'remove' | 'removeAll',
-    wishlist: Wishlist,
-    productId: number
-  ) {
+  updateWishlist(operation: 'remove' | 'removeAll', wishlist: Wishlist, productId: number) {
     this.operation = operation;
-    this._wishlistService.dispatchWishlistActions(
-      operation,
-      wishlist,
-      productId
-    );
+    this._wishlistService.dispatchWishlistActions(operation, wishlist, productId);
   }
 
   ngOnDestroy() {

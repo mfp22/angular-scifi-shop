@@ -25,8 +25,7 @@ import { AppState } from '@scifi/types';
 export class AuthComponent {
   authIsLoading$: Observable<boolean> = this._store.select(selectAuthIsLoading);
   authIsSuccess$: Observable<boolean> = this._store.select(selectAuthIsSuccess);
-  loggedInUserId$: Observable<number | string | null> =
-    this._store.select(selectLoggedInUserId);
+  loggedInUserId$: Observable<number | string | null> = this._store.select(selectLoggedInUserId);
   formType = 'Login';
   socialUser: SocialUser | undefined;
   private _subscription = Subscription.EMPTY;
@@ -34,24 +33,20 @@ export class AuthComponent {
   constructor(
     private _store: Store<AppState>,
     private _authService: AuthService,
-    private _socialAuthService: SocialAuthService
+    private _socialAuthService: SocialAuthService,
   ) {}
 
   ngOnInit() {
-    this._subscription = this._socialAuthService.authState.subscribe(
-      (user: SocialUser) => {
-        this.socialUser = user;
-        if (user) {
-          this._authService.dispatchSocialLoginAction(user);
-        }
+    this._subscription = this._socialAuthService.authState.subscribe((user: SocialUser) => {
+      this.socialUser = user;
+      if (user) {
+        this._authService.dispatchSocialLoginAction(user);
       }
-    );
+    });
   }
 
   get theme() {
-    return document.body.classList.contains('light-mode')
-      ? 'outline'
-      : 'filled_black';
+    return document.body.classList.contains('light-mode') ? 'outline' : 'filled_black';
   }
 
   get lightModeEnabled() {

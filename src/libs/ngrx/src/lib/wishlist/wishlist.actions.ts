@@ -3,12 +3,12 @@ import { Wishlist, WishlistBasic } from '@scifi/types';
 
 export const loadWishlist = createAction(
   '[Wishlist Component] Load Wishlist',
-  props<{ customerId: number; format: string }>()
+  props<{ customerId: number; format: string }>(),
 );
 
 export const loadWishlistSuccess = createAction(
   '[Wishlist Component] Wishlist Loaded - Success',
-  props<Wishlist>()
+  props<Wishlist>(),
 );
 
 export const updateWishlist = createAction(
@@ -16,19 +16,17 @@ export const updateWishlist = createAction(
   props<{
     updatedWishlist: WishlistBasic | [];
     customerId: number;
-  }>()
+  }>(),
 );
 
 export const updateWishlistSuccess = createAction(
   '[Wishlist Component] Update Wishlist - Success',
-  props<Wishlist>()
+  props<Wishlist>(),
 );
 
 export const updateActiveId = createAction(
   '[Wishlist Component] Update Active Id',
-  props<{ activeId: number }>()
+  props<{ activeId: number }>(),
 );
 
-export const resetWishlistStatus = createAction(
-  '[Wishlist Component] Reset Status'
-);
+export const resetWishlistStatus = createAction('[Wishlist Component] Reset Status');

@@ -6,14 +6,8 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-page-not-found',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MaterialModule
-  ],
+  imports: [CommonModule, RouterModule, MaterialModule],
   templateUrl: './page-not-found.component.html',
-  styleUrls: ['./page-not-found.component.sass']
+  styleUrls: ['./page-not-found.component.sass'],
 })
-export class PageNotFoundComponent {
-
-}
+export class PageNotFoundComponent {}

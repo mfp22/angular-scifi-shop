@@ -4,19 +4,15 @@ import { PaymentIntent } from '@stripe/stripe-js';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CheckoutService {
+  constructor(private _http: HttpClient) {}
 
-  constructor(
-    private _http: HttpClient
-  ) { }
-
-  createPaymentIntent(amount: number): 
-    Observable<{ paymentIntent: PaymentIntent }> {
+  createPaymentIntent(amount: number): Observable<{ paymentIntent: PaymentIntent }> {
     return this._http.post<{ paymentIntent: PaymentIntent }>(
-      "https://taliphus.vercel.app/api/create-payment-intent",
-      { amount }
+      'https://taliphus.vercel.app/api/create-payment-intent',
+      { amount },
     );
   }
 }

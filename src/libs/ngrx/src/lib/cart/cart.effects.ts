@@ -29,10 +29,10 @@ export class CartEffects {
       exhaustMap(({ customerId }) =>
         this.cartService.getCart(customerId).pipe(
           map((cartResponse) => loadCartSuccess(cartResponse.cart)),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   addToCart$ = createEffect(() =>
@@ -40,14 +40,12 @@ export class CartEffects {
       ofType(addToCart),
       withLatestFrom(this.store.select(selectCartItems)),
       exhaustMap(([cartItem, cartItems]) => {
-        return this.cartService
-          .updateCart([...cartItems, cartItem], cartItem.customerId)
-          .pipe(
-            map((cartResponse) => this.formatActionPayload(cartResponse)),
-            catchError(dispatchErrorAction)
-          );
-      })
-    )
+        return this.cartService.updateCart([...cartItems, cartItem], cartItem.customerId).pipe(
+          map((cartResponse) => this.formatActionPayload(cartResponse)),
+          catchError(dispatchErrorAction),
+        );
+      }),
+    ),
   );
 
   removeCartItem$ = createEffect(() =>
@@ -58,14 +56,14 @@ export class CartEffects {
         return this.cartService
           .updateCart(
             cartItems.filter((item) => item.productId !== productId),
-            customerId
+            customerId,
           )
           .pipe(
             map((cartResponse) => this.formatActionPayload(cartResponse)),
-            catchError(dispatchErrorAction)
+            catchError(dispatchErrorAction),
           );
-      })
-    )
+      }),
+    ),
   );
 
   modifyQuantity$ = createEffect(() =>
@@ -82,14 +80,14 @@ export class CartEffects {
                 return item;
               }
             }),
-            customerId
+            customerId,
           )
           .pipe(
             map((cartResponse) => this.formatActionPayload(cartResponse)),
-            catchError(dispatchErrorAction)
+            catchError(dispatchErrorAction),
           );
-      })
-    )
+      }),
+    ),
   );
 
   clearCart$ = createEffect(() =>
@@ -98,15 +96,15 @@ export class CartEffects {
       exhaustMap(({ customerId }) =>
         this.cartService.updateCart([], customerId).pipe(
           map((cartResponse) => this.formatActionPayload(cartResponse)),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   constructor(
     private actions$: Actions,
     private cartService: CartService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) {}
 }

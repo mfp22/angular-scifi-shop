@@ -1,10 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AccountService } from '@scifi/account/account.service';
@@ -54,28 +49,25 @@ export class AuthFormComponent {
 
   currentForm: AuthForm = this.loginForm;
 
-  readonly authIsLoading$: Observable<boolean> =
-    this._store.select(selectAuthIsLoading);
+  readonly authIsLoading$: Observable<boolean> = this._store.select(selectAuthIsLoading);
 
   constructor(
     private _store: Store<AppState>,
     private _accountService: AccountService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
   ) {}
 
   ngOnInit() {
     this.signupForm.addValidators(
       this._accountService.matchValidator(
         this.signupForm.get('password')!,
-        this.signupForm.get('passwordConfirm')!
-      )
+        this.signupForm.get('passwordConfirm')!,
+      ),
     );
     this.signupForm.updateValueAndValidity();
   }
 
-  showErrorMessage(
-    input: 'name' | 'email' | 'username' | 'password' | 'passwordConfirm'
-  ) {
+  showErrorMessage(input: 'name' | 'email' | 'username' | 'password' | 'passwordConfirm') {
     const control = this.currentForm.get(input)!;
 
     switch (true) {
@@ -99,11 +91,7 @@ export class AuthFormComponent {
     }
   }
 
-  ngOnChanges({
-    formType: { currentValue },
-  }: {
-    formType: { currentValue: string };
-  }) {
+  ngOnChanges({ formType: { currentValue } }: { formType: { currentValue: string } }) {
     if (currentValue === 'Signup') {
       this.currentForm = this.signupForm;
     } else if (currentValue === 'Login') {
@@ -124,7 +112,7 @@ export class AuthFormComponent {
           password: 'password',
         },
         endpoint: '/login',
-      })
+      }),
     );
   }
 
@@ -135,14 +123,14 @@ export class AuthFormComponent {
         signupRequest({
           requestBody: formValue as AuthCredentials,
           endpoint: '/signup',
-        })
+        }),
       );
     } else {
       this._store.dispatch(
         loginRequest({
           requestBody: formValue as AuthCredentials,
           endpoint: '/login',
-        })
+        }),
       );
     }
   }

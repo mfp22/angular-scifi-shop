@@ -22,11 +22,11 @@ export class CartSidebarComponent implements AfterViewInit {
     this._eventsSubscription.unsubscribe();
   }
 
-  toggleBodyOverflow(state: "hide" | "show") {
-    if (state === "hide") {
-      document.body.classList.add("hide-scrollbar");
+  toggleBodyOverflow(state: 'hide' | 'show') {
+    if (state === 'hide') {
+      document.body.classList.add('hide-scrollbar');
     } else {
-      document.body.classList.remove("hide-scrollbar");
+      document.body.classList.remove('hide-scrollbar');
     }
   }
 }

@@ -1,32 +1,38 @@
 <mat-dialog-content *ngLet="data.review as review">
   <div class="dialog-title">
-    <h2>{{ data.operation === "update" ? "Update review" : "Post new review"}}</h2>
+    <h2>{{ data.operation === 'update' ? 'Update review' : 'Post new review' }}</h2>
     <button mat-icon-button matSuffix (click)="onNoClick()">
       <mat-icon color="primary">close</mat-icon>
     </button>
   </div>
   <mat-divider></mat-divider>
-  <br>
+  <br />
 
   <mat-card>
     <mat-card-header>
       <mat-card-title>
         <h3>{{ review.product!.name }}</h3>
       </mat-card-title>
-        <app-chips class="chips" [product]="review.product"></app-chips>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="product-description">{{ review.product!.description }}</p>
-            <img mat-card-image [src]="'assets/icons/black/' + review.product!.thumbnail">
-        </mat-card-content>
+      <app-chips class="chips" [product]="review.product"></app-chips>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="product-description">{{ review.product!.description }}</p>
+      <img mat-card-image [src]="'assets/icons/black/' + review.product!.thumbnail" />
+    </mat-card-content>
   </mat-card>
 
   <div>
     <div class="rating-label">
-    <p>Rating:</p>
-    <span class="rating-chip" [matBadge]="reviewForm.get('rating')!.value" matBadgeColor="accent">
+      <p>Rating:</p>
+      <span class="rating-chip" [matBadge]="reviewForm.get('rating')!.value" matBadgeColor="accent">
         <mat-chip>
-          <igc-rating class="stars" (igcChange)="changeRating($event)" [value]="review.rating" min="0" max="5"></igc-rating>
+          <igc-rating
+            class="stars"
+            (igcChange)="changeRating($event)"
+            [value]="review.rating"
+            min="0"
+            max="5"
+          ></igc-rating>
         </mat-chip>
       </span>
     </div>
@@ -34,16 +40,34 @@
     <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
       <mat-form-field>
         <mat-label>Title</mat-label>
-        <input matInput formControlName="title" placeholder="Give your review a title.">
-        <button *ngIf="reviewForm.get('title')!.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearField('title', '')">
+        <input matInput formControlName="title" placeholder="Give your review a title." />
+        <button
+          *ngIf="reviewForm.get('title')!.value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearField('title', '')"
+        >
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
 
       <mat-form-field subscriptSizing="dynamic">
         <mat-label>Review</mat-label>
-        <textarea class="textarea" matInput cdkTextareaAutosize="true" formControlName="body" placeholder="Type your review here."></textarea>
-        <button *ngIf="reviewForm.get('body')!.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearField('body', '')">
+        <textarea
+          class="textarea"
+          matInput
+          cdkTextareaAutosize="true"
+          formControlName="body"
+          placeholder="Type your review here."
+        ></textarea>
+        <button
+          *ngIf="reviewForm.get('body')!.value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearField('body', '')"
+        >
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
@@ -55,7 +79,13 @@
             <mat-radio-button [value]="true">Yes</mat-radio-button>
             <mat-radio-button [value]="false">No</mat-radio-button>
           </mat-radio-group>
-          <button *ngIf="reviewForm.get('recommend')!.value !== null" matSuffix mat-icon-button aria-label="Clear" (click)="clearField('recommend', null)">
+          <button
+            *ngIf="reviewForm.get('recommend')!.value !== null"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="clearField('recommend', null)"
+          >
             <mat-icon>close</mat-icon>
           </button>
         </div>
@@ -68,9 +98,15 @@
         </button>
         <button mat-raised-button type="submit" [disabled]="!reviewForm.valid" color="primary">
           <mat-icon>edit</mat-icon>
-          {{ data.operation === "update" ? "Update review" : "Post review"}}
+          {{ data.operation === 'update' ? 'Update review' : 'Post review' }}
         </button>
-        <button *ngIf="data.operation === 'update'" type="button" (click)="deleteReview(review.id)" mat-raised-button color="warn">
+        <button
+          *ngIf="data.operation === 'update'"
+          type="button"
+          (click)="deleteReview(review.id)"
+          mat-raised-button
+          color="warn"
+        >
           <mat-icon>delete_forever</mat-icon>
           Delete review
         </button>

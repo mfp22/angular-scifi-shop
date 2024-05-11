@@ -3,10 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { selectAccount } from '@scifi/ngrx/account/account.feature';
 import { loadFavorites } from '@scifi/ngrx/reviews/reviews.actions';
-import {
-  selectFavorites,
-  selectLoadStatus,
-} from '@scifi/ngrx/reviews/reviews.feature';
+import { selectFavorites, selectLoadStatus } from '@scifi/ngrx/reviews/reviews.feature';
 import { AppState, Customer, Review, Status } from '@scifi/types';
 
 @Component({
@@ -16,8 +13,7 @@ import { AppState, Customer, Review, Status } from '@scifi/types';
 })
 export class FavoritesComponent {
   loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
-  favorites$: Observable<Review[] | [] | null> =
-    this._store.select(selectFavorites);
+  favorites$: Observable<Review[] | [] | null> = this._store.select(selectFavorites);
   accountData$: Observable<Customer | null> = this._store.select(selectAccount);
   private _subscription = Subscription.EMPTY;
   public showDescription: { [productId: number]: boolean } = {};

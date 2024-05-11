@@ -31,14 +31,12 @@ export class AuthEffects {
           map((response) => {
             const res = response.body as { customer: Customer };
             window.localStorage.setItem('userId', String(res.customer.id));
-            return endpoint === '/login'
-              ? loginSuccess(res)
-              : signupSuccess(res);
+            return endpoint === '/login' ? loginSuccess(res) : signupSuccess(res);
           }),
-          catchError(({ error }: { error: ApiError }) => of(httpError(error)))
+          catchError(({ error }: { error: ApiError }) => of(httpError(error))),
         );
-      })
-    )
+      }),
+    ),
   );
 
   authenticateWithSSO$ = createEffect(() =>
@@ -51,10 +49,10 @@ export class AuthEffects {
             window.localStorage.setItem('userId', String(res.customer.id));
             return authenticateWithSSOSuccess(res);
           }),
-          catchError(({ error }: { error: ApiError }) => of(httpError(error)))
+          catchError(({ error }: { error: ApiError }) => of(httpError(error))),
         );
-      })
-    )
+      }),
+    ),
   );
 
   logout$ = createEffect(() =>
@@ -70,33 +68,31 @@ export class AuthEffects {
             this.router.navigate(['/']);
             return logoutSuccess(logoutResponse);
           }),
-          catchError(({ error }: { error: ApiError }) => of(httpError(error)))
+          catchError(({ error }: { error: ApiError }) => of(httpError(error))),
         );
-      })
-    )
+      }),
+    ),
   );
 
   logoutNotification$ = createEffect(() =>
     this.actions$.pipe(
       ofType(logoutSuccess),
-      map((payload) =>
-        notify({ title: 'Successfully logged out.', content: payload.msg })
-      )
-    )
+      map((payload) => notify({ title: 'Successfully logged out.', content: payload.msg })),
+    ),
   );
 
   clearCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(logoutSuccess),
-      map(() => clearCurrentUser())
-    )
+      map(() => clearCurrentUser()),
+    ),
   );
 
   constructor(
     private actions$: Actions,
     private authService: AuthService,
     private router: Router,
-    private _authService: SocialAuthService
+    private _authService: SocialAuthService,
   ) {
     this._authService.authState.subscribe((user) => {
       if (user) {

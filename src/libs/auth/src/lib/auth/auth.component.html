@@ -1,10 +1,10 @@
-<section 
-  id="loginOverlay" 
-  class="overlay" 
+<section
+  id="loginOverlay"
+  class="overlay"
   (click)="hideOverlayOnBodyClick($event)"
-  *ngLet="(authIsLoading$ | async) as isLoading"
+  *ngLet="authIsLoading$ | async as isLoading"
 >
-  <div [ngClass]="{'content': true, 'dark-bg': !lightModeEnabled}">
+  <div [ngClass]="{ content: true, 'dark-bg': !lightModeEnabled }">
     <p class="subtitle">Sign in or create a new account.</p>
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-bar>
     <div class="padding">
@@ -12,12 +12,21 @@
 
       <mat-tab-group (selectedTabChange)="tabChange($event)">
         <mat-tab label="Login">
-          <ng-container *ngTemplateOutlet="confirmation; context: { msg: 'Successfully logged in.' }"></ng-container>
+          <ng-container
+            *ngTemplateOutlet="confirmation; context: { msg: 'Successfully logged in.' }"
+          ></ng-container>
           <app-auth-form [formType]="formType"></app-auth-form>
         </mat-tab>
 
         <mat-tab label="Signup">
-          <ng-container *ngTemplateOutlet="confirmation; context: { msg: 'Successfully signed up. You have also been logged in to your account.' }"></ng-container>
+          <ng-container
+            *ngTemplateOutlet="
+              confirmation;
+              context: {
+                msg: 'Successfully signed up. You have also been logged in to your account.'
+              }
+            "
+          ></ng-container>
           <app-auth-form [formType]="formType"></app-auth-form>
           <mat-spinner *ngIf="isLoading" class="spinner" color="primary"></mat-spinner>
         </mat-tab>
@@ -25,32 +34,37 @@
         <mat-tab label="Login with SSO">
           <div>
             <p>Use single sign-on to access the app.</p>
-            <ng-container *ngTemplateOutlet="confirmation; context: { msg: 'Successfully logged in via ' + socialUser?.provider }"></ng-container>
+            <ng-container
+              *ngTemplateOutlet="
+                confirmation;
+                context: { msg: 'Successfully logged in via ' + socialUser?.provider }
+              "
+            ></ng-container>
             <div class="sso-buttons">
               <div id="google-login">
-                <asl-google-signin-button 
+                <asl-google-signin-button
                   text="continue_with"
-                  type="standard" 
+                  type="standard"
                   size="large"
                   width="230"
-                  [theme]="theme">
+                  [theme]="theme"
+                >
                 </asl-google-signin-button>
               </div>
 
               <button class="sso-button" (click)="loginWithFacebook()" mat-stroked-button>
                 <div id="facebook-login">
                   <span>Continue with Facebook</span>
-                  <img src="assets/facebook.svg">
+                  <img src="assets/facebook.svg" />
                 </div>
               </button>
 
               <button class="sso-button" (click)="loginWithAmazon()" mat-stroked-button>
                 <div id="amazon-login">
                   <span>Continue with Amazon</span>
-                  <img src="assets/amazon.svg">
+                  <img src="assets/amazon.svg" />
                 </div>
               </button>
-
             </div>
           </div>
         </mat-tab>

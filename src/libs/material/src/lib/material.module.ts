@@ -57,11 +57,11 @@ const materials = [
   MatRadioModule,
   MatSlideToggleModule,
   MatSliderModule,
-  MatTableModule
+  MatTableModule,
 ];
 
 @NgModule({
   imports: materials,
-  exports: materials
+  exports: materials,
 })
-export class MaterialModule { }
+export class MaterialModule {}

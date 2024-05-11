@@ -3,11 +3,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
-import {
-  deleteOrder,
-  loadOrders,
-  resetStatus,
-} from '@scifi/ngrx/orders/orders.actions';
+import { deleteOrder, loadOrders, resetStatus } from '@scifi/ngrx/orders/orders.actions';
 import {
   selectDeleteStatus,
   selectLoadStatus,
@@ -23,38 +19,29 @@ import { map, Observable, shareReplay, Subscription } from 'rxjs';
   styleUrls: ['./orders.component.sass'],
 })
 export class OrdersComponent {
-  readonly orders$: Observable<OrdersResponse | null> =
-    this._store.select(selectOrders);
+  readonly orders$: Observable<OrdersResponse | null> = this._store.select(selectOrders);
   readonly loggedInUserId$: Observable<string | number | null> =
     this._store.select(selectLoggedInUserId);
-  readonly newOrder$: Observable<NewOrderResponse | null> =
-    this._store.select(selectNewOrder);
-  readonly loadStatus$: Observable<Status> =
-    this._store.select(selectLoadStatus);
-  readonly deleteStatus$: Observable<Status> =
-    this._store.select(selectDeleteStatus);
+  readonly newOrder$: Observable<NewOrderResponse | null> = this._store.select(selectNewOrder);
+  readonly loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
+  readonly deleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
   private _loggedInUserId: number | undefined;
   private _statusSubscription = Subscription.EMPTY;
   private _customerIdSubscription = Subscription.EMPTY;
   activeId: number = -1;
-  public tableColumns: string[] = [
-    'createdAt',
-    'total',
-    'paymentMethod',
-    'status',
-  ];
+  public tableColumns: string[] = ['createdAt', 'total', 'paymentMethod', 'status'];
 
   mediumViewport$: Observable<boolean> = this._breakpointObserver
     .observe('(min-width: 600px)')
     .pipe(
       map((result) => result.matches),
-      shareReplay()
+      shareReplay(),
     );
 
   constructor(
     private _store: Store,
     private _snackBar: MatSnackBar,
-    private _breakpointObserver: BreakpointObserver
+    private _breakpointObserver: BreakpointObserver,
   ) {}
 
   ngOnInit() {
@@ -97,7 +84,7 @@ export class OrdersComponent {
       deleteOrder({
         orderId,
         customerId: this._loggedInUserId!,
-      })
+      }),
     );
   }
 

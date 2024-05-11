@@ -5,10 +5,7 @@ import { MaterialModule } from '@scifi/material/material.module';
 
 @NgModule({
   declarations: [SpinnerComponent],
-  imports: [
-    CommonModule,
-    MaterialModule
-  ],
-  exports: [SpinnerComponent]
+  imports: [CommonModule, MaterialModule],
+  exports: [SpinnerComponent],
 })
-export class SpinnerModule { }
+export class SpinnerModule {}

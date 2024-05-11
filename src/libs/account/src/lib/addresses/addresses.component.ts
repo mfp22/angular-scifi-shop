@@ -35,12 +35,9 @@ export class AddressesComponent {
   @Input() billingAddress: Address | null | undefined;
   readonly loggedInUserId$: Observable<string | number | null> =
     this._store.select(selectLoggedInUserId);
-  readonly updateStatus$: Observable<Status> =
-    this._store.select(selectUpdateStatus);
-  readonly deleteStatus$: Observable<Status> =
-    this._store.select(selectDeleteStatus);
-  readonly activeItem$: Observable<AccountActiveItem> =
-    this._store.select(selectActiveItem);
+  readonly updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
+  readonly deleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
+  readonly activeItem$: Observable<AccountActiveItem> = this._store.select(selectActiveItem);
   private _subscription = Subscription.EMPTY;
   private _loggedInUserId: number | undefined;
   formDisplayState = { billing: false, shipping: false };
@@ -48,10 +45,7 @@ export class AddressesComponent {
   shippingAddressFormGroup: AddressFormGroup | undefined;
   billingAddressFormGroup: AddressFormGroup | undefined;
 
-  constructor(
-    private _store: Store<AppState>,
-    private _accountService: AccountService
-  ) {}
+  constructor(private _store: Store<AppState>, private _accountService: AccountService) {}
 
   ngOnInit() {
     this._subscription = this.loggedInUserId$.subscribe((id) => {
@@ -64,10 +58,10 @@ export class AddressesComponent {
   ngOnChanges({ billingAddress, shippingAddress }: SimpleChanges) {
     if (billingAddress && shippingAddress) {
       this.billingAddressFormGroup = this._accountService.createAddressForm(
-        billingAddress.currentValue
+        billingAddress.currentValue,
       );
       this.shippingAddressFormGroup = this._accountService.createAddressForm(
-        shippingAddress.currentValue
+        shippingAddress.currentValue,
       );
     }
   }
@@ -94,12 +88,10 @@ export class AddressesComponent {
     this._store.dispatch(
       createOrUpdateAddress({
         requestBody: {
-          [data.type!]: this._accountService.removeEmptyFields<Address>(
-            data.address
-          ),
+          [data.type!]: this._accountService.removeEmptyFields<Address>(data.address),
         } as { billingAddress: Address } | { shippingAddress: Address },
         customerId: this._loggedInUserId!,
-      })
+      }),
     );
   }
 
@@ -108,14 +100,14 @@ export class AddressesComponent {
     this._store.dispatch(
       updateActiveItem({
         activeItem: `${type}Address` as 'billingAddress' | 'shippingAddress',
-      })
+      }),
     );
     this._store.dispatch(
       deleteAddress({
         addressId: address.id!,
         addressIdType: `${type}AddressId` as AddressId,
         customerId: this._loggedInUserId!,
-      })
+      }),
     );
   }
 

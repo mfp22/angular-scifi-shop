@@ -3,23 +3,11 @@ import { Component } from '@angular/core';
 import { StepperOrientation } from '@angular/material/stepper';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
-import {
-  selectBillingAddress,
-  selectShippingAddress,
-} from '@scifi/ngrx/account/account.feature';
-import {
-  StepperSelectionEvent,
-  STEPPER_GLOBAL_OPTIONS,
-} from '@angular/cdk/stepper';
-import {
-  clearExpressCheckout,
-  createOrder,
-} from '@scifi/ngrx/orders/orders.actions';
+import { selectBillingAddress, selectShippingAddress } from '@scifi/ngrx/account/account.feature';
+import { StepperSelectionEvent, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { clearExpressCheckout, createOrder } from '@scifi/ngrx/orders/orders.actions';
 import { loadCart } from '@scifi/ngrx/cart/cart.actions';
-import {
-  selectExpressCheckoutItem,
-  selectNewOrder,
-} from '@scifi/ngrx/orders/orders.feature';
+import { selectExpressCheckoutItem, selectNewOrder } from '@scifi/ngrx/orders/orders.feature';
 import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import { Router } from '@angular/router';
 import { AccountService } from '@scifi/account/account.service';
@@ -56,8 +44,7 @@ export class CheckoutComponent {
     this._store.select(selectExpressCheckoutItem);
   readonly cartItemCount$: Observable<number | undefined> =
     this._store.select(selectCartItemsCount);
-  readonly newOrder$: Observable<NewOrderResponse | null> =
-    this._store.select(selectNewOrder);
+  readonly newOrder$: Observable<NewOrderResponse | null> = this._store.select(selectNewOrder);
   private readonly _loggedInUserId$: Observable<string | number | null> =
     this._store.select(selectLoggedInUserId);
 
@@ -69,7 +56,7 @@ export class CheckoutComponent {
   ]).pipe(
     map(([expressCheckoutItem, cartItemCount, newOrder, loggedInUserId]) => {
       return { expressCheckoutItem, cartItemCount, newOrder, loggedInUserId };
-    })
+    }),
   );
   private _loggedInUserId: string | number | undefined;
   private _subscription = Subscription.EMPTY;
@@ -89,7 +76,7 @@ export class CheckoutComponent {
     private _breakpointObserver: BreakpointObserver,
     private _router: Router,
     private _store: Store<AppState>,
-    private _accountService: AccountService
+    private _accountService: AccountService,
   ) {
     this.stepperOrientation$ = this._breakpointObserver
       .observe('(min-width: 900px)')
@@ -113,7 +100,7 @@ export class CheckoutComponent {
           this.loading = false;
         }
         this.expressCheckoutItem = expressCheckoutItem!;
-      }
+      },
     );
   }
 
@@ -129,12 +116,8 @@ export class CheckoutComponent {
   createOrder({ status, paymentMethod, total }: PaymentEvent) {
     this.orderStatus = status;
     const requestBody = {
-      shippingAddress: this._accountService.removeEmptyFields<Address>(
-        this.shippingAddress!
-      ),
-      billingAddress: this._accountService.removeEmptyFields<Address>(
-        this.billingAddress!
-      ),
+      shippingAddress: this._accountService.removeEmptyFields<Address>(this.shippingAddress!),
+      billingAddress: this._accountService.removeEmptyFields<Address>(this.billingAddress!),
       status,
       paymentMethod,
       total,
@@ -154,11 +137,9 @@ export class CheckoutComponent {
       createOrder({
         newOrder: requestBody,
         customerId: Number(this._loggedInUserId),
-      })
+      }),
     );
-    this._store.dispatch(
-      loadCart({ customerId: Number(this._loggedInUserId) })
-    );
+    this._store.dispatch(loadCart({ customerId: Number(this._loggedInUserId) }));
   }
 
   ngOnDestroy() {

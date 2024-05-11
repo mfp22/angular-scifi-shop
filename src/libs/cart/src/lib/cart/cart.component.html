@@ -1,9 +1,13 @@
-<ng-container *ngLet="(dataStream$ | async) as data">
+<ng-container *ngLet="dataStream$ | async as data">
   <ng-container *ngIf="cart$ | async as cart; else loading">
-
     <ng-container *ngIf="cart.cartItems.length > 0; else cartIsEmpty">
-      <p class="total" [ngClass]="{'light-bg total-purple': lightModeEnabled}">Total: {{ (cartTotal$ | async) | currency: 'GBP' }}</p>
-      <mat-progress-bar *ngIf="data?.updateStatus === 'loading' && data?.activeId === -1" mode="indeterminate"></mat-progress-bar>
+      <p class="total" [ngClass]="{ 'light-bg total-purple': lightModeEnabled }">
+        Total: {{ cartTotal$ | async | currency : 'GBP' }}
+      </p>
+      <mat-progress-bar
+        *ngIf="data?.updateStatus === 'loading' && data?.activeId === -1"
+        mode="indeterminate"
+      ></mat-progress-bar>
       <div class="buttons">
         <button mat-fab extended (click)="emptyCart()" color="warn">
           <mat-icon>remove_shopping_cart</mat-icon>
@@ -23,7 +27,7 @@
         <div class="empty">
           <p class="bold">Your cart is currently empty.</p>
           <p>Nothing else to see here.</p>
-          <img class="filter" src="assets/empty-3.svg">
+          <img class="filter" src="assets/empty-3.svg" />
         </div>
       </ng-container>
     </ng-template>
@@ -36,32 +40,35 @@
     </ng-template>
 
     <mat-nav-list class="cart-list" [class.limit-max-width]="!isSidebar">
-
       <mat-card *ngFor="let item of cart.cartItems" class="item-card">
-
         <ng-container *ngIf="isSidebar; else cartPageTemplate">
-          <ng-container *ngTemplateOutlet="header; context:{item}"></ng-container> 
-          <ng-container *ngTemplateOutlet="accordion; context:{item}"></ng-container> 
-          <ng-container *ngTemplateOutlet="actions; context:{item}"></ng-container> 
+          <ng-container *ngTemplateOutlet="header; context: { item }"></ng-container>
+          <ng-container *ngTemplateOutlet="accordion; context: { item }"></ng-container>
+          <ng-container *ngTemplateOutlet="actions; context: { item }"></ng-container>
         </ng-container>
 
         <ng-template #cartPageTemplate>
-          <ng-container *ngTemplateOutlet="header; context:{item}"></ng-container>
+          <ng-container *ngTemplateOutlet="header; context: { item }"></ng-container>
           <div class="cart-page-card-content">
-            <img [src]="'assets/icons/transparent/' + item.product.thumbnail" [alt]="item.product.name">
+            <img
+              [src]="'assets/icons/transparent/' + item.product.thumbnail"
+              [alt]="item.product.name"
+            />
             <div>
               <div class="chips">
                 <app-chips [product]="item.product"></app-chips>
               </div>
-              <ng-container *ngTemplateOutlet="accordion; context:{item}"></ng-container> 
-              <ng-container *ngTemplateOutlet="actions; context:{item}"></ng-container> 
+              <ng-container *ngTemplateOutlet="accordion; context: { item }"></ng-container>
+              <ng-container *ngTemplateOutlet="actions; context: { item }"></ng-container>
             </div>
           </div>
         </ng-template>
 
-        <mat-progress-bar *ngIf="data?.updateStatus === 'loading' && data?.activeId === item.product.id" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar
+          *ngIf="data?.updateStatus === 'loading' && data?.activeId === item.product.id"
+          mode="indeterminate"
+        ></mat-progress-bar>
       </mat-card>
-
     </mat-nav-list>
   </ng-container>
 
@@ -73,9 +80,7 @@
       </div>
     </ng-container>
   </ng-template>
-  
 </ng-container>
-
 
 <!-- ********************************************************************** -->
 <!-- Templates -->
@@ -84,16 +89,20 @@
 <ng-template #header let-item="item">
   <mat-card-header class="item-header" [class.light-bg]="lightModeEnabled">
     <h3 [class.fit-content]="!isSidebar">{{ item.product.name }}</h3>
-    <img *ngIf="isSidebar" [src]="'assets/icons/transparent/' + item.product.thumbnail" [alt]="item.product.name">
+    <img
+      *ngIf="isSidebar"
+      [src]="'assets/icons/transparent/' + item.product.thumbnail"
+      [alt]="item.product.name"
+    />
   </mat-card-header>
 </ng-template>
 
 <!-- 2) Accordion -->
 <ng-template #accordion let-item="item">
   <mat-accordion>
-    <mat-expansion-panel 
-      *ngLet="showDescription[item.product.id] as show" 
-      (opened)="toggleDescription(item.product.id, true)" 
+    <mat-expansion-panel
+      *ngLet="showDescription[item.product.id] as show"
+      (opened)="toggleDescription(item.product.id, true)"
       (closed)="toggleDescription(item.product.id, false)"
     >
       <mat-expansion-panel-header>
@@ -103,7 +112,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel
-      (opened)="toggleForm(item.product.id, true)" 
+      (opened)="toggleForm(item.product.id, true)"
       (closed)="toggleForm(item.product.id, false)"
       hideToggle
     >
@@ -111,22 +120,32 @@
         <mat-panel-title>Quantity: {{ item.quantity }}</mat-panel-title>
         <mat-icon>edit</mat-icon>
       </mat-expansion-panel-header>
-      
+
       <mat-form-field>
         <mat-label>Quantity</mat-label>
-        <input matInput [(ngModel)]="quantities[item.product.id]" name="quantity" #quantity="ngModel" type="number" required min="0" [max]="item.product.stock">
-        <mat-error *ngIf="quantity.errors?.['required']">
-          Quantity is required.
-        </mat-error>
-        <mat-error *ngIf="quantity.errors?.['min']">
-            Quantity cannot be less than 0.
-        </mat-error>
-        <mat-error *ngIf="quantity.errors?.['max']">
-          Quantity cannot exceed stock.
-      </mat-error>
+        <input
+          matInput
+          [(ngModel)]="quantities[item.product.id]"
+          name="quantity"
+          #quantity="ngModel"
+          type="number"
+          required
+          min="0"
+          [max]="item.product.stock"
+        />
+        <mat-error *ngIf="quantity.errors?.['required']"> Quantity is required. </mat-error>
+        <mat-error *ngIf="quantity.errors?.['min']"> Quantity cannot be less than 0. </mat-error>
+        <mat-error *ngIf="quantity.errors?.['max']"> Quantity cannot exceed stock. </mat-error>
       </mat-form-field>
       <mat-action-row>
-        <button mat-button color="accent" (click)="modifyQuantity(item.product.id, quantities[item.product.id])" [disabled]="quantity.invalid">Update</button>
+        <button
+          mat-button
+          color="accent"
+          (click)="modifyQuantity(item.product.id, quantities[item.product.id])"
+          [disabled]="quantity.invalid"
+        >
+          Update
+        </button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
@@ -135,10 +154,15 @@
 <!-- 3) Actions -->
 <ng-template #actions let-item="item">
   <mat-card-actions>
-    <p class="bold">{{ item.product.price | currency: 'GBP' }}</p>
-    <button mat-fab (click)="deleteItem(item.product.id)" class="delete" color="warn" aria-label="delete icon">
+    <p class="bold">{{ item.product.price | currency : 'GBP' }}</p>
+    <button
+      mat-fab
+      (click)="deleteItem(item.product.id)"
+      class="delete"
+      color="warn"
+      aria-label="delete icon"
+    >
       <mat-icon>delete_forever</mat-icon>
     </button>
   </mat-card-actions>
 </ng-template>
-

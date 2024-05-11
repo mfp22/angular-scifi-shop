@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectAccount } from '@scifi/ngrx/account/account.feature';
-import {
-  selectCartItemsCount,
-  selectLoadStatus,
-} from '@scifi/ngrx/cart/cart.feature';
+import { selectCartItemsCount, selectLoadStatus } from '@scifi/ngrx/cart/cart.feature';
 import { AppState, Customer, Status } from '@scifi/types';
 
 @Component({
@@ -14,12 +11,10 @@ import { AppState, Customer, Status } from '@scifi/types';
   styleUrls: ['./cart-page.component.sass'],
 })
 export class CartPageComponent {
-  readonly loadStatus$: Observable<Status> =
-    this._store.select(selectLoadStatus);
+  readonly loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
   readonly cartItemsCount$: Observable<number | undefined> =
     this._store.select(selectCartItemsCount);
-  readonly accountData$: Observable<Customer | null> =
-    this._store.select(selectAccount);
+  readonly accountData$: Observable<Customer | null> = this._store.select(selectAccount);
 
   constructor(private _store: Store<AppState>) {}
 

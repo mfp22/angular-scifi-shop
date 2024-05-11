@@ -9,11 +9,11 @@ import {
 
 export const loadOrders = createAction(
   '[Orders Component] Load Orders',
-  props<{ customerId: number }>()
+  props<{ customerId: number }>(),
 );
 export const loadOrdersSuccess = createAction(
   '[Orders Component] Orders Loaded - Success',
-  props<OrdersResponse>()
+  props<OrdersResponse>(),
 );
 
 export const loadSingleOrder = createAction(
@@ -21,34 +21,32 @@ export const loadSingleOrder = createAction(
   props<{
     orderId: string;
     customerId: number;
-  }>()
+  }>(),
 );
 export const loadSingleOrderSuccess = createAction(
   '[Single Order Component] Single Order Loaded - Success',
-  props<SingleOrderResponse>()
+  props<SingleOrderResponse>(),
 );
-export const clearSingleOrder = createAction(
-  '[Single Order Component] Clear Single Order'
-);
+export const clearSingleOrder = createAction('[Single Order Component] Clear Single Order');
 
 export const createOrder = createAction(
   '[Checkout Component] Create Order - Loading',
   props<{
     newOrder: NewOrderRequest;
     customerId: number;
-  }>()
+  }>(),
 );
 export const createOrderSuccess = createAction(
   '[Checkout Component] Create Order - Success',
-  props<NewOrderResponse>()
+  props<NewOrderResponse>(),
 );
 
 export const addExpressCheckoutItem = createAction(
   '[Checkout Component] Add Express Checkout Item',
-  props<ExpressCheckoutItem>()
+  props<ExpressCheckoutItem>(),
 );
 export const clearExpressCheckout = createAction(
-  '[Checkout Component] Remove Express Checkout Item'
+  '[Checkout Component] Remove Express Checkout Item',
 );
 
 export const deleteOrder = createAction(
@@ -56,12 +54,12 @@ export const deleteOrder = createAction(
   props<{
     customerId: number;
     orderId: number;
-  }>()
+  }>(),
 );
 
 export const deleteOrderSuccess = createAction(
   '[Orders Component] Delete Order - Success',
-  props<{ deletedOrder: SingleOrderResponse }>()
+  props<{ deletedOrder: SingleOrderResponse }>(),
 );
 
 export const updateOrder = createAction(
@@ -70,12 +68,12 @@ export const updateOrder = createAction(
     status: string;
     orderId: number;
     customerId: number;
-  }>()
+  }>(),
 );
 
 export const updateOrderSuccess = createAction(
   '[New Order - Redirect Component] Update Order - Success',
-  props<SingleOrderResponse>()
+  props<SingleOrderResponse>(),
 );
 
 export const resetStatus = createAction('[Orders Component] Reset Status');

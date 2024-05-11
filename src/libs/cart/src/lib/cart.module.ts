@@ -24,15 +24,9 @@ import { ChipsComponent } from '@scifi/chips/chips.component';
     SpinnerModule,
     ChipsComponent,
     StoreModule.forFeature(cartFeature),
-    EffectsModule.forFeature(CartEffects)
+    EffectsModule.forFeature(CartEffects),
   ],
-  declarations: [
-    CartComponent,
-    CartSidebarComponent,
-    CartPageComponent
-  ],
-  exports: [
-    CartSidebarComponent
-  ]
+  declarations: [CartComponent, CartSidebarComponent, CartPageComponent],
+  exports: [CartSidebarComponent],
 })
-export class CartModule { }
+export class CartModule {}

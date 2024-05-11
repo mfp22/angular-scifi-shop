@@ -10,11 +10,11 @@ import {
 
 export const loadAllReviews = createAction(
   '[Reviews Component] Load All Reviews',
-  props<{ page: number; limit: number }>()
+  props<{ page: number; limit: number }>(),
 );
 export const loadAllReviewsSuccess = createAction(
   '[Reviews Component] Load All Reviews - Success',
-  props<ReviewsResponse>()
+  props<ReviewsResponse>(),
 );
 
 export const loadProductReviews = createAction(
@@ -22,11 +22,11 @@ export const loadProductReviews = createAction(
   props<{
     productId: number;
     queryParams: { page: number; limit: number };
-  }>()
+  }>(),
 );
 export const loadProductReviewsSuccess = createAction(
   '[Reviews Component] Load Product Reviews - Success',
-  props<ReviewsResponse>()
+  props<ReviewsResponse>(),
 );
 
 export const loadCustomerReviews = createAction(
@@ -34,29 +34,29 @@ export const loadCustomerReviews = createAction(
   props<{
     customerId: number;
     queryParams: { page: number; limit: number };
-  }>()
+  }>(),
 );
 export const loadCustomerReviewsSuccess = createAction(
   '[Reviews Component] Load Customer Reviews - Success',
-  props<CustomerReviewsResponse>()
+  props<CustomerReviewsResponse>(),
 );
 
 export const loadFavorites = createAction(
   '[Favorites Component] Load Favorites',
-  props<{ customerId: number }>()
+  props<{ customerId: number }>(),
 );
 export const loadFavoritesSuccess = createAction(
   '[Favorites Component] Load Favorites - Success',
-  props<FavoritesResponse>()
+  props<FavoritesResponse>(),
 );
 
 export const createReview = createAction(
   '[Reviews Component] Create Review - Loading',
-  props<NewReviewRequest>()
+  props<NewReviewRequest>(),
 );
 export const createReviewSuccess = createAction(
   '[Reviews Component] Create Review - Success',
-  props<{ newReview: Review }>()
+  props<{ newReview: Review }>(),
 );
 
 export const updateReview = createAction(
@@ -64,27 +64,25 @@ export const updateReview = createAction(
   props<{
     reviewId: number;
     requestBody: UpdateReviewRequest;
-  }>()
+  }>(),
 );
 export const updateReviewSuccess = createAction(
   '[Reviews Component] Update Review - Success',
-  props<{ updatedReview: Review }>()
+  props<{ updatedReview: Review }>(),
 );
 
 export const deleteReview = createAction(
   '[Reviews Component] Delete Review - Loading',
-  props<{ reviewId: number }>()
+  props<{ reviewId: number }>(),
 );
 export const deleteReviewSuccess = createAction(
   '[Reviews Component] Delete Review - Success',
-  props<{ deletedReview: Review }>()
+  props<{ deletedReview: Review }>(),
 );
 
-export const resetReviewsStatus = createAction(
-  '[Reviews Component] Reset Status'
-);
+export const resetReviewsStatus = createAction('[Reviews Component] Reset Status');
 
 export const updateActiveId = createAction(
   '[Reviews Component] Update Active Id',
-  props<{ activeId: number }>()
+  props<{ activeId: number }>(),
 );

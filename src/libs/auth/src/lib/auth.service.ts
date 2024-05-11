@@ -5,12 +5,7 @@ import { authenticateWithSSO } from '@scifi/ngrx/auth/auth.actions';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { selectAccount } from '@scifi/ngrx/account/account.feature';
-import {
-  AppState,
-  AuthCredentials,
-  Customer,
-  OAuthCredentials,
-} from '@scifi/types';
+import { AppState, AuthCredentials, Customer, OAuthCredentials } from '@scifi/types';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +36,7 @@ export class AuthService {
     const response = this._http.post<{ customer: Customer }>(
       this._baseUrl + endpoint,
       requestBody,
-      this._httpOptions
+      this._httpOptions,
     );
 
     return response;
@@ -51,7 +46,7 @@ export class AuthService {
     const response = this._http.post<{ customer: Customer }>(
       this._baseUrl + '/sso',
       requestBody,
-      this._httpOptions
+      this._httpOptions,
     );
 
     return response;
@@ -64,13 +59,11 @@ export class AuthService {
           name: user.name,
           email: user.email,
           authId: user.id,
-          provider: `${user.provider[0].toUpperCase()}${user.provider
-            .slice(1)
-            .toLowerCase()}`,
+          provider: `${user.provider[0].toUpperCase()}${user.provider.slice(1).toLowerCase()}`,
           thumbnail: user.photoUrl,
         },
         socialUser: user,
-      })
+      }),
     );
   }
 
@@ -78,7 +71,7 @@ export class AuthService {
     const response = this._http.post<{ msg: string }>(
       this._baseUrl + '/logout',
       {},
-      { withCredentials: true }
+      { withCredentials: true },
     );
 
     return response;

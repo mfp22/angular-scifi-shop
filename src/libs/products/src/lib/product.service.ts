@@ -22,34 +22,25 @@ export class ProductService {
       params: new HttpParams().appendAll(queryParams),
     };
 
-    return this._http.get<ProductsResponse>(
-      `${this.baseUrl}/products`,
-      options
-    );
+    return this._http.get<ProductsResponse>(`${this.baseUrl}/products`, options);
   }
 
   getSingleProduct(productId: number) {
-    return this._http.get<SingleProduct>(
-      `${this.baseUrl}/products/${productId}`
-    );
+    return this._http.get<SingleProduct>(`${this.baseUrl}/products/${productId}`);
   }
 
   getProductFromOrderHistory(customerId: number, productId: number) {
     return this._http.get<OrderSearchResponse>(
       `${this.baseUrl}/customers/${customerId}/orders?productId=${productId}`,
-      { withCredentials: true }
+      { withCredentials: true },
     );
   }
 
   getCategories() {
-    return this._http.get<{ categories: Category[] }>(
-      `${this.baseUrl}/categories`
-    );
+    return this._http.get<{ categories: Category[] }>(`${this.baseUrl}/categories`);
   }
 
   getSuppliers() {
-    return this._http.get<{ suppliers: Supplier[] }>(
-      `${this.baseUrl}/suppliers`
-    );
+    return this._http.get<{ suppliers: Supplier[] }>(`${this.baseUrl}/suppliers`);
   }
 }

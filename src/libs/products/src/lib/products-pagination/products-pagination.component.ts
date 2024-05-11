@@ -14,13 +14,7 @@ import {
   selectPagination,
   selectProducts,
 } from '@scifi/ngrx/products/products.feature';
-import {
-  AppState,
-  Pagination,
-  Product,
-  ProductsUrlParams,
-  Status,
-} from '@scifi/types';
+import { AppState, Pagination, Product, ProductsUrlParams, Status } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -31,12 +25,9 @@ import { Observable, Subscription } from 'rxjs';
 export class ProductsPaginationComponent {
   @Output() toggleStyleEvent = new EventEmitter<MatButtonToggleChange>();
   @Input() showDisplayToggle = true;
-  readonly pagination$: Observable<Pagination> =
-    this._store.select(selectPagination);
-  readonly productsLoadStatus$: Observable<Status> =
-    this._store.select(selectLoadStatus);
-  readonly products$: Observable<Product[] | null> =
-    this._store.select(selectProducts);
+  readonly pagination$: Observable<Pagination> = this._store.select(selectPagination);
+  readonly productsLoadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
+  readonly products$: Observable<Product[] | null> = this._store.select(selectProducts);
   private _paginationSubscription = Subscription.EMPTY;
   private _routeSubscription = Subscription.EMPTY;
   public currentPage = 1;
@@ -53,7 +44,7 @@ export class ProductsPaginationComponent {
     private _store: Store<AppState>,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _titleService: Title
+    private _titleService: Title,
   ) {}
 
   ngOnInit() {
@@ -61,25 +52,21 @@ export class ProductsPaginationComponent {
       this.currentPage = page;
     });
 
-    this._routeSubscription = this._route.queryParamMap.subscribe(
-      (queryParamMap) => {
-        this.queryParams = Object.create(queryParamMap).params;
-        this.activeFilters = this.selectFilters(
-          Object.create(queryParamMap).params
-        );
-        this.category = queryParamMap.get('category') || '';
-        this.supplier = queryParamMap.get('supplier') || '';
-        this._store.dispatch(loadProducts(this.queryParams));
+    this._routeSubscription = this._route.queryParamMap.subscribe((queryParamMap) => {
+      this.queryParams = Object.create(queryParamMap).params;
+      this.activeFilters = this.selectFilters(Object.create(queryParamMap).params);
+      this.category = queryParamMap.get('category') || '';
+      this.supplier = queryParamMap.get('supplier') || '';
+      this._store.dispatch(loadProducts(this.queryParams));
 
-        if (queryParamMap.get('category')) {
-          this._titleService.setTitle(queryParamMap.get('category')!);
-        } else if (queryParamMap.get('supplier')) {
-          this._titleService.setTitle(queryParamMap.get('supplier')!);
-        } else {
-          this._titleService.setTitle('Products');
-        }
+      if (queryParamMap.get('category')) {
+        this._titleService.setTitle(queryParamMap.get('category')!);
+      } else if (queryParamMap.get('supplier')) {
+        this._titleService.setTitle(queryParamMap.get('supplier')!);
+      } else {
+        this._titleService.setTitle('Products');
       }
-    );
+    });
   }
 
   get showFilters() {
@@ -87,9 +74,7 @@ export class ProductsPaginationComponent {
   }
 
   get accentColor(): ThemePalette {
-    return document.body.classList.contains('light-mode')
-      ? 'primary'
-      : 'accent';
+    return document.body.classList.contains('light-mode') ? 'primary' : 'accent';
   }
 
   selectFilters({ page, limit, ...props }: ProductsUrlParams) {
@@ -107,9 +92,7 @@ export class ProductsPaginationComponent {
     this._router.navigate([]);
   }
 
-  updateUrlQueryParams(queryParams: {
-    [key: string]: string | number | boolean | null;
-  }) {
+  updateUrlQueryParams(queryParams: { [key: string]: string | number | boolean | null }) {
     this._router.navigate([], {
       queryParams,
       queryParamsHandling: 'merge',

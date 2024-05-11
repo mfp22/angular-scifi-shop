@@ -23,7 +23,7 @@ import { RouterModule } from '@angular/router';
     ReviewDialogComponent,
     ReviewsPageComponent,
     ReviewsPaginationComponent,
-    RatingComponent
+    RatingComponent,
   ],
   imports: [
     CommonModule,
@@ -35,12 +35,9 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     ChipsComponent,
     StoreModule.forFeature(reviewsFeature),
-    EffectsModule.forFeature(ReviewsEffects)
+    EffectsModule.forFeature(ReviewsEffects),
   ],
-  exports: [
-    ReviewsComponent,
-    RatingComponent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [ReviewsComponent, RatingComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ReviewsModule { }
+export class ReviewsModule {}

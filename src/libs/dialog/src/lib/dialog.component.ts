@@ -15,7 +15,7 @@ export class DialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Observable<DialogContent>,
     public dialogRef: MatDialogRef<DialogComponent>,
-    private _store: Store<AppState>
+    private _store: Store<AppState>,
   ) {}
 
   hideOverlay() {

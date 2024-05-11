@@ -13,8 +13,7 @@ import { AppState, Status } from '@scifi/types';
   styleUrls: ['./delete-dialog.component.sass'],
 })
 export class DeleteDialogComponent {
-  readonly $deleteStatus: Observable<Status> =
-    this._store.select(selectDeleteStatus);
+  readonly $deleteStatus: Observable<Status> = this._store.select(selectDeleteStatus);
   public deleteStatus: Status = 'pending';
   private _socialLoginUser: SocialUser | undefined;
   private _subscription = Subscription.EMPTY;
@@ -24,7 +23,7 @@ export class DeleteDialogComponent {
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
     private _store: Store<AppState>,
     private _authService: SocialAuthService,
-    @Inject(MAT_DIALOG_DATA) public data: { customerId: number }
+    @Inject(MAT_DIALOG_DATA) public data: { customerId: number },
   ) {}
 
   ngOnInit() {
@@ -35,13 +34,11 @@ export class DeleteDialogComponent {
       }
     });
 
-    this._socialLoginSubscription = this._authService.authState.subscribe(
-      (user) => {
-        if (user) {
-          this._socialLoginUser = user;
-        }
+    this._socialLoginSubscription = this._authService.authState.subscribe((user) => {
+      if (user) {
+        this._socialLoginUser = user;
       }
-    );
+    });
   }
 
   onNoClick() {
@@ -52,7 +49,7 @@ export class DeleteDialogComponent {
     this._store.dispatch(
       deleteUser({
         customerId: this.data.customerId,
-      })
+      }),
     );
     if (this._socialLoginUser) {
       this._authService.signOut();

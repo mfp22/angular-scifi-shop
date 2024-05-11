@@ -51,7 +51,7 @@ export const cartReducer = createReducer(
     ...state,
     loadStatus: 'error' as const,
     updateStatus: 'error' as const,
-  }))
+  })),
 );
 
 export const cartFeature = createFeature({
@@ -82,14 +82,11 @@ export const cartFeature = createFeature({
               (accumulator: number, { quantity, product }: CartItemDetail) => {
                 return accumulator + quantity * Number(product.price);
               },
-              0
+              0,
             );
       return Number(total.toFixed(2));
     }),
-    selectCartItemsCount: createSelector(
-      selectCart,
-      (cart: Cart | null) => cart?.cartItems.length
-    ),
+    selectCartItemsCount: createSelector(selectCart, (cart: Cart | null) => cart?.cartItems.length),
   }),
 });
 

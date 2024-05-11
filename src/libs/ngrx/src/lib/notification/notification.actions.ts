@@ -4,10 +4,7 @@ import { ApiError } from '@scifi/types';
 export const showDialog = createAction('[App Component] Show Dialog');
 export const hideDialog = createAction('[App Component] Hide Dialog');
 
-export const httpError = createAction(
-  '[Dialog Component] Set Error Message',
-  props<ApiError>()
-);
+export const httpError = createAction('[Dialog Component] Set Error Message', props<ApiError>());
 
 export const notify = createAction(
   '[Dialog Component] Set Notification Message',
@@ -21,5 +18,5 @@ export const notify = createAction(
       username: string;
       email: string;
     };
-  }>()
+  }>(),
 );

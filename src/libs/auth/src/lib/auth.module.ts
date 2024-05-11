@@ -10,14 +10,16 @@ import { AuthEffects } from '@scifi/ngrx/auth/auth.effects';
 import { NgLetModule } from 'ng-let';
 import { StoreModule } from '@ngrx/store';
 import { authFeature } from '@scifi/ngrx/auth/auth.feature';
-import { GoogleSigninButtonModule, SocialAuthServiceConfig, FacebookLoginProvider, AmazonLoginProvider } from '@abacritt/angularx-social-login';
+import {
+  GoogleSigninButtonModule,
+  SocialAuthServiceConfig,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 @NgModule({
-  declarations: [
-    AuthComponent,
-    AuthFormComponent
-  ],
+  declarations: [AuthComponent, AuthFormComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -26,44 +28,37 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     NgLetModule,
     GoogleSigninButtonModule,
     StoreModule.forFeature(authFeature),
-    EffectsModule.forFeature(AuthEffects)
+    EffectsModule.forFeature(AuthEffects),
   ],
-  exports: [
-    AuthComponent
-  ], 
-  providers: [{
-    provide: 'SocialAuthServiceConfig',
-    useValue: {
-      autoLogin: false,
-      providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            import.meta.env.NG_APP_GOOGLE_CLIENT_ID,
-            { 
-              oneTapEnabled: window.localStorage.getItem("userId") ? false : true,
-              prompt_parent_id: "google-login-prompt"
-            }
-          )
+  exports: [AuthComponent],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(import.meta.env.NG_APP_GOOGLE_CLIENT_ID, {
+              oneTapEnabled: window.localStorage.getItem('userId') ? false : true,
+              prompt_parent_id: 'google-login-prompt',
+            }),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(import.meta.env.NG_APP_FACEBOOK_APP_ID),
+          },
+          {
+            id: AmazonLoginProvider.PROVIDER_ID,
+            provider: new AmazonLoginProvider(import.meta.env.NG_APP_AMAZON_CLIENT_ID),
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
         },
-        {
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider(
-            import.meta.env.NG_APP_FACEBOOK_APP_ID
-          )
-        },
-        {
-          id: AmazonLoginProvider.PROVIDER_ID,
-          provider: new AmazonLoginProvider(
-            import.meta.env.NG_APP_AMAZON_CLIENT_ID
-          )
-        }
-      ],
-      onError: (err) => {
-        console.error(err);
-      }
-    } as SocialAuthServiceConfig,
-  }],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      } as SocialAuthServiceConfig,
+    },
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AuthModule { }
+export class AuthModule {}

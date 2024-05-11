@@ -59,7 +59,7 @@ export const productsReducer = createReducer(
     ...state,
     loadStatus: 'error' as const,
     searchStatus: 'error' as const,
-  }))
+  })),
 );
 
 export const productsFeature = createFeature({

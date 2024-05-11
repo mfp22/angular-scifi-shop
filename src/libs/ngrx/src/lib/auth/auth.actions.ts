@@ -11,11 +11,11 @@ export const loginRequest = createAction(
   props<{
     requestBody: AuthCredentials;
     endpoint: '/login';
-  }>()
+  }>(),
 );
 export const loginSuccess = createAction(
   '[Auth Component] Login Success',
-  props<{ customer: Customer }>()
+  props<{ customer: Customer }>(),
 );
 
 export const signupRequest = createAction(
@@ -23,11 +23,11 @@ export const signupRequest = createAction(
   props<{
     requestBody: AuthCredentials;
     endpoint: '/signup';
-  }>()
+  }>(),
 );
 export const signupSuccess = createAction(
   '[Auth Component] Signup Success',
-  props<{ customer: Customer }>()
+  props<{ customer: Customer }>(),
 );
 
 export const authenticateWithSSO = createAction(
@@ -35,19 +35,17 @@ export const authenticateWithSSO = createAction(
   props<{
     requestBody: OAuthCredentials;
     socialUser: SocialUser;
-  }>()
+  }>(),
 );
 export const authenticateWithSSOSuccess = createAction(
   '[Auth Component] Authenticate With SSO - Success',
-  props<{ customer: Customer }>()
+  props<{ customer: Customer }>(),
 );
 
 export const logoutRequest = createAction('[Auth Component] Logout');
 export const logoutSuccess = createAction(
   '[Auth Component] Logout Success',
-  props<{ msg: string }>()
+  props<{ msg: string }>(),
 );
 
-export const authFailure = createAction(
-  '[App Component] Authentication Failed'
-);
+export const authFailure = createAction('[App Component] Authentication Failed');

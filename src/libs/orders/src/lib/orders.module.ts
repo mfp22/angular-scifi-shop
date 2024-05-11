@@ -16,11 +16,7 @@ import { ReviewsModule } from '@scifi/reviews/reviews.module';
 import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [
-    OrdersComponent,
-    SingleOrderComponent,
-    NewOrderRedirectComponent
-  ],
+  declarations: [OrdersComponent, SingleOrderComponent, NewOrderRedirectComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -31,7 +27,7 @@ import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.comp
     ReviewsModule,
     PageNotFoundComponent,
     StoreModule.forFeature(ordersFeature),
-    EffectsModule.forFeature(OrdersEffects)
-  ]
+    EffectsModule.forFeature(OrdersEffects),
+  ],
 })
-export class OrdersModule { }
+export class OrdersModule {}

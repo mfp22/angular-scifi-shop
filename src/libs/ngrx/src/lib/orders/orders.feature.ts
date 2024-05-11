@@ -89,9 +89,7 @@ export const ordersReducer = createReducer(
       ? []
       : state.orders.orders.length === 0
       ? []
-      : state.orders.orders.filter(
-          (order) => order.id !== payload.deletedOrder.id
-        );
+      : state.orders.orders.filter((order) => order.id !== payload.deletedOrder.id);
     return {
       ...state,
       orders: { ...state.orders, orders: filteredOrders } as OrdersResponse,
@@ -112,7 +110,7 @@ export const ordersReducer = createReducer(
     createStatus: 'error' as const,
     updateStatus: 'error' as const,
     deleteStatus: 'error' as const,
-  }))
+  })),
 );
 
 export const ordersFeature = createFeature({

@@ -1,11 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,10 +9,7 @@ import {
   selectActiveId as selectActiveCartId,
   selectUpdateStatus as selectCartUpdateStatus,
 } from '@scifi/ngrx/cart/cart.feature';
-import {
-  selectCategories,
-  selectSuppliers,
-} from '@scifi/ngrx/categories/categories.feature';
+import { selectCategories, selectSuppliers } from '@scifi/ngrx/categories/categories.feature';
 import {
   selectLoadStatus,
   selectPagination,
@@ -30,15 +21,7 @@ import {
   selectWishlist,
   selectUpdateStatus as selectWishlistUpdateStatus,
 } from '@scifi/ngrx/wishlist/wishlist.feature';
-import {
-  AppState,
-  Category,
-  Pagination,
-  Product,
-  Status,
-  Supplier,
-  Wishlist,
-} from '@scifi/types';
+import { AppState, Category, Pagination, Product, Status, Supplier, Wishlist } from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
@@ -65,26 +48,17 @@ const placeholderProduct = {
 })
 export class ProductListComponent implements OnInit, AfterViewInit {
   @ViewChild('scrollRef') scrollRef: ElementRef | undefined;
-  loggedInUserId$: Observable<string | number | null> =
-    this._store.select(selectLoggedInUserId);
+  loggedInUserId$: Observable<string | number | null> = this._store.select(selectLoggedInUserId);
   wishlist$: Observable<Wishlist | null> = this._store.select(selectWishlist);
   products$: Observable<Product[] | null> = this._store.select(selectProducts);
-  categories$: Observable<Category[] | null> =
-    this._store.select(selectCategories);
-  suppliers$: Observable<Supplier[] | null> =
-    this._store.select(selectSuppliers);
+  categories$: Observable<Category[] | null> = this._store.select(selectCategories);
+  suppliers$: Observable<Supplier[] | null> = this._store.select(selectSuppliers);
   pagination$: Observable<Pagination> = this._store.select(selectPagination);
   productLoadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
-  cartUpdateStatus$: Observable<Status> = this._store.select(
-    selectCartUpdateStatus
-  );
-  wishlistUpdateStatus$: Observable<Status> = this._store.select(
-    selectWishlistUpdateStatus
-  );
+  cartUpdateStatus$: Observable<Status> = this._store.select(selectCartUpdateStatus);
+  wishlistUpdateStatus$: Observable<Status> = this._store.select(selectWishlistUpdateStatus);
   cartActiveId$: Observable<number> = this._store.select(selectActiveCartId);
-  wishlistActiveId$: Observable<number> = this._store.select(
-    selectActiveWishlistId
-  );
+  wishlistActiveId$: Observable<number> = this._store.select(selectActiveWishlistId);
   private _breakpointSubscription = Subscription.EMPTY;
   private _streamSubscription = Subscription.EMPTY;
   private _productsSubscription = Subscription.EMPTY;
@@ -106,7 +80,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
       suppliers,
       queryParamMap,
       wishlistUpdateStatus,
-    }))
+    })),
   );
 
   constructor(
@@ -115,7 +89,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     private _router: Router,
     private _breakPointObserver: BreakpointObserver,
     private _snackBar: MatSnackBar,
-    private _wishlistService: WishlistService
+    private _wishlistService: WishlistService,
   ) {}
 
   ngOnInit(): void {
@@ -141,17 +115,13 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         const categoryParam = queryParamMap.get('category');
         const supplierParam = queryParamMap.get('supplier');
         if (categoryParam && categories) {
-          this.category = categories.find(
-            (category) => category.name === categoryParam
-          );
+          this.category = categories.find((category) => category.name === categoryParam);
         } else if (!categoryParam) {
           this.category = null;
         }
 
         if (supplierParam && suppliers) {
-          this.supplier = suppliers.find(
-            (supplier) => supplier.name === supplierParam
-          );
+          this.supplier = suppliers.find((supplier) => supplier.name === supplierParam);
         } else if (!supplierParam) {
           this.supplier = null;
         }
@@ -168,7 +138,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
           });
           this._store.dispatch(resetWishlistStatus());
         }
-      }
+      },
     );
   }
 
@@ -201,9 +171,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   productImgSrc(product: Product) {
-    return `assets/icons/${this.lightModeEnabled ? 'transparent' : 'black'}/${
-      product.thumbnail
-    }`;
+    return `assets/icons/${this.lightModeEnabled ? 'transparent' : 'black'}/${product.thumbnail}`;
   }
 
   reloadResults() {
@@ -214,17 +182,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     return wishlist.wishlistItems.find((item) => item.product.id === productId);
   }
 
-  updateWishlist(
-    operation: 'add' | 'remove',
-    wishlist: Wishlist,
-    productId: number
-  ) {
+  updateWishlist(operation: 'add' | 'remove', wishlist: Wishlist, productId: number) {
     this._wishlistOperation = operation;
-    this._wishlistService.dispatchWishlistActions(
-      operation,
-      wishlist,
-      productId
-    );
+    this._wishlistService.dispatchWishlistActions(operation, wishlist, productId);
   }
 
   toggleStyle(e: MatButtonToggleChange) {

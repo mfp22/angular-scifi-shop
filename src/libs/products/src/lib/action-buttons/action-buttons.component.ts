@@ -20,8 +20,7 @@ import { AppState, CartItem, Product } from '@scifi/types';
 })
 export class ActionButtonsComponent {
   @Input() product: Product | undefined;
-  readonly cart$: Observable<CartItem[] | [] | null> =
-    this._store.select(selectCartItems);
+  readonly cart$: Observable<CartItem[] | [] | null> = this._store.select(selectCartItems);
   private readonly _loggedInUserId$: Observable<number | string | null> =
     this._store.select(selectLoggedInUserId);
   private _loggedInUserId: string | number | null | undefined;
@@ -59,7 +58,7 @@ export class ActionButtonsComponent {
         productId: this.product!.id,
         quantity: 1,
         customerId: Number(this._loggedInUserId),
-      })
+      }),
     );
   }
 
@@ -70,13 +69,11 @@ export class ActionButtonsComponent {
       removeCartItem({
         productId: this.product!.id,
         customerId: Number(this._loggedInUserId),
-      })
+      }),
     );
   }
 
   cartIncludesItem(cartItems: CartItem[] | null) {
-    return (
-      cartItems && cartItems.find((item) => item.productId === this.product!.id)
-    );
+    return cartItems && cartItems.find((item) => item.productId === this.product!.id);
   }
 }

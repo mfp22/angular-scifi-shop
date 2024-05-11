@@ -43,7 +43,7 @@ export const categoriesReducer = createReducer(
     ...state,
     categoriesLoadStatus: 'error' as const,
     suppliersLoadStatus: 'error' as const,
-  }))
+  })),
 );
 
 export const categoriesFeature = createFeature({

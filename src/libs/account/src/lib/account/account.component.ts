@@ -5,11 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
-import {
-  resetStatus,
-  updateAccount,
-  updateActiveItem,
-} from '@scifi/ngrx/account/account.actions';
+import { resetStatus, updateAccount, updateActiveItem } from '@scifi/ngrx/account/account.actions';
 import {
   selectAccount,
   selectLoadStatus,
@@ -17,19 +13,10 @@ import {
   selectDeleteStatus,
   selectActiveItem,
 } from '@scifi/ngrx/account/account.feature';
-import {
-  selectLoggedInUserId,
-  selectSocialUser,
-} from '@scifi/ngrx/auth/auth.feature';
+import { selectLoggedInUserId, selectSocialUser } from '@scifi/ngrx/auth/auth.feature';
 import { AccountService } from '../account.service';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import {
-  AccountActiveItem,
-  AppState,
-  Customer,
-  Status,
-  UpdateCustomerRequest,
-} from '@scifi/types';
+import { AccountActiveItem, AppState, Customer, Status, UpdateCustomerRequest } from '@scifi/types';
 
 @Component({
   selector: 'app-account',
@@ -39,18 +26,12 @@ import {
 export class AccountComponent implements OnInit {
   readonly loggedInUserId$: Observable<string | number | null> =
     this._store.select(selectLoggedInUserId);
-  readonly accountData$: Observable<Customer | null> =
-    this._store.select(selectAccount);
-  readonly socialUser$: Observable<SocialUser | null> =
-    this._store.select(selectSocialUser);
-  readonly accountLoadStatus$: Observable<Status> =
-    this._store.select(selectLoadStatus);
-  readonly updateStatus$: Observable<Status> =
-    this._store.select(selectUpdateStatus);
-  readonly deleteStatus$: Observable<Status> =
-    this._store.select(selectDeleteStatus);
-  readonly activeItem$: Observable<AccountActiveItem> =
-    this._store.select(selectActiveItem);
+  readonly accountData$: Observable<Customer | null> = this._store.select(selectAccount);
+  readonly socialUser$: Observable<SocialUser | null> = this._store.select(selectSocialUser);
+  readonly accountLoadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
+  readonly updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
+  readonly deleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
+  readonly activeItem$: Observable<AccountActiveItem> = this._store.select(selectActiveItem);
 
   readonly dataStream$ = combineLatest([
     this.loggedInUserId$,
@@ -61,14 +42,11 @@ export class AccountComponent implements OnInit {
       loggedInUserId,
       accountData,
       activeItem,
-    }))
+    })),
   );
 
-  readonly statusStream$ = combineLatest([
-    this.updateStatus$,
-    this.deleteStatus$,
-  ]).pipe(
-    map(([updateStatus, deleteStatus]) => ({ updateStatus, deleteStatus }))
+  readonly statusStream$ = combineLatest([this.updateStatus$, this.deleteStatus$]).pipe(
+    map(([updateStatus, deleteStatus]) => ({ updateStatus, deleteStatus })),
   );
 
   private _subscription = Subscription.EMPTY;
@@ -111,7 +89,7 @@ export class AccountComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _accountService: AccountService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   get name() {
@@ -138,8 +116,8 @@ export class AccountComponent implements OnInit {
     this.passwordForm.addValidators(
       this._accountService.matchValidator(
         this.passwordForm.get('password')!,
-        this.passwordForm.get('passwordConfirm')!
-      )
+        this.passwordForm.get('passwordConfirm')!,
+      ),
     );
     this.passwordForm.updateValueAndValidity();
 
@@ -163,34 +141,32 @@ export class AccountComponent implements OnInit {
         }
 
         this.activeItem = activeItem;
-      }
+      },
     );
 
-    this._statusSubscription = this.statusStream$.subscribe(
-      ({ updateStatus, deleteStatus }) => {
-        this.updateStatus = updateStatus;
-        this.deleteStatus = deleteStatus;
+    this._statusSubscription = this.statusStream$.subscribe(({ updateStatus, deleteStatus }) => {
+      this.updateStatus = updateStatus;
+      this.deleteStatus = deleteStatus;
 
-        if (updateStatus === 'success' || deleteStatus === 'success') {
-          let message =
-            this.activeItem === 'billingAddress'
-              ? 'Billing address '
-              : this.activeItem === 'shippingAddress'
-              ? 'Shipping address'
-              : this.activeItem === 'password'
-              ? 'Password '
-              : 'Account ';
-          if (updateStatus === 'success') message += 'updated successfully.';
-          if (deleteStatus === 'success') message += 'deleted successfully.';
-          this._snackBar.open(message, 'Dismiss', {
-            horizontalPosition: 'start',
-            verticalPosition: 'top',
-            duration: 8000,
-          });
-          this.passwordForm.reset();
-        }
+      if (updateStatus === 'success' || deleteStatus === 'success') {
+        let message =
+          this.activeItem === 'billingAddress'
+            ? 'Billing address '
+            : this.activeItem === 'shippingAddress'
+            ? 'Shipping address'
+            : this.activeItem === 'password'
+            ? 'Password '
+            : 'Account ';
+        if (updateStatus === 'success') message += 'updated successfully.';
+        if (deleteStatus === 'success') message += 'deleted successfully.';
+        this._snackBar.open(message, 'Dismiss', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 8000,
+        });
+        this.passwordForm.reset();
       }
-    );
+    });
   }
 
   showErrorMessage(field: 'password' | 'passwordConfirm') {
@@ -198,9 +174,7 @@ export class AccountComponent implements OnInit {
       return 'Passwords do not match.';
     }
     if (this[field]!.errors?.['required']) {
-      return field === 'password'
-        ? 'Password is required.'
-        : 'Password confirmation is required.';
+      return field === 'password' ? 'Password is required.' : 'Password confirmation is required.';
     }
     if (this[field]!.errors?.['minlength']) {
       return 'Password must be at least 6 characters long.';
@@ -212,18 +186,17 @@ export class AccountComponent implements OnInit {
   }
 
   updateAccountData() {
-    const requestBody =
-      this._accountService.removeEmptyFields<UpdateCustomerRequest>(
-        this.accountForm.value as UpdateCustomerRequest,
-        this._loggedInUserId!
-      );
+    const requestBody = this._accountService.removeEmptyFields<UpdateCustomerRequest>(
+      this.accountForm.value as UpdateCustomerRequest,
+      this._loggedInUserId!,
+    );
     this._store.dispatch(resetStatus());
     this._store.dispatch(updateActiveItem({ activeItem: 'account' }));
     this._store.dispatch(
       updateAccount({
         requestBody,
         customerId: this._loggedInUserId!,
-      })
+      }),
     );
   }
 
@@ -234,7 +207,7 @@ export class AccountComponent implements OnInit {
       updateAccount({
         requestBody: this.passwordForm.value as UpdateCustomerRequest,
         customerId: this._loggedInUserId!,
-      })
+      }),
     );
   }
 

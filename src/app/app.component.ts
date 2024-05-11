@@ -1,29 +1,16 @@
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  MatSnackBar,
-  MatSnackBarRef,
-  TextOnlySnackBar,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@scifi/auth/auth.service';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { loadAccount } from '@scifi/ngrx/account/account.actions';
 import { selectAccount } from '@scifi/ngrx/account/account.feature';
-import {
-  selectLoggedInUserId,
-  selectShowOverlay,
-} from '@scifi/ngrx/auth/auth.feature';
+import { selectLoggedInUserId, selectShowOverlay } from '@scifi/ngrx/auth/auth.feature';
 import { loadCart } from '@scifi/ngrx/cart/cart.actions';
-import {
-  loadCategories,
-  loadSuppliers,
-} from '@scifi/ngrx/categories/categories.actions';
-import {
-  selectData,
-  selectShowDialog,
-} from '@scifi/ngrx/notification/notification.feature';
+import { loadCategories, loadSuppliers } from '@scifi/ngrx/categories/categories.actions';
+import { selectData, selectShowDialog } from '@scifi/ngrx/notification/notification.feature';
 import { loadWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
 import { AppState, Customer, DialogContent } from '@scifi/types';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
@@ -34,24 +21,18 @@ import { combineLatest, map, Observable, Subscription } from 'rxjs';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-  private readonly _showDialog$: Observable<boolean> =
-    this._store.select(selectShowDialog);
+  private readonly _showDialog$: Observable<boolean> = this._store.select(selectShowDialog);
   private readonly _dialogContent$: Observable<DialogContent | null> =
     this._store.select(selectData);
   private readonly _loggedInUserId$: Observable<string | number | null> =
     this._store.select(selectLoggedInUserId);
-  private readonly _accountData$: Observable<Customer | null> =
-    this._store.select(selectAccount);
-  public readonly showLoginDialog$: Observable<boolean> =
-    this._store.select(selectShowOverlay);
-  private readonly _dataStream$ = combineLatest([
-    this._showDialog$,
-    this.showLoginDialog$,
-  ]).pipe(
+  private readonly _accountData$: Observable<Customer | null> = this._store.select(selectAccount);
+  public readonly showLoginDialog$: Observable<boolean> = this._store.select(selectShowOverlay);
+  private readonly _dataStream$ = combineLatest([this._showDialog$, this.showLoginDialog$]).pipe(
     map(([showDialog, showLoginDialog]) => ({
       showDialog,
       showLoginDialog,
-    }))
+    })),
   );
   private _loggedInUserId: number | null = null;
   private _snackBarRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
@@ -65,25 +46,23 @@ export class AppComponent {
     private _authService: AuthService,
     private _socialAuthService: SocialAuthService,
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
     this._store.dispatch(loadCategories());
     this._store.dispatch(loadSuppliers());
-    this._dialogSubscription = this._dataStream$.subscribe(
-      ({ showDialog, showLoginDialog }) => {
-        if (showDialog) {
-          this.dialog.open(DialogComponent, {
-            disableClose: showDialog,
-            data: this._dialogContent$,
-          });
-        }
-        if (showLoginDialog) {
-          this._snackBarRef?.dismiss();
-        }
+    this._dialogSubscription = this._dataStream$.subscribe(({ showDialog, showLoginDialog }) => {
+      if (showDialog) {
+        this.dialog.open(DialogComponent, {
+          disableClose: showDialog,
+          data: this._dialogContent$,
+        });
       }
-    );
+      if (showLoginDialog) {
+        this._snackBarRef?.dismiss();
+      }
+    });
 
     this._loggedInUserIdSubscription = this._loggedInUserId$.subscribe((id) => {
       if (id) {
@@ -97,7 +76,7 @@ export class AppComponent {
             horizontalPosition: 'right',
             verticalPosition: 'bottom',
             panelClass: 'login-prompt',
-          }
+          },
         );
       }
     });
@@ -106,19 +85,15 @@ export class AppComponent {
       if (account && this._loggedInUserId) {
         this._snackBarRef?.dismiss();
         this._store.dispatch(loadCart({ customerId: this._loggedInUserId }));
-        this._store.dispatch(
-          loadWishlist({ customerId: this._loggedInUserId, format: 'full' })
-        );
+        this._store.dispatch(loadWishlist({ customerId: this._loggedInUserId, format: 'full' }));
       }
     });
 
-    this._socialAuthSubscription = this._socialAuthService.authState.subscribe(
-      (user) => {
-        if (user) {
-          this._authService.dispatchSocialLoginAction(user);
-        }
+    this._socialAuthSubscription = this._socialAuthService.authState.subscribe((user) => {
+      if (user) {
+        this._authService.dispatchSocialLoginAction(user);
       }
-    );
+    });
   }
 
   get googleClinetId() {

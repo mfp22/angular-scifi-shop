@@ -1,5 +1,5 @@
 <div class="heading">
-  <img src="assets/account.svg">
+  <img src="assets/account.svg" />
 </div>
 
 <ng-container *ngLet="accountData$ | async as accountData">
@@ -15,12 +15,15 @@
       <h1 class="username">{{ accountData.username }}</h1>
       <p class="name">{{ accountData.name }}</p>
       <mat-divider></mat-divider>
-      <p *ngIf="(socialUser$ | async) as social">Currently signed in via {{ social.provider }}.</p>
-      
+      <p *ngIf="socialUser$ | async as social">Currently signed in via {{ social.provider }}.</p>
+
       <div class="hint" *ngIf="accountData.username === 'alexnes'">
         <p class="subtitle">
           <span class="icon"><mat-icon>info</mat-icon></span>
-          <span>You are currently logged in as the sample customer and will not be able to modify his username or password.</span>
+          <span
+            >You are currently logged in as the sample customer and will not be able to modify his
+            username or password.</span
+          >
         </p>
       </div>
 
@@ -38,8 +41,13 @@
             <mat-icon>local_phone</mat-icon>
             {{ accountData.phone }}
           </p>
-          <br>
-          <img #avatar class="avatar-image" [src]="accountData.avatar" (error)="avatar.src = '/assets/anonymous.webp'">
+          <br />
+          <img
+            #avatar
+            class="avatar-image"
+            [src]="accountData.avatar"
+            (error)="avatar.src = '/assets/anonymous.webp'"
+          />
         </div>
         <div class="addresses">
           <h2>Addresses</h2>
@@ -65,94 +73,179 @@
             <form [formGroup]="accountForm">
               <mat-form-field floatLabel="always">
                 <mat-label>Name</mat-label>
-                <input matInput type="text" formControlName="name" placeholder="Enter your name">
+                <input matInput type="text" formControlName="name" placeholder="Enter your name" />
               </mat-form-field>
-  
+
               <mat-form-field floatLabel="always">
                 <mat-label>Username</mat-label>
-                <input matInput type="text" formControlName="username" placeholder="Enter your username">
+                <input
+                  matInput
+                  type="text"
+                  formControlName="username"
+                  placeholder="Enter your username"
+                />
               </mat-form-field>
-  
+
               <mat-form-field floatLabel="always">
                 <mat-label>Email</mat-label>
-                <input matInput type="email" formControlName="email" placeholder="Enter your email">
+                <input
+                  matInput
+                  type="email"
+                  formControlName="email"
+                  placeholder="Enter your email"
+                />
                 <mat-error></mat-error>
               </mat-form-field>
 
               <mat-form-field floatLabel="always">
                 <mat-label>Phone</mat-label>
-                <input matInput type="tel" formControlName="phone" placeholder="Enter your phone number">
-                <mat-error *ngIf="phone?.errors?.['pattern']">Phone number cannot contain letters.</mat-error>
+                <input
+                  matInput
+                  type="tel"
+                  formControlName="phone"
+                  placeholder="Enter your phone number"
+                />
+                <mat-error *ngIf="phone?.errors?.['pattern']"
+                  >Phone number cannot contain letters.</mat-error
+                >
               </mat-form-field>
 
               <mat-form-field floatLabel="always">
                 <mat-label>Avatar URL</mat-label>
-                <input matInput type="url" formControlName="avatar" placeholder="Enter avatar URL">
+                <input
+                  matInput
+                  type="url"
+                  formControlName="avatar"
+                  placeholder="Enter avatar URL"
+                />
               </mat-form-field>
-            
-             <button mat-stroked-button type="button" (click)="updateAccountData()" class="update" [disabled]="accountForm.invalid" color="primary">
-              <mat-icon>edit</mat-icon>
-              Update details
-            </button>
+
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="updateAccountData()"
+                class="update"
+                [disabled]="accountForm.invalid"
+                color="primary"
+              >
+                <mat-icon>edit</mat-icon>
+                Update details
+              </button>
             </form>
           </mat-expansion-panel>
-          <mat-progress-bar *ngIf="(updateStatus === 'loading' || deleteStatus === 'loading') && activeItem === 'account'" mode="indeterminate"></mat-progress-bar>
+          <mat-progress-bar
+            *ngIf="
+              (updateStatus === 'loading' || deleteStatus === 'loading') && activeItem === 'account'
+            "
+            mode="indeterminate"
+          ></mat-progress-bar>
         </div>
 
         <div class="password-panel">
           <h2>Password</h2>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>{{ accountData.password ? "Change password" : "Set password" }}</mat-panel-title>
+              <mat-panel-title>{{
+                accountData.password ? 'Change password' : 'Set password'
+              }}</mat-panel-title>
               <mat-panel-description>
-                {{ accountData.password ? "Choose a new password." : "Add a password to your account." }}
+                {{
+                  accountData.password
+                    ? 'Choose a new password.'
+                    : 'Add a password to your account.'
+                }}
               </mat-panel-description>
             </mat-expansion-panel-header>
 
             <form [formGroup]="passwordForm">
               <mat-form-field floatLabel="always">
                 <mat-label>Enter new password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Enter password">
-                <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="password"
+                  placeholder="Enter password"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
                   <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
                 </button>
-                <mat-hint>Password must be at least 6 characters long and contain at least 1 capital letter and 1 number.</mat-hint>
-                <mat-error *ngIf="passwordForm.invalid">{{ showErrorMessage('password') }}</mat-error>
+                <mat-hint
+                  >Password must be at least 6 characters long and contain at least 1 capital letter
+                  and 1 number.</mat-hint
+                >
+                <mat-error *ngIf="passwordForm.invalid">{{
+                  showErrorMessage('password')
+                }}</mat-error>
               </mat-form-field>
 
               <mat-form-field floatLabel="always">
                 <mat-label>Confirm new password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordConfirm" placeholder="Confirm password">
-                <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="passwordConfirm"
+                  placeholder="Confirm password"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
                   <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
                 </button>
-                <mat-error *ngIf="passwordForm.invalid">{{ showErrorMessage('passwordConfirm') }}</mat-error>
+                <mat-error *ngIf="passwordForm.invalid">{{
+                  showErrorMessage('passwordConfirm')
+                }}</mat-error>
               </mat-form-field>
-             
-             <button mat-stroked-button type="button" (click)="updatePassword()" class="update" color="primary" [disabled]="passwordForm.invalid || accountData.id === 1">
-              <mat-icon>edit</mat-icon>
-              Update password
-            </button>
-            <mat-hint *ngIf="accountData.id === 1" class="warn">
-              <mat-icon>error</mat-icon>
-              You won't be able to update the sample customer's password.
-            </mat-hint>
+
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="updatePassword()"
+                class="update"
+                color="primary"
+                [disabled]="passwordForm.invalid || accountData.id === 1"
+              >
+                <mat-icon>edit</mat-icon>
+                Update password
+              </button>
+              <mat-hint *ngIf="accountData.id === 1" class="warn">
+                <mat-icon>error</mat-icon>
+                You won't be able to update the sample customer's password.
+              </mat-hint>
             </form>
           </mat-expansion-panel>
-          <mat-progress-bar *ngIf="updateStatus === 'loading' && activeItem === 'password'" mode="indeterminate"></mat-progress-bar>
+          <mat-progress-bar
+            *ngIf="updateStatus === 'loading' && activeItem === 'password'"
+            mode="indeterminate"
+          ></mat-progress-bar>
         </div>
       </div>
 
       <div>
         <h2>Delete account</h2>
-        <p style="margin: 0 0 10px; font-style: italic;" *ngIf="accountData.username === 'alexnes'">Cannot delete sample customer account.</p>
-        <button 
-          mat-raised-button color="warn" 
+        <p style="margin: 0 0 10px; font-style: italic" *ngIf="accountData.username === 'alexnes'">
+          Cannot delete sample customer account.
+        </p>
+        <button
+          mat-raised-button
+          color="warn"
           (click)="openDialog(accountData.id)"
           [disabled]="accountData.username === 'alexnes'"
-          >Delete account</button>
+        >
+          Delete account
+        </button>
       </div>
-
     </section>
   </main>
 </ng-container>

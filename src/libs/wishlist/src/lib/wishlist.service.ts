@@ -6,13 +6,7 @@ import {
   updateActiveId,
   updateWishlist,
 } from '@scifi/ngrx/wishlist/wishlist.actions';
-import {
-  AppState,
-  Product,
-  Wishlist,
-  WishlistBasic,
-  WishlistItem,
-} from '@scifi/types';
+import { AppState, Product, Wishlist, WishlistBasic, WishlistItem } from '@scifi/types';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +24,7 @@ export class WishlistService {
 
     return this._http.get<{ wishlist: Wishlist }>(
       `${this.baseUrl}/${customerId}/wishlist`,
-      options
+      options,
     );
   }
 
@@ -38,14 +32,14 @@ export class WishlistService {
     return this._http.put<{ wishlist: Wishlist | [] }>(
       `${this.baseUrl}/${customerId}/wishlist`,
       updatedWishlist,
-      { withCredentials: true }
+      { withCredentials: true },
     );
   }
 
   dispatchWishlistActions(
     operation: 'add' | 'remove' | 'removeAll',
     wishlist: Wishlist,
-    productId: number
+    productId: number,
   ): void {
     this._store.dispatch(resetWishlistStatus());
 
@@ -55,7 +49,7 @@ export class WishlistService {
         updateWishlist({
           updatedWishlist: [],
           customerId: wishlist.id,
-        })
+        }),
       );
       return;
     }
@@ -80,7 +74,7 @@ export class WishlistService {
       updateWishlist({
         updatedWishlist: wishlistArray,
         customerId: wishlist.id,
-      })
+      }),
     );
   }
 }

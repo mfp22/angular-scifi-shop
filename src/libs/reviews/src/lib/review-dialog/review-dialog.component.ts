@@ -32,8 +32,7 @@ export class ReviewDialogComponent {
     recommend: [this.data.review.recommend],
     rating: [this.data.review.rating, Validators.required],
   });
-  private readonly _reviewStatus$: Observable<Status> =
-    this._store.select(selectReviewStatus);
+  private readonly _reviewStatus$: Observable<Status> = this._store.select(selectReviewStatus);
   private _reviewStatusSubscription = Subscription.EMPTY;
   private _accountDataSubscription = Subscription.EMPTY;
   showLoadingBar = false;
@@ -46,7 +45,7 @@ export class ReviewDialogComponent {
       operation: 'create' | 'update';
     },
     private _store: Store<AppState>,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
   ) {}
 
   onNoClick(): void {
@@ -81,7 +80,7 @@ export class ReviewDialogComponent {
         updateReview({
           reviewId: this.data.review.id,
           requestBody: this.reviewForm.value as UpdateReviewRequest,
-        })
+        }),
       );
     }
     if (this.data.operation === 'create') {

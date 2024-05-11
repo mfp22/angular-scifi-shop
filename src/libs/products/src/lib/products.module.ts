@@ -26,12 +26,12 @@ import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.comp
 
 @NgModule({
   declarations: [
-    ProductListComponent, 
-    ProductDialogComponent, 
-    SingleProductComponent, 
+    ProductListComponent,
+    ProductDialogComponent,
+    SingleProductComponent,
     ActionButtonsComponent,
     ProductsPaginationComponent,
-    FavoritesComponent
+    FavoritesComponent,
   ],
   imports: [
     CommonModule,
@@ -48,8 +48,8 @@ import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.comp
     StoreModule.forFeature(wishlistFeature),
     EffectsModule.forFeature(ProductsEffects),
     EffectsModule.forFeature(ReviewsEffects),
-    EffectsModule.forFeature(WishlistEffects)
+    EffectsModule.forFeature(WishlistEffects),
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ProductsModule { }
+export class ProductsModule {}

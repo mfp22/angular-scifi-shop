@@ -49,7 +49,7 @@ export const wishlistReducer = createReducer(
     ...state,
     loadStatus: 'error' as const,
     updateStatus: 'error' as const,
-  }))
+  })),
 );
 
 export const wishlistFeature = createFeature({
@@ -57,9 +57,5 @@ export const wishlistFeature = createFeature({
   reducer: wishlistReducer,
 });
 
-export const {
-  selectWishlist,
-  selectLoadStatus,
-  selectUpdateStatus,
-  selectActiveId,
-} = wishlistFeature;
+export const { selectWishlist, selectLoadStatus, selectUpdateStatus, selectActiveId } =
+  wishlistFeature;

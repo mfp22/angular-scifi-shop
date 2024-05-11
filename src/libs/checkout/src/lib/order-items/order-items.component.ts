@@ -16,8 +16,7 @@ export class OrderItemsComponent {
   readonly expressCheckoutItem$: Observable<ExpressCheckoutItem | null> =
     this._store.select(selectExpressCheckoutItem);
   readonly cart$: Observable<Cart | null> = this._store.select(selectCart);
-  readonly cartTotal$: Observable<number | undefined> =
-    this._store.select(selectCartTotal);
+  readonly cartTotal$: Observable<number | undefined> = this._store.select(selectCartTotal);
   expressCheckoutItem: ExpressCheckoutItem | null | undefined;
   private _subscription = Subscription.EMPTY;
 
@@ -40,8 +39,7 @@ export class OrderItemsComponent {
 
   get expressCheckoutTotal() {
     return (
-      Number(this.expressCheckoutItem?.product.price) *
-      (this.expressCheckoutItem?.quantity || 1)
+      Number(this.expressCheckoutItem?.product.price) * (this.expressCheckoutItem?.quantity || 1)
     );
   }
 
@@ -54,7 +52,7 @@ export class OrderItemsComponent {
       addExpressCheckoutItem({
         product: this.expressCheckoutItem!.product,
         quantity: this.quantity.value,
-      })
+      }),
     );
   }
 

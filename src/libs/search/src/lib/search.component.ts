@@ -30,17 +30,18 @@ export class SearchComponent {
   hideSearchbar = false;
   isMediumViewport: boolean | undefined;
 
-  private readonly _mediumViewport$: Observable<boolean> =
-    this._breakpointObserver.observe('(max-width: 800px)').pipe(
+  private readonly _mediumViewport$: Observable<boolean> = this._breakpointObserver
+    .observe('(max-width: 800px)')
+    .pipe(
       map((result) => result.matches),
-      shareReplay()
+      shareReplay(),
     );
   private _subscription = Subscription.EMPTY;
 
   constructor(
     private _store: Store<AppState>,
     private _router: Router,
-    private _breakpointObserver: BreakpointObserver
+    private _breakpointObserver: BreakpointObserver,
   ) {}
 
   ngOnInit() {

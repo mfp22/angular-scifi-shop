@@ -28,17 +28,12 @@ export class AddressStepComponent {
   @Input() existingAddress: Address | null | undefined;
   @Input() view: 'checkout' | 'account' | undefined;
   @Input() type: 'billingAddress' | 'shippingAddress' | undefined;
-  @Input() useExisting:
-    | { billingAddress: boolean; shippingAddress: boolean }
-    | undefined;
+  @Input() useExisting: { billingAddress: boolean; shippingAddress: boolean } | undefined;
   @Output() addressEvent = new EventEmitter<AddressEmitData>();
   isCheckout: boolean | undefined;
-  readonly updateStatus$: Observable<Status> =
-    this._store.select(selectUpdateStatus);
-  readonly deleteStatus$: Observable<Status> =
-    this._store.select(selectDeleteStatus);
-  readonly activeItem$: Observable<AccountActiveItem> =
-    this._store.select(selectActiveItem);
+  readonly updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
+  readonly deleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
+  readonly activeItem$: Observable<AccountActiveItem> = this._store.select(selectActiveItem);
 
   constructor(private _store: Store<AppState>) {}
 
@@ -58,8 +53,7 @@ export class AddressStepComponent {
 
   clearValidators() {
     for (const field in this.addressFormGroup!.controls) {
-      const formControl =
-        this.addressFormGroup!.controls[field as RequiredAddressField];
+      const formControl = this.addressFormGroup!.controls[field as RequiredAddressField];
       formControl.clearValidators();
       formControl.updateValueAndValidity();
     }
@@ -69,8 +63,7 @@ export class AddressStepComponent {
     this.clearValidators();
     for (const field in this.addressFormGroup!.controls) {
       if (!['addressLine1', 'city', 'postcode'].includes(field)) continue;
-      const formControl =
-        this.addressFormGroup!.controls[field as RequiredAddressField];
+      const formControl = this.addressFormGroup!.controls[field as RequiredAddressField];
       formControl.setValidators([Validators.required]);
       formControl.updateValueAndValidity();
     }

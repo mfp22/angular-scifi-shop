@@ -13,12 +13,7 @@ import { OrderItemsComponent } from './order-items/order-items.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    CheckoutComponent,
-    AddressStepComponent,
-    PaymentComponent,
-    OrderItemsComponent
-  ],
+  declarations: [CheckoutComponent, AddressStepComponent, PaymentComponent, OrderItemsComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -28,10 +23,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     SpinnerModule,
     ClipboardModule,
-    NgxStripeModule.forRoot(import.meta.env.NG_APP_STRIPE_KEY)
+    NgxStripeModule.forRoot(import.meta.env.NG_APP_STRIPE_KEY),
   ],
-  exports: [
-    AddressStepComponent
-  ]
+  exports: [AddressStepComponent],
 })
-export class CheckoutModule { }
+export class CheckoutModule {}

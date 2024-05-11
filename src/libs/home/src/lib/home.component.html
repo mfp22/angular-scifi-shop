@@ -1,16 +1,16 @@
 <main>
   <div class="bg">
     <div class="logo-container">
-      <img src="assets/logo.svg">
+      <img src="assets/logo.svg" />
     </div>
     <div class="slogan">
-      <img src="assets/slogan.svg">
+      <img src="assets/slogan.svg" />
     </div>
     <h1>From high-tech prototypes and exotic devices to junk supplies - we sell it all.</h1>
   </div>
-  
+
   <div class="logo-container suppliers">
-    <img src="assets/suppliers.svg">
+    <img src="assets/suppliers.svg" />
   </div>
 
   <div class="bg-alt">
@@ -20,17 +20,23 @@
     </ng-container>
     <ng-template #suppliersList>
       <section class="suppliers-list">
-        <ng-container *ngFor="let supplier of (suppliers$ | async)" >
+        <ng-container *ngFor="let supplier of suppliers$ | async">
           <mat-card>
             <mat-chip
-              routerLink="/products" [queryParams]="{ supplier: supplier.name }"
-              class="label">
+              routerLink="/products"
+              [queryParams]="{ supplier: supplier.name }"
+              class="label"
+            >
               <mat-icon>view_module</mat-icon>
               {{ supplier.products }} products
             </mat-chip>
             <img
-              routerLink="/products" [queryParams]="{ supplier: supplier.name }"
-              mat-card-image [src]="'assets/suppliers/' + supplier.thumbnail + '.svg'" [class.dark-bg]="lightModeEnabled">
+              routerLink="/products"
+              [queryParams]="{ supplier: supplier.name }"
+              mat-card-image
+              [src]="'assets/suppliers/' + supplier.thumbnail + '.svg'"
+              [class.dark-bg]="lightModeEnabled"
+            />
             <mat-divider></mat-divider>
             <mat-card-header>
               <mat-card-title>{{ supplier.name }}</mat-card-title>
@@ -44,10 +50,10 @@
         </ng-container>
       </section>
     </ng-template>
-</div>
+  </div>
 
   <div class="logo-container categories">
-    <img src="assets/categories.svg">
+    <img src="assets/categories.svg" />
   </div>
 
   <div class="bg-alt">
@@ -57,17 +63,22 @@
     </ng-container>
     <ng-template #categoriesList>
       <section class="categories-list">
-        <ng-container *ngFor="let category of (categories$ | async)">
+        <ng-container *ngFor="let category of categories$ | async">
           <mat-card>
             <mat-chip
-              routerLink="/products" [queryParams]="{ category: category.name }"
-              class="label">
+              routerLink="/products"
+              [queryParams]="{ category: category.name }"
+              class="label"
+            >
               <mat-icon>view_module</mat-icon>
               {{ category.products }} products
             </mat-chip>
-            <img 
-              routerLink="/products" [queryParams]="{ category: category.name }"
-              mat-card-image [src]="'assets/categories/' + category.thumbnail + '.svg'">
+            <img
+              routerLink="/products"
+              [queryParams]="{ category: category.name }"
+              mat-card-image
+              [src]="'assets/categories/' + category.thumbnail + '.svg'"
+            />
             <mat-divider></mat-divider>
             <mat-card-content>
               <p>{{ category.description }}</p>

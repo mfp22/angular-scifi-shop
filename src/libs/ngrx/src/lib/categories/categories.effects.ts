@@ -18,10 +18,10 @@ export class CategoriesEffects {
       exhaustMap(() =>
         this._productsService.getCategories().pipe(
           map((categories) => loadCategoriesSuccess(categories)),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   loadSuppliers$ = createEffect(() =>
@@ -30,14 +30,11 @@ export class CategoriesEffects {
       exhaustMap(() =>
         this._productsService.getSuppliers().pipe(
           map((suppliers) => loadSuppliersSuccess(suppliers)),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
-  constructor(
-    private _actions$: Actions,
-    private _productsService: ProductService
-  ) {}
+  constructor(private _actions$: Actions, private _productsService: ProductService) {}
 }

@@ -32,13 +32,7 @@ import { SearchComponent } from '@scifi/search/search.component';
 import { FooterComponent } from '@scifi/footer/footer.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavComponent,
-    FooterComponent,
-    DialogComponent,
-  ],
+  declarations: [AppComponent, HomeComponent, NavComponent, FooterComponent, DialogComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

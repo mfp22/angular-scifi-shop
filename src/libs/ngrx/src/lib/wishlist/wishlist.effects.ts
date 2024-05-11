@@ -23,10 +23,10 @@ export class WishlistEffects {
           map(({ wishlist }) => {
             return loadWishlistSuccess(wishlist);
           }),
-          catchError(dispatchErrorAction)
+          catchError(dispatchErrorAction),
         );
-      })
-    )
+      }),
+    ),
   );
 
   updateWishList$ = createEffect(() =>
@@ -34,27 +34,25 @@ export class WishlistEffects {
       ofType(updateWishlist),
       withLatestFrom(this._store.select(selectWishlist)),
       exhaustMap(([{ updatedWishlist, customerId }, previousWishlist]) => {
-        return this._wishlistService
-          .updateWishlist(updatedWishlist, customerId)
-          .pipe(
-            map(({ wishlist }) => {
-              if (Array.isArray(wishlist) && wishlist.length === 0) {
-                return updateWishlistSuccess({
-                  ...previousWishlist!,
-                  wishlistItems: [],
-                });
-              }
-              return updateWishlistSuccess(wishlist as Wishlist);
-            }),
-            catchError(dispatchErrorAction)
-          );
-      })
-    )
+        return this._wishlistService.updateWishlist(updatedWishlist, customerId).pipe(
+          map(({ wishlist }) => {
+            if (Array.isArray(wishlist) && wishlist.length === 0) {
+              return updateWishlistSuccess({
+                ...previousWishlist!,
+                wishlistItems: [],
+              });
+            }
+            return updateWishlistSuccess(wishlist as Wishlist);
+          }),
+          catchError(dispatchErrorAction),
+        );
+      }),
+    ),
   );
 
   constructor(
     private _actions$: Actions,
     private _wishlistService: WishlistService,
-    private _store: Store<AppState>
+    private _store: Store<AppState>,
   ) {}
 }

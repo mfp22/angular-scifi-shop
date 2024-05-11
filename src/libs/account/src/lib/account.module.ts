@@ -12,25 +12,21 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
-  declarations: [
-    AccountComponent,
-    AddressesComponent,
-    DeleteDialogComponent
-  ],
+  declarations: [AccountComponent, AddressesComponent, DeleteDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     NgLetModule,
     CheckoutModule,
-    EffectsModule.forFeature(AccountEffects)
+    EffectsModule.forFeature(AccountEffects),
   ],
-  providers: [{
-    provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-    useValue: { subscriptSizing: "dynamic" }
-  }],
-  exports: [
-    AddressesComponent
-  ]
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { subscriptSizing: 'dynamic' },
+    },
+  ],
+  exports: [AddressesComponent],
 })
-export class AccountModule { }
+export class AccountModule {}

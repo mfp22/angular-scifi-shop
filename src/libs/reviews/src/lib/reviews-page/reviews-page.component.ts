@@ -12,14 +12,7 @@ import {
   selectReviews,
   selectUpdateStatus,
 } from '@scifi/ngrx/reviews/reviews.feature';
-import {
-  AppState,
-  Customer,
-  DialogContent,
-  Pagination,
-  Review,
-  Status,
-} from '@scifi/types';
+import { AppState, Customer, DialogContent, Pagination, Review, Status } from '@scifi/types';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -28,47 +21,33 @@ import { combineLatest, map, Observable, Subscription } from 'rxjs';
   styleUrls: ['./reviews-page.component.sass'],
 })
 export class ReviewsPageComponent {
-  readonly accountData$: Observable<Customer | null> =
-    this._store.select(selectAccount);
-  readonly reviews$: Observable<Review[] | [] | null> =
-    this._store.select(selectReviews);
-  readonly customer$: Observable<Customer | null> =
-    this._store.select(selectCustomer);
-  readonly pagination$: Observable<Pagination> =
-    this._store.select(selectPagination);
-  readonly updateStatus$: Observable<Status> =
-    this._store.select(selectUpdateStatus);
-  readonly deleteStatus$: Observable<Status> =
-    this._store.select(selectDeleteStatus);
-  readonly errorStatus$: Observable<DialogContent | null> =
-    this._store.select(selectData);
+  readonly accountData$: Observable<Customer | null> = this._store.select(selectAccount);
+  readonly reviews$: Observable<Review[] | [] | null> = this._store.select(selectReviews);
+  readonly customer$: Observable<Customer | null> = this._store.select(selectCustomer);
+  readonly pagination$: Observable<Pagination> = this._store.select(selectPagination);
+  readonly updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
+  readonly deleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
+  readonly errorStatus$: Observable<DialogContent | null> = this._store.select(selectData);
   private _errorSubscription = Subscription.EMPTY;
   private _reviewStatusSubscription = Subscription.EMPTY;
   public show404 = false;
 
-  readonly dataStream$ = combineLatest([
-    this.reviews$,
-    this.pagination$,
-    this.customer$,
-  ]).pipe(
+  readonly dataStream$ = combineLatest([this.reviews$, this.pagination$, this.customer$]).pipe(
     map(([reviews, pagination, customer]) => ({
       reviews,
       pagination,
       customer,
-    }))
+    })),
   );
 
-  readonly statusStream$ = combineLatest([
-    this.updateStatus$,
-    this.deleteStatus$,
-  ]).pipe(
-    map(([updateStatus, deleteStatus]) => ({ updateStatus, deleteStatus }))
+  readonly statusStream$ = combineLatest([this.updateStatus$, this.deleteStatus$]).pipe(
+    map(([updateStatus, deleteStatus]) => ({ updateStatus, deleteStatus })),
   );
 
   constructor(
     private _store: Store<AppState>,
     private _router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -92,7 +71,7 @@ export class ReviewsPageComponent {
           });
           this._store.dispatch(resetReviewsStatus());
         }
-      }
+      },
     );
   }
 

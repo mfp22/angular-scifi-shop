@@ -22,36 +22,29 @@ export class OrdersService {
   }
 
   getSingleOrder(orderId: string, customerId: number) {
-    return this._http.get<SingleOrderResponse>(
-      `${this._url}/${customerId}/orders/${orderId}`,
-      { withCredentials: true }
-    );
+    return this._http.get<SingleOrderResponse>(`${this._url}/${customerId}/orders/${orderId}`, {
+      withCredentials: true,
+    });
   }
 
   createOrder(newOrder: NewOrderRequest, customerId: number) {
-    return this._http.post<NewOrderResponse>(
-      `${this._url}/${customerId}/orders`,
-      newOrder,
-      { withCredentials: true }
-    );
+    return this._http.post<NewOrderResponse>(`${this._url}/${customerId}/orders`, newOrder, {
+      withCredentials: true,
+    });
   }
 
-  updateOrder(requestBody: {
-    status: string;
-    orderId: number;
-    customerId: number;
-  }) {
+  updateOrder(requestBody: { status: string; orderId: number; customerId: number }) {
     return this._http.put<SingleOrderResponse>(
       `${this._url}/${requestBody.customerId}/orders/${requestBody.orderId}`,
       requestBody,
-      { withCredentials: true }
+      { withCredentials: true },
     );
   }
 
   deleteOrder(orderId: number, customerId: number) {
     return this._http.delete<{ deletedOrder: SingleOrderResponse }>(
       `${this._url}/${customerId}/orders/${orderId}`,
-      { withCredentials: true }
+      { withCredentials: true },
     );
   }
 }

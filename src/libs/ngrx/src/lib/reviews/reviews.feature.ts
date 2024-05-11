@@ -39,13 +39,10 @@ export const initialState: ReviewsState = {
 
 export const reviewsReducer = createReducer(
   initialState,
-  on(
-    loadAllReviews,
-    loadProductReviews,
-    loadCustomerReviews,
-    loadFavorites,
-    (state) => ({ ...state, loadStatus: 'loading' as const })
-  ),
+  on(loadAllReviews, loadProductReviews, loadCustomerReviews, loadFavorites, (state) => ({
+    ...state,
+    loadStatus: 'loading' as const,
+  })),
   on(
     loadAllReviewsSuccess,
     loadProductReviewsSuccess,
@@ -57,32 +54,26 @@ export const reviewsReducer = createReducer(
         reviews,
         customer: null,
       };
-    }
+    },
   ),
-  on(
-    loadCustomerReviewsSuccess,
-    (state, { page, count, totalResults, customer, reviews }) => {
-      return {
-        ...state,
-        loadStatus: 'success' as const,
-        pagination: { page, count, totalResults },
-        reviews,
-        customer,
-      };
-    }
-  ),
-  on(
-    loadFavoritesSuccess,
-    (state, { page, count, totalResults, favorites }) => {
-      return {
-        ...state,
-        loadStatus: 'success' as const,
-        pagination: { page, count, totalResults },
-        favorites,
-        customer: null,
-      };
-    }
-  ),
+  on(loadCustomerReviewsSuccess, (state, { page, count, totalResults, customer, reviews }) => {
+    return {
+      ...state,
+      loadStatus: 'success' as const,
+      pagination: { page, count, totalResults },
+      reviews,
+      customer,
+    };
+  }),
+  on(loadFavoritesSuccess, (state, { page, count, totalResults, favorites }) => {
+    return {
+      ...state,
+      loadStatus: 'success' as const,
+      pagination: { page, count, totalResults },
+      favorites,
+      customer: null,
+    };
+  }),
   on(createReview, (state) => ({ ...state, createStatus: 'loading' as const })),
   on(createReviewSuccess, (state, payload) => {
     const updatedReviewList = [...state.reviews!];
@@ -147,7 +138,7 @@ export const reviewsReducer = createReducer(
       deleteStatus: 'pending' as const,
     };
   }),
-  on(updateActiveId, (state, { activeId }) => ({ ...state, activeId }))
+  on(updateActiveId, (state, { activeId }) => ({ ...state, activeId })),
 );
 
 export const reviewsFeature = createFeature({
@@ -166,7 +157,7 @@ export const reviewsFeature = createFeature({
           }
         });
         return updatedStatus;
-      }
+      },
     ),
   }),
 });

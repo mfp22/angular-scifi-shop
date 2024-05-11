@@ -12,9 +12,7 @@ import { AppRoutingModule } from '../../../../app/app-routing.module';
 import { ChipsComponent } from '@scifi/chips/chips.component';
 
 @NgModule({
-  declarations: [
-    WishlistComponent
-  ],
+  declarations: [WishlistComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -23,7 +21,7 @@ import { ChipsComponent } from '@scifi/chips/chips.component';
     ChipsComponent,
     AppRoutingModule,
     StoreModule.forFeature(wishlistFeature),
-    EffectsModule.forFeature(WishlistEffects)
-  ]
+    EffectsModule.forFeature(WishlistEffects),
+  ],
 })
-export class WishlistModule { }
+export class WishlistModule {}

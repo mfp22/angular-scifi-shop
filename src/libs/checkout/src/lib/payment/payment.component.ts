@@ -10,13 +10,7 @@ import {
   Input,
   SimpleChange,
 } from '@angular/core';
-import {
-  combineLatest,
-  map,
-  Observable,
-  shareReplay,
-  Subscription,
-} from 'rxjs';
+import { combineLatest, map, Observable, shareReplay, Subscription } from 'rxjs';
 import { StripeService, StripePaymentElementComponent } from 'ngx-stripe';
 import {
   StripeElementsOptions,
@@ -34,13 +28,7 @@ import { CheckoutService } from '../checkout.service';
 import { selectExpressCheckoutItem } from '@scifi/ngrx/orders/orders.feature';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {
-  Address,
-  AppState,
-  Customer,
-  ExpressCheckoutItem,
-  PaymentEvent,
-} from '@scifi/types';
+import { Address, AppState, Customer, ExpressCheckoutItem, PaymentEvent } from '@scifi/types';
 
 @Component({
   selector: 'app-payment',
@@ -54,10 +42,8 @@ export class PaymentComponent implements OnInit {
   @Input() shippingAddress: Address | null | undefined;
   @Input() newOrderId: number | undefined;
   @Output() paymentEvent = new EventEmitter<PaymentEvent>();
-  private readonly _accountData$: Observable<Customer | null> =
-    this._store.select(selectAccount);
-  private readonly _cartTotal$: Observable<number> =
-    this._store.select(selectCartTotal);
+  private readonly _accountData$: Observable<Customer | null> = this._store.select(selectAccount);
+  private readonly _cartTotal$: Observable<number> = this._store.select(selectCartTotal);
   private readonly _expressCheckoutItem$: Observable<ExpressCheckoutItem | null> =
     this._store.select(selectExpressCheckoutItem);
   private _accountDataSubscription = Subscription.EMPTY;
@@ -69,14 +55,12 @@ export class PaymentComponent implements OnInit {
   ]).pipe(
     map(([cartTotal, expressCheckoutItem]) => {
       return { cartTotal, expressCheckoutItem };
-    })
+    }),
   );
-  smallViewport$: Observable<boolean> = this._breakpointObserver
-    .observe('(max-width: 500px)')
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  smallViewport$: Observable<boolean> = this._breakpointObserver.observe('(max-width: 500px)').pipe(
+    map((result) => result.matches),
+    shareReplay(),
+  );
 
   orderTotal = 0;
   elementsOptions: StripeElementsOptions = { locale: 'en' };
@@ -155,28 +139,26 @@ export class PaymentComponent implements OnInit {
     private _store: Store<AppState>,
     private _snackBar: MatSnackBar,
     private _breakpointObserver: BreakpointObserver,
-    @Inject(LOCALE_ID) private locale: string
+    @Inject(LOCALE_ID) private locale: string,
   ) {}
 
   ngOnInit() {
     this.status = 'loading';
-    this._accountDataSubscription = this._accountData$.subscribe(
-      (accountData) => {
-        if (accountData) {
-          this.paymentElementForm.patchValue({
-            name: accountData.name,
-            email: accountData.email || '',
-          });
+    this._accountDataSubscription = this._accountData$.subscribe((accountData) => {
+      if (accountData) {
+        this.paymentElementForm.patchValue({
+          name: accountData.name,
+          email: accountData.email || '',
+        });
 
-          this.paymentElementOptions.defaultValues = {
-            billingDetails: {
-              name: accountData.name,
-              email: accountData.email,
-            },
-          };
-        }
+        this.paymentElementOptions.defaultValues = {
+          billingDetails: {
+            name: accountData.name,
+            email: accountData.email,
+          },
+        };
       }
-    );
+    });
 
     this._checkoutSubscription = this._dataStream$.subscribe(
       ({ cartTotal, expressCheckoutItem }) => {
@@ -186,8 +168,7 @@ export class PaymentComponent implements OnInit {
           }
           if (expressCheckoutItem) {
             this.orderTotal =
-              Number(expressCheckoutItem.product.price) *
-              expressCheckoutItem.quantity;
+              Number(expressCheckoutItem.product.price) * expressCheckoutItem.quantity;
           }
 
           this._checkoutService
@@ -197,7 +178,7 @@ export class PaymentComponent implements OnInit {
               this.elementsOptions.clientSecret = paymentIntent.client_secret!;
             });
         }
-      }
+      },
     );
   }
 
@@ -220,9 +201,8 @@ export class PaymentComponent implements OnInit {
       this._store.dispatch(
         notify({
           title: 'Address information is missing.',
-          content:
-            'Billing and shipping addresses are required to complete your order.',
-        })
+          content: 'Billing and shipping addresses are required to complete your order.',
+        }),
       );
     } else {
       this.paying = true;
@@ -247,9 +227,8 @@ export class PaymentComponent implements OnInit {
           this._store.dispatch(
             notify({
               title: 'There was an error with the payment process.',
-              content:
-                result.error.message || 'Unable to process your request.',
-            })
+              content: result.error.message || 'Unable to process your request.',
+            }),
           );
         } else {
           // The payment has been processed!
@@ -261,9 +240,9 @@ export class PaymentComponent implements OnInit {
                 content: `All done! Order total: ${formatCurrency(
                   this.orderTotal,
                   this.locale,
-                  '£'
+                  '£',
                 )}. You will now be redirected to your new order.`,
-              })
+              }),
             );
             this.paymentEvent.emit({
               status: 'completed',

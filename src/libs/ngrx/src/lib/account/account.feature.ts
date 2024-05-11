@@ -15,12 +15,7 @@ import {
   updateActiveItem,
   resetStatus,
 } from './account.actions';
-import {
-  AccountState,
-  Address,
-  Customer,
-  CustomerNewAddress,
-} from '@scifi/types';
+import { AccountState, Address, Customer, CustomerNewAddress } from '@scifi/types';
 
 const initialState: AccountState = {
   account: null,
@@ -30,18 +25,11 @@ const initialState: AccountState = {
   deleteStatus: 'pending',
 };
 
-const removeAddressFromAccount = (
-  account: Customer,
-  deletedAddressId: number
-) => {
+const removeAddressFromAccount = (account: Customer, deletedAddressId: number) => {
   const accountCopy: Customer = {
     ...account,
-    billingAddress: account.billingAddress
-      ? { ...account.billingAddress }
-      : null,
-    shippingAddress: account.shippingAddress
-      ? { ...account.shippingAddress }
-      : null,
+    billingAddress: account.billingAddress ? { ...account.billingAddress } : null,
+    shippingAddress: account.shippingAddress ? { ...account.shippingAddress } : null,
   };
 
   if (accountCopy.billingAddress?.id === deletedAddressId) {
@@ -95,12 +83,8 @@ export const accountReducer = createReducer(
   })),
   on(deleteAddressSuccess, (state, payload) => {
     if (payload.hasOwnProperty('deletedAddress')) {
-      const deletedAddressId = (payload as { deletedAddress: Address })
-        .deletedAddress.id!;
-      const updatedAccount = removeAddressFromAccount(
-        state.account!,
-        deletedAddressId
-      );
+      const deletedAddressId = (payload as { deletedAddress: Address }).deletedAddress.id!;
+      const updatedAccount = removeAddressFromAccount(state.account!, deletedAddressId);
       return {
         ...state,
         account: updatedAccount,
@@ -135,7 +119,7 @@ export const accountReducer = createReducer(
     loadStatus: 'error' as const,
     updateStatus: 'error' as const,
     deleteStatus: 'error' as const,
-  }))
+  })),
 );
 
 export const accountFeature = createFeature({
@@ -144,11 +128,11 @@ export const accountFeature = createFeature({
   extraSelectors: ({ selectAccount }) => ({
     selectBillingAddress: createSelector(
       selectAccount,
-      (account: Customer | null) => account?.billingAddress
+      (account: Customer | null) => account?.billingAddress,
     ),
     selectShippingAddress: createSelector(
       selectAccount,
-      (account: Customer | null) => account?.shippingAddress
+      (account: Customer | null) => account?.shippingAddress,
     ),
   }),
 });

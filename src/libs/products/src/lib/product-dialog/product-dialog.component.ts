@@ -17,7 +17,7 @@ export class ProductDialogComponent {
     public dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { product: Product },
     private _store: Store<AppState>,
-    private _router: Router
+    private _router: Router,
   ) {}
 
   onNoClick(): void {
@@ -29,7 +29,7 @@ export class ProductDialogComponent {
       addExpressCheckoutItem({
         product: this.data.product,
         quantity: this.quantity,
-      })
+      }),
     );
     this.dialogRef.close();
     this.dialogRef.afterClosed().subscribe(() => {

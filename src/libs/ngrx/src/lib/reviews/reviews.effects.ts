@@ -30,10 +30,10 @@ export class ReviewsEffects {
           map((reviewsResponse) => {
             return loadAllReviewsSuccess(reviewsResponse);
           }),
-          catchError(dispatchErrorAction)
+          catchError(dispatchErrorAction),
         );
-      })
-    )
+      }),
+    ),
   );
 
   $loadProductReviews = createEffect(() =>
@@ -44,10 +44,10 @@ export class ReviewsEffects {
           map((reviewsResponse) => {
             return loadProductReviewsSuccess(reviewsResponse);
           }),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   $loadCustomerReviews = createEffect(() =>
@@ -58,10 +58,10 @@ export class ReviewsEffects {
           map((reviewsResponse) => {
             return loadCustomerReviewsSuccess(reviewsResponse);
           }),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   $loadFavorites = createEffect(() =>
@@ -72,10 +72,10 @@ export class ReviewsEffects {
           map((favoritesResponse) => {
             return loadFavoritesSuccess(favoritesResponse);
           }),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   $createReview = createEffect(() =>
@@ -86,10 +86,10 @@ export class ReviewsEffects {
           map((newReviewResponse) => {
             return createReviewSuccess(newReviewResponse);
           }),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
   $updateReview = createEffect(() =>
@@ -100,10 +100,10 @@ export class ReviewsEffects {
           map((updatedReviewResponse) => {
             return updateReviewSuccess(updatedReviewResponse);
           }),
-          catchError(dispatchErrorAction)
+          catchError(dispatchErrorAction),
         );
-      })
-    )
+      }),
+    ),
   );
 
   $deleteReview = createEffect(() =>
@@ -114,14 +114,11 @@ export class ReviewsEffects {
           map((deletedReviewResponse) => {
             return deleteReviewSuccess(deletedReviewResponse);
           }),
-          catchError(dispatchErrorAction)
-        )
-      )
-    )
+          catchError(dispatchErrorAction),
+        ),
+      ),
+    ),
   );
 
-  constructor(
-    private _actions$: Actions,
-    private _reviewsService: ReviewsService
-  ) {}
+  constructor(private _actions$: Actions, private _reviewsService: ReviewsService) {}
 }

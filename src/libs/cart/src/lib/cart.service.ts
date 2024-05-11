@@ -19,10 +19,8 @@ export class CartService {
   }
 
   updateCart(updatedCart: CartItem[] | [], customerId: number) {
-    return this._http.put<{ cart: Cart | [] }>(
-      `${this._url}/${customerId}/cart`,
-      updatedCart,
-      { withCredentials: true }
-    );
+    return this._http.put<{ cart: Cart | [] }>(`${this._url}/${customerId}/cart`, updatedCart, {
+      withCredentials: true,
+    });
   }
 }
