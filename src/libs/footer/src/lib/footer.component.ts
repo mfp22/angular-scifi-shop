@@ -1,7 +1,11 @@
+import { NgIf } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { MaterialModule } from '@scifi/material/material.module';
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
+  imports: [MaterialModule, NgIf],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.sass'],
 })
