@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { resetWishlistStatus, updateActiveId, updateWishlist } from '../../../../app/ngrx/wishlist/wishlist.actions';
+import { resetWishlistStatus, updateActiveId, updateWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
 
 @Injectable({
   providedIn: 'root'

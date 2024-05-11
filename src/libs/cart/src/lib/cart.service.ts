@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { selectAccount } from '../../../../app/ngrx/account/account.feature';
+import { selectAccount } from '@scifi/ngrx/account/account.feature';
 
 @Injectable({
   providedIn: 'root'

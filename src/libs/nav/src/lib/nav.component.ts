@@ -3,12 +3,12 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable, combineLatest, Subject, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { logoutRequest, showAuthOverlay } from '../../../../app/ngrx/auth/auth.actions';
-import { selectAccount } from '../../../../app/ngrx/account/account.feature';
-import { selectCartItemsCount } from '../../../../app/ngrx/cart/cart.feature';
-import { selectAnyLoadingState, selectLoggedInUserId, selectLogoutStatus } from '../../../../app/ngrx/auth/auth.feature';
+import { logoutRequest, showAuthOverlay } from '@scifi/ngrx/auth/auth.actions';
+import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
+import { selectAnyLoadingState, selectLoggedInUserId, selectLogoutStatus } from '@scifi/ngrx/auth/auth.feature';
 import { NavigationEnd, Router } from '@angular/router';
-import { selectCategories, selectCategoriesLoadStatus, selectSuppliers, selectSuppliersLoadStatus } from '../../../../app/ngrx/categories/categories.feature';
+import { selectCategories, selectCategoriesLoadStatus, selectSuppliers, selectSuppliersLoadStatus } from '@scifi/ngrx/categories/categories.feature';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatDrawer } from '@angular/material/sidenav';
 

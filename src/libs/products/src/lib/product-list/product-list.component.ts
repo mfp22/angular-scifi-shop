@@ -14,24 +14,24 @@ import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import {
   selectActiveId as selectActiveCartId,
   selectUpdateStatus as selectCartUpdateStatus,
-} from 'src/app/ngrx/cart/cart.feature';
+} from '@scifi/ngrx/cart/cart.feature';
 import {
   selectActiveId as selectActiveWishlistId,
   selectUpdateStatus as selectWishlistUpdateStatus,
-} from 'src/app/ngrx/wishlist/wishlist.feature';
+} from '@scifi/ngrx/wishlist/wishlist.feature';
 import {
   selectCategories,
   selectSuppliers,
-} from 'src/app/ngrx/categories/categories.feature';
+} from '@scifi/ngrx/categories/categories.feature';
 import {
   selectLoadStatus,
   selectPagination,
   selectProducts,
-} from 'src/app/ngrx/products/products.feature';
-import { resetWishlistStatus } from 'src/app/ngrx/wishlist/wishlist.actions';
-import { selectWishlist } from 'src/app/ngrx/wishlist/wishlist.feature';
+} from '@scifi/ngrx/products/products.feature';
+import { resetWishlistStatus } from '@scifi/ngrx/wishlist/wishlist.actions';
+import { selectWishlist } from '@scifi/ngrx/wishlist/wishlist.feature';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
-import { selectLoggedInUserId } from 'src/app/ngrx/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 
 const placeholderProduct = {
   id: 2,

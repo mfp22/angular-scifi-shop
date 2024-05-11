@@ -9,28 +9,32 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { loadProducts } from 'src/app/ngrx/products/products.actions';
-import { selectLoadStatus, selectPagination, selectProducts } from 'src/app/ngrx/products/products.feature';
+import { loadProducts } from '@scifi/ngrx/products/products.actions';
+import {
+  selectLoadStatus,
+  selectPagination,
+  selectProducts,
+} from '@scifi/ngrx/products/products.feature';
 
 @Component({
   selector: 'app-products-pagination',
   templateUrl: './products-pagination.component.html',
-  styleUrls: ['./products-pagination.component.sass']
+  styleUrls: ['./products-pagination.component.sass'],
 })
 export class ProductsPaginationComponent {
   @Output() toggleStyleEvent = new EventEmitter<MatButtonToggleChange>();
   @Input() showDisplayToggle = true;
-  readonly pagination$: Observable<Pagination> = 
+  readonly pagination$: Observable<Pagination> =
     this._store.select(selectPagination);
-  readonly productsLoadStatus$: Observable<Status> = 
+  readonly productsLoadStatus$: Observable<Status> =
     this._store.select(selectLoadStatus);
-  readonly products$: Observable<Product[] | null> = 
+  readonly products$: Observable<Product[] | null> =
     this._store.select(selectProducts);
   private _paginationSubscription = Subscription.EMPTY;
   private _routeSubscription = Subscription.EMPTY;
   public currentPage = 1;
   public currentLimit = 25;
-  public orderBy = "id";
+  public orderBy = 'id';
   public minPrice = 0;
   public maxPrice = 1e5;
   public category: string | undefined;
@@ -43,28 +47,32 @@ export class ProductsPaginationComponent {
     private _route: ActivatedRoute,
     private _router: Router,
     private _titleService: Title
-  ) { }
+  ) {}
 
   ngOnInit() {
     this._paginationSubscription = this.pagination$.subscribe(({ page }) => {
       this.currentPage = page;
     });
 
-    this._routeSubscription = this._route.queryParamMap.subscribe(queryParamMap => {
-      this.queryParams = Object.create(queryParamMap).params;
-      this.activeFilters = this.selectFilters(Object.create(queryParamMap).params);
-      this.category = queryParamMap.get("category") || "";
-      this.supplier = queryParamMap.get("supplier") || "";
-      this._store.dispatch(loadProducts(this.queryParams));
+    this._routeSubscription = this._route.queryParamMap.subscribe(
+      (queryParamMap) => {
+        this.queryParams = Object.create(queryParamMap).params;
+        this.activeFilters = this.selectFilters(
+          Object.create(queryParamMap).params
+        );
+        this.category = queryParamMap.get('category') || '';
+        this.supplier = queryParamMap.get('supplier') || '';
+        this._store.dispatch(loadProducts(this.queryParams));
 
-      if (queryParamMap.get("category")) {
-        this._titleService.setTitle(queryParamMap.get("category")!);
-      } else if (queryParamMap.get("supplier")) {
-        this._titleService.setTitle(queryParamMap.get("supplier")!);
-      } else {
-        this._titleService.setTitle("Products");
+        if (queryParamMap.get('category')) {
+          this._titleService.setTitle(queryParamMap.get('category')!);
+        } else if (queryParamMap.get('supplier')) {
+          this._titleService.setTitle(queryParamMap.get('supplier')!);
+        } else {
+          this._titleService.setTitle('Products');
+        }
       }
-    });
+    );
   }
 
   get showFilters() {
@@ -72,10 +80,12 @@ export class ProductsPaginationComponent {
   }
 
   get accentColor(): ThemePalette {
-    return document.body.classList.contains("light-mode") ? "primary" : "accent";
+    return document.body.classList.contains('light-mode')
+      ? 'primary'
+      : 'accent';
   }
 
-  selectFilters({ page, limit, ...props}: ProductsUrlParams) {
+  selectFilters({ page, limit, ...props }: ProductsUrlParams) {
     const params: ProductsUrlParams = { ...props };
     if (page && Number(page) > 1) params.page = page;
     if (limit && Number(limit) !== 25) params.limit = limit;
@@ -90,23 +100,25 @@ export class ProductsPaginationComponent {
     this._router.navigate([]);
   }
 
-  updateUrlQueryParams(queryParams: { [key: string]: string | number | boolean | null }) {
+  updateUrlQueryParams(queryParams: {
+    [key: string]: string | number | boolean | null;
+  }) {
     this._router.navigate([], {
       queryParams,
-      queryParamsHandling: "merge"
+      queryParamsHandling: 'merge',
     });
   }
 
   formatParamKey(key: string): string {
     switch (key) {
-      case "orderBy":
-        return "Order by"
-      case "hideOutOfStock":
-        return "Hide out of stock";
-      case "minPrice":
-        return "Min price:";
-      case "maxPrice":
-        return "Max price:";
+      case 'orderBy':
+        return 'Order by';
+      case 'hideOutOfStock':
+        return 'Hide out of stock';
+      case 'minPrice':
+        return 'Min price:';
+      case 'maxPrice':
+        return 'Max price:';
       default:
         return `${key[0].toUpperCase()}${key.slice(1)}:`;
     }
@@ -114,16 +126,16 @@ export class ProductsPaginationComponent {
 
   formatParamValue(value: string | number | boolean | undefined) {
     switch (value) {
-      case "categoryName":
-        return "category";
-      case "supplierName":
-        return "supplier";
-      case "avgRating":
-        return "avg. rating";
-      case "ASC":
-        return "ascending";
-      case "DESC":
-        return "descending";
+      case 'categoryName':
+        return 'category';
+      case 'supplierName':
+        return 'supplier';
+      case 'avgRating':
+        return 'avg. rating';
+      case 'ASC':
+        return 'ascending';
+      case 'DESC':
+        return 'descending';
       default:
         return value;
     }
@@ -132,9 +144,9 @@ export class ProductsPaginationComponent {
   handlePageEvent(e: PageEvent) {
     this.currentPage = e.pageIndex + 1;
     this.currentLimit = e.pageSize;
-    this.updateUrlQueryParams({ 
-      page: this.currentPage, 
-      limit: this.currentLimit 
+    this.updateUrlQueryParams({
+      page: this.currentPage,
+      limit: this.currentLimit,
     });
   }
 
@@ -143,9 +155,9 @@ export class ProductsPaginationComponent {
   }
 
   setOrderBy(e: MatSelectChange) {
-    const newParams: { orderBy: string, order?: string } = { orderBy: e.value };
-    if (e.value === "bestsellers") {
-     newParams.order = "DESC";
+    const newParams: { orderBy: string; order?: string } = { orderBy: e.value };
+    if (e.value === 'bestsellers') {
+      newParams.order = 'DESC';
     }
     this.updateUrlQueryParams(newParams);
   }
@@ -159,7 +171,10 @@ export class ProductsPaginationComponent {
   }
 
   setPriceRange() {
-    this.updateUrlQueryParams({ minPrice: this.minPrice, maxPrice: this.maxPrice });
+    this.updateUrlQueryParams({
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+    });
   }
 
   ngOnDestroy() {

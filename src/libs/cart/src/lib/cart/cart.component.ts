@@ -1,29 +1,50 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
-import { selectCart, selectActiveId, selectLoadStatus, selectUpdateStatus, selectCartTotal } from 'src/app/ngrx/cart/cart.feature';
-import { clearCart, modifyQuantity, removeCartItem, resetStatus, updateActiveId } from 'src/app/ngrx/cart/cart.actions';
+import {
+  selectCart,
+  selectActiveId,
+  selectLoadStatus,
+  selectUpdateStatus,
+  selectCartTotal,
+} from '@scifi/ngrx/cart/cart.feature';
+import {
+  clearCart,
+  modifyQuantity,
+  removeCartItem,
+  resetStatus,
+  updateActiveId,
+} from '@scifi/ngrx/cart/cart.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { selectLoggedInUserId } from 'src/app/ngrx/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.sass', '../cart-sidebar/cart-sidebar.component.sass']
+  styleUrls: [
+    './cart.component.sass',
+    '../cart-sidebar/cart-sidebar.component.sass',
+  ],
 })
 export class CartComponent {
-  @Input() component: "cart-page" | "cart-sidebar" | undefined;
+  @Input() component: 'cart-page' | 'cart-sidebar' | undefined;
   @Output() closeSidebarEvent = new EventEmitter();
   cart$: Observable<Cart | null> = this._store.select(selectCart);
   cartTotal$: Observable<number> = this._store.select(selectCartTotal);
-  loggedInUserId$: Observable<string | number | null> = 
+  loggedInUserId$: Observable<string | number | null> =
     this._store.select(selectLoggedInUserId);
   loadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
   updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
   activeId$: Observable<number> = this._store.select(selectActiveId);
   dataStream$ = combineLatest([
-    this.cart$, this.cartTotal$, this.loadStatus$, this.updateStatus$, this.activeId$, this.loggedInUserId$
-  ]).pipe(map(([cart, cartTotal, loadStatus, updateStatus, activeId]) => {
+    this.cart$,
+    this.cartTotal$,
+    this.loadStatus$,
+    this.updateStatus$,
+    this.activeId$,
+    this.loggedInUserId$,
+  ]).pipe(
+    map(([cart, cartTotal, loadStatus, updateStatus, activeId]) => {
       return { cart, cartTotal, loadStatus, updateStatus, activeId };
     })
   );
@@ -37,32 +58,32 @@ export class CartComponent {
   isSidebar: boolean | undefined;
 
   constructor(
-    private _store: Store<AppState>, 
+    private _store: Store<AppState>,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.isSidebar = this.component === "cart-sidebar";
-    this._loggedInUserIdSubscription = this.loggedInUserId$.subscribe(id => {
+    this.isSidebar = this.component === 'cart-sidebar';
+    this._loggedInUserIdSubscription = this.loggedInUserId$.subscribe((id) => {
       if (id) {
         this._loggedInUserId = Number(id);
       }
     });
 
-    this._cartSubscription = this.cart$.subscribe(cart => {
+    this._cartSubscription = this.cart$.subscribe((cart) => {
       if (cart) {
-        cart.cartItems.forEach(item => {
+        cart.cartItems.forEach((item) => {
           this.quantities[item.product.id] = item.quantity;
         });
       }
     });
 
-    this._statusSubscription = this.updateStatus$.subscribe(updateStatus => {
-      if (updateStatus === "success") {
+    this._statusSubscription = this.updateStatus$.subscribe((updateStatus) => {
+      if (updateStatus === 'success') {
         this._snackBar.open('Cart updated.', 'Dismiss', {
-          horizontalPosition: "start",
-          verticalPosition: "top",
-          duration: 7000
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 7000,
         });
         this._store.dispatch(resetStatus());
       }
@@ -70,7 +91,7 @@ export class CartComponent {
   }
 
   get lightModeEnabled() {
-    return document.body.classList.contains("light-mode");
+    return document.body.classList.contains('light-mode');
   }
 
   emitSidebarCloseEvent() {
@@ -80,25 +101,31 @@ export class CartComponent {
   modifyQuantity(productId: number, quantity: number) {
     this._store.dispatch(updateActiveId({ activeId: productId }));
     if (quantity === 0) {
-      this._store.dispatch(removeCartItem({ 
-        productId, 
-        customerId: this._loggedInUserId!
-      }));
+      this._store.dispatch(
+        removeCartItem({
+          productId,
+          customerId: this._loggedInUserId!,
+        })
+      );
     } else {
-      this._store.dispatch(modifyQuantity({ 
-        productId, 
-        quantity,
-        customerId: this._loggedInUserId!
-      }));
+      this._store.dispatch(
+        modifyQuantity({
+          productId,
+          quantity,
+          customerId: this._loggedInUserId!,
+        })
+      );
     }
   }
 
   deleteItem(productId: number) {
     this._store.dispatch(updateActiveId({ activeId: productId }));
-    this._store.dispatch(removeCartItem({ 
-      productId, 
-      customerId: this._loggedInUserId!
-    }));
+    this._store.dispatch(
+      removeCartItem({
+        productId,
+        customerId: this._loggedInUserId!,
+      })
+    );
   }
 
   emptyCart() {

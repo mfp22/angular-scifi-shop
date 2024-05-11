@@ -8,8 +8,8 @@ import {
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AccountService } from '@scifi/account/account.service';
-import { loginRequest, signupRequest } from 'src/app/ngrx/auth/auth.actions';
-import { selectAuthIsLoading } from 'src/app/ngrx/auth/auth.feature';
+import { loginRequest, signupRequest } from '@scifi/ngrx/auth/auth.actions';
+import { selectAuthIsLoading } from '@scifi/ngrx/auth/auth.feature';
 
 type AuthForm = FormGroup<{
   username: FormControl<string | null>;

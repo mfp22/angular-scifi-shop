@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { authenticateWithSSO } from '../../../../app/ngrx/auth/auth.actions';
+import { authenticateWithSSO } from '@scifi/ngrx/auth/auth.actions';
 import { SocialUser } from '@abacritt/angularx-social-login';
-import { selectLoggedInUserId } from '../../../../app/ngrx/auth/auth.feature';
-import { selectAccount } from '../../../../app/ngrx/account/account.feature';
+import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import { selectAccount } from '@scifi/ngrx/account/account.feature';
 
 @Injectable({
   providedIn: 'root'

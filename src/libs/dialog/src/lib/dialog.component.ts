@@ -2,8 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { logoutRequest } from '../../../../app/ngrx/auth/auth.actions';
-import { hideDialog } from '../../../../app/ngrx/notification/notification.actions';
+import { logoutRequest } from '@scifi/ngrx/auth/auth.actions';
+import { hideDialog } from '@scifi/ngrx/notification/notification.actions';
 
 @Component({
   selector: 'app-dialog',

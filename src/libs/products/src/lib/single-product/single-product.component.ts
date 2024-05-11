@@ -11,34 +11,34 @@ import {
   shareReplay,
   Subscription,
 } from 'rxjs';
-import { selectLoggedInUserId } from 'src/app/ngrx/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   selectActiveId,
   selectUpdateStatus,
-} from 'src/app/ngrx/cart/cart.feature';
+} from '@scifi/ngrx/cart/cart.feature';
 import {
   selectCreateStatus,
   selectUpdateStatus as selectReviewUpdateStatus,
   selectDeleteStatus,
   selectReviewStatus,
-} from 'src/app/ngrx/reviews/reviews.feature';
+} from '@scifi/ngrx/reviews/reviews.feature';
 import {
   loadSingleProduct,
   searchOrderHistory,
-} from 'src/app/ngrx/products/products.actions';
+} from '@scifi/ngrx/products/products.actions';
 import {
   selectSingleProduct,
   selectLoadStatus,
   selectOrderSearchResult,
   selectSearchStatus,
-} from 'src/app/ngrx/products/products.feature';
+} from '@scifi/ngrx/products/products.feature';
 import {
   deleteReview,
   resetReviewsStatus,
   updateActiveId,
-} from 'src/app/ngrx/reviews/reviews.actions';
+} from '@scifi/ngrx/reviews/reviews.actions';
 import { ReviewDialogComponent } from '@scifi/reviews/review-dialog/review-dialog.component';
-import { selectData } from '../../../../../app/ngrx/notification/notification.feature';
+import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import { Title } from '@angular/platform-browser';
 
 @Component({

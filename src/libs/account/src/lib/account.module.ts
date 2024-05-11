@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountComponent } from './account/account.component';
 import { EffectsModule } from '@ngrx/effects';
-import { AccountEffects } from '../../../../app/ngrx/account/account.effects';
+import { AccountEffects } from '@scifi/ngrx/account/account.effects';
 import { AddressesComponent } from './addresses/addresses.component';
 import { MaterialModule } from '@scifi/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';

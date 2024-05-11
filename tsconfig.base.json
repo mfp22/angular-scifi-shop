@@ -21,6 +21,7 @@
       "@scifi/home/*": ["src/libs/home/src/lib/*"],
       "@scifi/material/*": ["src/libs/material/src/lib/*"],
       "@scifi/nav/*": ["src/libs/nav/src/lib/*"],
+      "@scifi/ngrx/*": ["src/libs/ngrx/src/lib/*"],
       "@scifi/orders/*": ["src/libs/orders/src/lib/*"],
       "@scifi/page-not-found/*": ["src/libs/page-not-found/src/lib/*"],
       "@scifi/products/*": ["src/libs/products/src/lib/*"],

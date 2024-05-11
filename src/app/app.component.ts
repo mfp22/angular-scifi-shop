@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
-import { loadAccount } from './ngrx/account/account.actions';
+import { loadAccount } from '@scifi/ngrx/account/account.actions';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
-import { loadCart } from './ngrx/cart/cart.actions';
-import { selectData, selectShowDialog } from './ngrx/notification/notification.feature';
-import { loadCategories, loadSuppliers } from './ngrx/categories/categories.actions';
-import { loadWishlist } from './ngrx/wishlist/wishlist.actions';
-import { selectLoggedInUserId, selectShowOverlay } from './ngrx/auth/auth.feature';
+import { loadCart } from '@scifi/ngrx/cart/cart.actions';
+import { selectData, selectShowDialog } from '@scifi/ngrx/notification/notification.feature';
+import { loadCategories, loadSuppliers } from '@scifi/ngrx/categories/categories.actions';
+import { loadWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
+import { selectLoggedInUserId, selectShowOverlay } from '@scifi/ngrx/auth/auth.feature';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { AuthService } from '@scifi/auth/auth.service';
-import { selectAccount } from './ngrx/account/account.feature';
+import { selectAccount } from '@scifi/ngrx/account/account.feature';
 
 @Component({
   selector: 'app-root',

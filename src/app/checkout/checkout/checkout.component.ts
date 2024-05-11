@@ -6,7 +6,7 @@ import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import {
   selectBillingAddress,
   selectShippingAddress,
-} from '@scifi/ngrx/account/account.feature';
+} from '@scifi/ngrx-account/account.feature';
 import {
   StepperSelectionEvent,
   STEPPER_GLOBAL_OPTIONS,

@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { NgLetModule } from 'ng-let';
 
-import { reducers, metaReducers } from './ngrx';
+import { reducers, metaReducers } from '@scifi/ngrx/index';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from '@scifi/material/material.module';
 import { AuthModule } from '@scifi/auth/auth.module';
@@ -18,16 +18,16 @@ import { AccountModule } from '@scifi/account/account.module';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { CartModule } from '@scifi/cart/cart.module';
 import { CheckoutModule } from '@scifi/checkout/checkout.module';
-import { accountFeature } from './ngrx/account/account.feature';
+import { accountFeature } from '@scifi/ngrx/account/account.feature';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { OrdersModule } from '@scifi/orders/orders.module';
-import { notificationFeature } from './ngrx/notification/notification.feature';
-import { categoriesFeature } from './ngrx/categories/categories.feature';
-import { CategoriesEffects } from './ngrx/categories/categories.effects';
+import { notificationFeature } from '@scifi/ngrx/notification/notification.feature';
+import { categoriesFeature } from '@scifi/ngrx/categories/categories.feature';
+import { CategoriesEffects } from '@scifi/ngrx/categories/categories.effects';
 import { WishlistModule } from '@scifi/wishlist/wishlist.module';
-import { wishlistFeature } from './ngrx/wishlist/wishlist.feature';
-import { WishlistEffects } from './ngrx/wishlist/wishlist.effects';
+import { wishlistFeature } from '@scifi/ngrx/wishlist/wishlist.feature';
+import { WishlistEffects } from '@scifi/ngrx/wishlist/wishlist.effects';
 import { SearchComponent } from '@scifi/search/search.component';
 import { FooterComponent } from '@scifi/footer/footer.component';
 
@@ -37,7 +37,7 @@ import { FooterComponent } from '@scifi/footer/footer.component';
     HomeComponent,
     NavComponent,
     FooterComponent,
-    DialogComponent
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,9 +63,9 @@ import { FooterComponent } from '@scifi/footer/footer.component';
     StoreModule.forFeature(notificationFeature),
     EffectsModule.forFeature(CategoriesEffects),
     EffectsModule.forFeature(WishlistEffects),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
   ],
   providers: [],
-  bootstrap: [AppComponent, FooterComponent]
+  bootstrap: [AppComponent, FooterComponent],
 })
-export class AppModule { }
+export class AppModule {}
