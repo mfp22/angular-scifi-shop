@@ -1,0 +1,104 @@
+{
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "name": "angular-ecommerce",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "sass"
+    }
+  },
+  "sourceRoot": "src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@ngx-env/builder:browser",
+      "options": {
+        "outputPath": "dist/angular-ecommerce",
+        "index": "src/index.html",
+        "main": "src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "tsconfig.app.json",
+        "inlineStyleLanguage": "sass",
+        "assets": [
+          "src/favicon.ico",
+          "src/assets"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "src"
+          ]
+        },
+        "styles": [
+          "src/custom-theme.scss",
+          "src/styles.sass"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "3mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@ngx-env/builder:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "angular-ecommerce:build:production"
+        },
+        "development": {
+          "browserTarget": "angular-ecommerce:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@ngx-env/builder:extract-i18n",
+      "options": {
+        "browserTarget": "angular-ecommerce:build"
+      }
+    },
+    "test": {
+      "executor": "@ngx-env/builder:karma",
+      "options": {
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "tsConfig": "tsconfig.spec.json",
+        "inlineStyleLanguage": "sass",
+        "assets": [
+          "src/favicon.ico",
+          "src/assets"
+        ],
+        "styles": [
+          "src/styles.sass"
+        ],
+        "scripts": []
+      }
+    }
+  }
+}

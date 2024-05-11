@@ -47,3 +47,5 @@ angular.md
 *.spec.ts
 scrap
 .env
+
+.nx/cache
