@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import { selectAccount } from '@scifi/account/account.feature';
+import { Customer } from '@scifi/account/customer.type';
+import { DialogContent } from '@scifi/dialog/dialog-content.type';
+import { Status } from '@scifi/http';
 import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import { resetReviewsStatus } from '@scifi/ngrx/reviews/reviews.actions';
 import {
@@ -13,8 +16,8 @@ import {
   selectUpdateStatus,
 } from '@scifi/ngrx/reviews/reviews.feature';
 import { Pagination } from '@scifi/pagination';
-import { AppState, Customer, DialogContent, Review, Status } from '@scifi/types';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
+import { Review } from '@scifi/types';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-reviews-page',
@@ -45,11 +48,7 @@ export class ReviewsPageComponent {
     map(([updateStatus, deleteStatus]) => ({ updateStatus, deleteStatus })),
   );
 
-  constructor(
-    private _store: Store<AppState>,
-    private _router: Router,
-    private _snackBar: MatSnackBar,
-  ) {}
+  constructor(private _store: Store, private _router: Router, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     window.scrollTo({ top: 0 });

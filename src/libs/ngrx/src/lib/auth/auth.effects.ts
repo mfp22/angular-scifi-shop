@@ -2,11 +2,12 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { clearCurrentUser } from '@scifi/account/account.actions';
+import { Customer } from '@scifi/account/customer.type';
 import { AuthService } from '@scifi/auth/auth.service';
-import { ApiError, Customer } from '@scifi/types';
+import { ApiError } from '@scifi/http';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { clearCurrentUser } from '../account/account.actions';
 import { httpError, notify } from '../notification/notification.actions';
 import {
   authenticateWithSSO,

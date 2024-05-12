@@ -3,16 +3,17 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
+import { loadAccount } from '@scifi/account/account.actions';
+import { selectAccount } from '@scifi/account/account.feature';
+import { Customer } from '@scifi/account/customer.type';
 import { AuthService } from '@scifi/auth/auth.service';
+import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
-import { loadAccount } from '@scifi/ngrx/account/account.actions';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
 import { selectLoggedInUserId, selectShowOverlay } from '@scifi/ngrx/auth/auth.feature';
 import { loadCart } from '@scifi/ngrx/cart/cart.actions';
 import { loadCategories, loadSuppliers } from '@scifi/ngrx/categories/categories.actions';
 import { selectData, selectShowDialog } from '@scifi/ngrx/notification/notification.feature';
 import { loadWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
-import { AppState, Customer, DialogContent } from '@scifi/types';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -42,7 +43,7 @@ export class AppComponent {
   private _socialAuthSubscription = Subscription.EMPTY;
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _authService: AuthService,
     private _socialAuthService: SocialAuthService,
     public dialog: MatDialog,

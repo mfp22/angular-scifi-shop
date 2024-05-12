@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { AppState, Wishlist } from '@scifi/types';
+import { Wishlist } from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
 import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs';
 import { dispatchErrorAction } from '..';
@@ -53,6 +53,6 @@ export class WishlistEffects {
   constructor(
     private _actions$: Actions,
     private _wishlistService: WishlistService,
-    private _store: Store<AppState>,
+    private _store: Store,
   ) {}
 }

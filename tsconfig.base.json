@@ -21,6 +21,7 @@
       "@scifi/dialog/*": ["src/libs/dialog/src/lib/*"],
       "@scifi/footer/*": ["src/libs/footer/src/lib/*"],
       "@scifi/home/*": ["src/libs/home/src/lib/*"],
+      "@scifi/http": ["src/libs/http/src/index.ts"],
       "@scifi/material/*": ["src/libs/material/src/lib/*"],
       "@scifi/nav/*": ["src/libs/nav/src/lib/*"],
       "@scifi/ngrx/*": ["src/libs/ngrx/src/lib/*"],

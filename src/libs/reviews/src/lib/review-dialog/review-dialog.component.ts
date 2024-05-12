@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { Status } from '@scifi/http';
 import {
   createReview,
   deleteReview,
@@ -10,14 +11,7 @@ import {
   updateReview,
 } from '@scifi/ngrx/reviews/reviews.actions';
 import { selectReviewStatus } from '@scifi/ngrx/reviews/reviews.feature';
-import {
-  AppState,
-  NewReviewRequest,
-  Rating,
-  Review,
-  Status,
-  UpdateReviewRequest,
-} from '@scifi/types';
+import { NewReviewRequest, Rating, Review, UpdateReviewRequest } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -44,7 +38,7 @@ export class ReviewDialogComponent {
       review: Review;
       operation: 'create' | 'update';
     },
-    private _store: Store<AppState>,
+    private _store: Store,
     private _formBuilder: FormBuilder,
   ) {}
 

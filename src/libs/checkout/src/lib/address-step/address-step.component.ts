@@ -1,14 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { AccountActiveItem } from '@scifi/account/account-active-item.type';
 import {
   selectActiveItem,
   selectDeleteStatus,
   selectUpdateStatus,
-} from '@scifi/ngrx/account/account.feature';
-import { AccountActiveItem, AppState, Status } from '@scifi/types';
+} from '@scifi/account/account.feature';
 import { Address, AddressFormGroup } from '@scifi/address';
+import { Status } from '@scifi/http';
+import { Observable } from 'rxjs';
 
 type RequiredAddressField = 'addressLine1' | 'city' | 'postcode';
 
@@ -35,7 +36,7 @@ export class AddressStepComponent {
   readonly deleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
   readonly activeItem$: Observable<AccountActiveItem> = this._store.select(selectActiveItem);
 
-  constructor(private _store: Store<AppState>) {}
+  constructor(private _store: Store) {}
 
   ngOnInit() {
     this.isCheckout = this.view === 'checkout';

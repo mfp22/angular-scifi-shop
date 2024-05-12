@@ -1,26 +1,28 @@
-import { Component, inject, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Observable, combineLatest, Subject, Subscription } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Component, inject, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { selectAccount } from '@scifi/account/account.feature';
+import { Customer } from '@scifi/account/customer.type';
+import { Status } from '@scifi/http';
 import { logoutRequest, showAuthOverlay } from '@scifi/ngrx/auth/auth.actions';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
-import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import {
   selectAnyLoadingState,
   selectLoggedInUserId,
   selectLogoutStatus,
 } from '@scifi/ngrx/auth/auth.feature';
-import { NavigationEnd, Router } from '@angular/router';
+import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import {
   selectCategories,
   selectCategoriesLoadStatus,
   selectSuppliers,
   selectSuppliersLoadStatus,
 } from '@scifi/ngrx/categories/categories.feature';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { MatDrawer } from '@angular/material/sidenav';
-import { AppState, Category, Customer, Status } from '@scifi/types';
+import { Category } from '@scifi/types';
+import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -97,7 +99,7 @@ export class NavComponent {
     })),
   );
 
-  constructor(private _store: Store<AppState>, private _router: Router) {}
+  constructor(private _store: Store, private _router: Router) {}
 
   ngOnInit() {
     this._logoutSubscription = this.logoutStatus$.subscribe((status) => {

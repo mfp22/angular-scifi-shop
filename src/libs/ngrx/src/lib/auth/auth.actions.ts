@@ -1,6 +1,7 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { createAction, props } from '@ngrx/store';
-import { AuthCredentials, Customer, OAuthCredentials } from '@scifi/types';
+import { Customer } from '@scifi/account/customer.type';
+import { AuthCredentials, OAuthCredentials } from '@scifi/types';
 
 export const showAuthOverlay = createAction('[Login Component] Show Overlay');
 export const hideAuthOverlay = createAction('[Login Component] Hide Overlay');

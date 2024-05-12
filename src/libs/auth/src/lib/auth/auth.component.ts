@@ -15,7 +15,6 @@ import {
   SocialUser,
 } from '@abacritt/angularx-social-login';
 import { AuthService } from '../auth.service';
-import { AppState } from '@scifi/types';
 
 @Component({
   selector: 'app-auth',
@@ -31,7 +30,7 @@ export class AuthComponent {
   private _subscription = Subscription.EMPTY;
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _authService: AuthService,
     private _socialAuthService: SocialAuthService,
   ) {}

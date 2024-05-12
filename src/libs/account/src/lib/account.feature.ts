@@ -1,5 +1,4 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
-import { httpError } from '../notification/notification.actions';
 import {
   clearCurrentUser,
   createOrUpdateAddress,
@@ -15,8 +14,11 @@ import {
   updateActiveItem,
   resetStatus,
 } from './account.actions';
-import { AccountState, Customer, CustomerNewAddress } from '@scifi/types';
 import { Address } from '@scifi/address';
+import { Customer } from './customer.type';
+import { CustomerNewAddress } from './customer-new-address.type';
+import { httpError } from '@scifi/ngrx/notification/notification.actions';
+import { AccountState } from './account.state';
 
 const initialState: AccountState = {
   account: null,
@@ -24,6 +26,10 @@ const initialState: AccountState = {
   loadStatus: 'pending',
   updateStatus: 'pending',
   deleteStatus: 'pending',
+  deleteMsg: {
+    msg: '',
+    deletedUser: null,
+  },
 };
 
 const removeAddressFromAccount = (account: Customer, deletedAddressId: number) => {
@@ -99,10 +105,11 @@ export const accountReducer = createReducer(
       };
     }
   }),
-  on(deleteUserSuccess, (state) => ({
+  on(deleteUserSuccess, (state, payload) => ({
     ...state,
     account: null,
     deleteStatus: 'success' as const,
+    deleteMsg: payload,
   })),
   on(updateActiveItem, (state, payload) => ({
     ...state,
@@ -143,6 +150,7 @@ export const {
   selectLoadStatus,
   selectUpdateStatus,
   selectDeleteStatus,
+  selectDeleteMsg,
   selectBillingAddress,
   selectShippingAddress,
   selectActiveItem,

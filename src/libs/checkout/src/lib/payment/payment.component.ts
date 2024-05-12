@@ -1,36 +1,37 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { formatCurrency } from '@angular/common';
 import {
   Component,
-  Inject,
-  OnInit,
-  ViewChild,
-  LOCALE_ID,
-  Output,
   EventEmitter,
+  Inject,
   Input,
+  LOCALE_ID,
+  OnInit,
+  Output,
   SimpleChange,
+  ViewChild,
 } from '@angular/core';
-import { combineLatest, map, Observable, shareReplay, Subscription } from 'rxjs';
-import { StripeService, StripePaymentElementComponent } from 'ngx-stripe';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import { selectAccount } from '@scifi/account/account.feature';
+import { Customer } from '@scifi/account/customer.type';
+import { Address } from '@scifi/address';
+import { selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
+import { notify } from '@scifi/ngrx/notification/notification.actions';
+import { selectExpressCheckoutItem } from '@scifi/ngrx/orders/orders.feature';
+import { ExpressCheckoutItem } from '@scifi/product';
+import { PaymentEvent } from '@scifi/types';
 import {
-  StripeElementsOptions,
   Appearance,
   PaymentIntentResult,
-  StripePaymentElementOptions,
+  StripeElementsOptions,
   StripePaymentElementChangeEvent,
+  StripePaymentElementOptions,
 } from '@stripe/stripe-js';
-import { Store } from '@ngrx/store';
-import { notify } from '@scifi/ngrx/notification/notification.actions';
-import { selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
-import { FormBuilder, Validators } from '@angular/forms';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import { StripePaymentElementComponent, StripeService } from 'ngx-stripe';
+import { Observable, Subscription, combineLatest, map, shareReplay } from 'rxjs';
 import { CheckoutService } from '../checkout.service';
-import { selectExpressCheckoutItem } from '@scifi/ngrx/orders/orders.feature';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { AppState, Customer, PaymentEvent } from '@scifi/types';
-import { ExpressCheckoutItem } from '@scifi/product';
-import { Address } from '@scifi/address';
 
 @Component({
   selector: 'app-payment',
@@ -138,7 +139,7 @@ export class PaymentComponent implements OnInit {
     private _checkoutService: CheckoutService,
     private _formBuilder: FormBuilder,
     private _stripeService: StripeService,
-    private _store: Store<AppState>,
+    private _store: Store,
     private _snackBar: MatSnackBar,
     private _breakpointObserver: BreakpointObserver,
     @Inject(LOCALE_ID) private locale: string,

@@ -17,7 +17,8 @@ import {
 } from '@scifi/ngrx/cart/cart.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
-import { AppState, Cart, Status } from '@scifi/types';
+import { Cart } from '@scifi/types';
+import { Status } from '@scifi/http';
 
 @Component({
   selector: 'app-cart',
@@ -54,7 +55,7 @@ export class CartComponent {
   quantities: { [productId: number]: number } = {};
   isSidebar: boolean | undefined;
 
-  constructor(private _store: Store<AppState>, private _snackBar: MatSnackBar) {}
+  constructor(private _store: Store, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.isSidebar = this.component === 'cart-sidebar';

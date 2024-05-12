@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import { selectAccount } from '@scifi/account/account.feature';
+import { Customer } from '@scifi/account/customer.type';
+import { Status } from '@scifi/http';
 import { loadFavorites } from '@scifi/ngrx/reviews/reviews.actions';
 import { selectFavorites, selectLoadStatus } from '@scifi/ngrx/reviews/reviews.feature';
-import { AppState, Customer, Review, Status } from '@scifi/types';
+import { Review } from '@scifi/types';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-favorites',
@@ -18,7 +20,7 @@ export class FavoritesComponent {
   private _subscription = Subscription.EMPTY;
   public showDescription: { [productId: number]: boolean } = {};
 
-  constructor(private _store: Store<AppState>) {}
+  constructor(private _store: Store) {}
 
   ngOnInit() {
     this._subscription = this.accountData$.subscribe((customer) => {

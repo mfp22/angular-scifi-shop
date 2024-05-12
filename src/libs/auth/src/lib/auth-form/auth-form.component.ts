@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { AccountService } from '@scifi/account/account.service';
 import { loginRequest, signupRequest } from '@scifi/ngrx/auth/auth.actions';
 import { selectAuthIsLoading } from '@scifi/ngrx/auth/auth.feature';
-import { AppState, AuthCredentials } from '@scifi/types';
+import { AuthCredentials } from '@scifi/types';
+import { Observable } from 'rxjs';
 
 type AuthForm = FormGroup<{
   username: FormControl<string | null>;
@@ -52,7 +52,7 @@ export class AuthFormComponent {
   readonly authIsLoading$: Observable<boolean> = this._store.select(selectAuthIsLoading);
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _accountService: AccountService,
     private _formBuilder: FormBuilder,
   ) {}

@@ -1,18 +1,18 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { Status } from '@scifi/http';
 import { Observable, Subscription } from 'rxjs';
-import { deleteUser, resetStatus } from '@scifi/ngrx/account/account.actions';
-import { selectDeleteStatus } from '@scifi/ngrx/account/account.feature';
-import { AppState, Status } from '@scifi/types';
+import { deleteUser, resetStatus } from '../account.actions';
+import { selectDeleteStatus } from '../account.feature';
 
 @Component({
   selector: 'app-delete-dialog',
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.sass'],
 })
-export class DeleteDialogComponent {
+export class DeleteDialogComponent implements OnInit, OnDestroy {
   readonly $deleteStatus: Observable<Status> = this._store.select(selectDeleteStatus);
   public deleteStatus: Status = 'pending';
   private _socialLoginUser: SocialUser | undefined;
@@ -21,7 +21,7 @@ export class DeleteDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
-    private _store: Store<AppState>,
+    private _store: Store,
     private _authService: SocialAuthService,
     @Inject(MAT_DIALOG_DATA) public data: { customerId: number },
   ) {}

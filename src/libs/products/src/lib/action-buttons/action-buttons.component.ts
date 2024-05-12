@@ -11,7 +11,7 @@ import {
 } from '@scifi/ngrx/cart/cart.actions';
 import { selectCartItems } from '@scifi/ngrx/cart/cart.feature';
 import { ProductDialogComponent } from '../../../../product/src/lib/product-dialog/product-dialog.component';
-import { AppState, CartItem } from '@scifi/types';
+import { CartItem } from '@scifi/types';
 import { Product } from '@scifi/product';
 
 @Component({
@@ -27,7 +27,7 @@ export class ActionButtonsComponent {
   private _loggedInUserId: string | number | null | undefined;
   private _subscription = Subscription.EMPTY;
 
-  constructor(private _store: Store<AppState>, public dialog: MatDialog) {}
+  constructor(private _store: Store, public dialog: MatDialog) {}
 
   ngOnInit() {
     this._subscription = this._loggedInUserId$.subscribe((id) => {

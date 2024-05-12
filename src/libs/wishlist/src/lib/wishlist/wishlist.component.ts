@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
+import { Status } from '@scifi/http';
 import { resetWishlistStatus } from '@scifi/ngrx/wishlist/wishlist.actions';
 import {
   selectActiveId,
@@ -9,8 +10,8 @@ import {
   selectUpdateStatus,
   selectWishlist,
 } from '@scifi/ngrx/wishlist/wishlist.feature';
-import { AppState, Status, Wishlist } from '@scifi/types';
-import { map, Observable, shareReplay, Subscription } from 'rxjs';
+import { Wishlist } from '@scifi/types';
+import { Observable, Subscription, map, shareReplay } from 'rxjs';
 import { WishlistService } from '../wishlist.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class WishlistComponent {
   );
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _wishlistService: WishlistService,
     private _snackBar: MatSnackBar,
     private _breakpointObserver: BreakpointObserver,

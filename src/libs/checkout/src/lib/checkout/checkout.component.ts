@@ -1,20 +1,20 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { STEPPER_GLOBAL_OPTIONS, StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component } from '@angular/core';
 import { StepperOrientation } from '@angular/material/stepper';
-import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
-import { selectBillingAddress, selectShippingAddress } from '@scifi/ngrx/account/account.feature';
-import { StepperSelectionEvent, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { clearExpressCheckout, createOrder } from '@scifi/ngrx/orders/orders.actions';
-import { loadCart } from '@scifi/ngrx/cart/cart.actions';
-import { selectExpressCheckoutItem, selectNewOrder } from '@scifi/ngrx/orders/orders.feature';
-import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectBillingAddress, selectShippingAddress } from '@scifi/account/account.feature';
 import { AccountService } from '@scifi/account/account.service';
-import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
-import { AppState, NewOrderResponse, PaymentEvent } from '@scifi/types';
-import { ExpressCheckoutItem } from '@scifi/product';
 import { Address } from '@scifi/address';
+import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import { loadCart } from '@scifi/ngrx/cart/cart.actions';
+import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
+import { clearExpressCheckout, createOrder } from '@scifi/ngrx/orders/orders.actions';
+import { selectExpressCheckoutItem, selectNewOrder } from '@scifi/ngrx/orders/orders.feature';
+import { ExpressCheckoutItem } from '@scifi/product';
+import { NewOrderResponse, PaymentEvent } from '@scifi/types';
+import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import { AddressEmitData } from '../address-step/address-step.component';
 
 @Component({
@@ -71,7 +71,7 @@ export class CheckoutComponent {
   constructor(
     private _breakpointObserver: BreakpointObserver,
     private _router: Router,
-    private _store: Store<AppState>,
+    private _store: Store,
     private _accountService: AccountService,
   ) {
     this.stepperOrientation$ = this._breakpointObserver

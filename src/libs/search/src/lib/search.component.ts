@@ -5,7 +5,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MaterialModule } from '@scifi/material/material.module';
-import { AppState } from '@scifi/types';
 import { Observable, Subscription, map, shareReplay } from 'rxjs';
 
 @Component({
@@ -39,7 +38,7 @@ export class SearchComponent {
   private _subscription = Subscription.EMPTY;
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _router: Router,
     private _breakpointObserver: BreakpointObserver,
   ) {}

@@ -4,6 +4,7 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Status } from '@scifi/http';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   selectActiveId as selectActiveCartId,
@@ -23,7 +24,7 @@ import {
 } from '@scifi/ngrx/wishlist/wishlist.feature';
 import { Pagination } from '@scifi/pagination';
 import { Product } from '@scifi/product';
-import { AppState, Category, Status, Supplier, Wishlist } from '@scifi/types';
+import { Category, Supplier, Wishlist } from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
@@ -86,7 +87,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   );
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _route: ActivatedRoute,
     private _router: Router,
     private _breakPointObserver: BreakpointObserver,

@@ -1,13 +1,23 @@
 import { isDevMode } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { ApiError, AppState } from '@scifi/types';
 import { of } from 'rxjs';
-import { accountReducer } from './account/account.feature';
 import { authReducer } from './auth/auth.feature';
 import { cartReducer } from './cart/cart.feature';
 import { categoriesReducer } from './categories/categories.feature';
 import { httpError } from './notification/notification.actions';
 import { notificationReducer } from './notification/notification.feature';
+import { accountReducer } from '@scifi/account/account.feature';
+import { ApiError } from '@scifi/http';
+import { AuthState, CartState, CategoriesState, NotificationState } from '@scifi/types';
+import { AccountState } from '@scifi/account/account.state';
+
+export type AppState = {
+  authSlice: AuthState;
+  accountSlice: AccountState;
+  categoriesSlice: CategoriesState;
+  cartSlice: CartState;
+  notificationSlice: NotificationState;
+};
 
 export const reducers: ActionReducerMap<AppState> = {
   authSlice: authReducer,

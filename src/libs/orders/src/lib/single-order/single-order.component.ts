@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import { selectAccount } from '@scifi/account/account.feature';
+import { Customer } from '@scifi/account/customer.type';
+import { DialogContent } from '@scifi/dialog/dialog-content.type';
+import { Status } from '@scifi/http';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { notify } from '@scifi/ngrx/notification/notification.actions';
 import { selectData } from '@scifi/ngrx/notification/notification.feature';
@@ -18,14 +21,7 @@ import {
   selectNewOrder,
   selectSingleOrder,
 } from '@scifi/ngrx/orders/orders.feature';
-import {
-  Customer,
-  DialogContent,
-  NewOrderResponse,
-  Order,
-  SingleOrderResponse,
-  Status,
-} from '@scifi/types';
+import { NewOrderResponse, Order, SingleOrderResponse } from '@scifi/types';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({

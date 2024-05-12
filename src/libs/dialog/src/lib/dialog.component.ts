@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { logoutRequest } from '@scifi/ngrx/auth/auth.actions';
 import { hideDialog } from '@scifi/ngrx/notification/notification.actions';
-import { AppState, DialogContent } from '@scifi/types';
+import { DialogContent } from './dialog-content.type';
 
 @Component({
   selector: 'app-dialog',
@@ -15,7 +15,7 @@ export class DialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Observable<DialogContent>,
     public dialogRef: MatDialogRef<DialogComponent>,
-    private _store: Store<AppState>,
+    private _store: Store,
   ) {}
 
   hideOverlay() {

@@ -7,7 +7,7 @@ import {
   updateWishlist,
 } from '@scifi/ngrx/wishlist/wishlist.actions';
 import { Product } from '@scifi/product';
-import { AppState, Wishlist, WishlistBasic, WishlistItem } from '@scifi/types';
+import { Wishlist, WishlistBasic, WishlistItem } from '@scifi/types';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ import { AppState, Wishlist, WishlistBasic, WishlistItem } from '@scifi/types';
 export class WishlistService {
   baseUrl = 'https://taliphus.vercel.app/api/customers';
 
-  constructor(private _http: HttpClient, private _store: Store<AppState>) {}
+  constructor(private _http: HttpClient, private _store: Store) {}
 
   getWishlistItems(customerId: number, format: string) {
     const options = {

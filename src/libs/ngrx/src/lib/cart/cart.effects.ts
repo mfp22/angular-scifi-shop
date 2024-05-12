@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CartService } from '@scifi/cart/cart.service';
-import { AppState, Cart } from '@scifi/types';
+import { Cart } from '@scifi/types';
 import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs/operators';
 import { dispatchErrorAction } from '..';
 import {
@@ -102,9 +102,5 @@ export class CartEffects {
     ),
   );
 
-  constructor(
-    private actions$: Actions,
-    private cartService: CartService,
-    private store: Store<AppState>,
-  ) {}
+  constructor(private actions$: Actions, private cartService: CartService, private store: Store) {}
 }

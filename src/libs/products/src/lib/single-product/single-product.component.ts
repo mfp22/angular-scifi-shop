@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { DialogContent } from '@scifi/dialog/dialog-content.type';
+import { Status } from '@scifi/http';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { selectActiveId, selectUpdateStatus } from '@scifi/ngrx/cart/cart.feature';
 import { selectData } from '@scifi/ngrx/notification/notification.feature';
@@ -28,15 +30,7 @@ import {
 } from '@scifi/ngrx/reviews/reviews.feature';
 import { Product, SingleProduct } from '@scifi/product';
 import { ReviewDialogComponent } from '@scifi/reviews/review-dialog/review-dialog.component';
-import {
-  AppState,
-  DialogContent,
-  NewReviewRequest,
-  OrderSearchResponse,
-  Rating,
-  Review,
-  Status,
-} from '@scifi/types';
+import { NewReviewRequest, OrderSearchResponse, Rating, Review } from '@scifi/types';
 import { Observable, Subscription, combineLatest, map, shareReplay } from 'rxjs';
 
 @Component({
@@ -95,7 +89,7 @@ export class SingleProductComponent {
   );
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _route: ActivatedRoute,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,

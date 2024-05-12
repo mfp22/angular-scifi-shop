@@ -1,5 +1,6 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
-import { ReviewsState, Status } from '@scifi/types';
+import { Status } from '@scifi/http';
+import { ReviewsState } from '@scifi/types';
 import { httpError } from '../notification/notification.actions';
 import {
   createReview,

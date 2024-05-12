@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import { selectAccount } from '@scifi/account/account.feature';
 import { Cart, CartItem } from '@scifi/types';
 
 @Injectable({

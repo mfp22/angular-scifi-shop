@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractControl, FormBuilder, ValidatorFn, Validators } from '@angular/forms';
-import {
-  AddressId,
-  Customer,
-  CustomerNewAddress,
-  DeleteUserResponse,
-  UpdateCustomerRequest,
-} from '@scifi/types';
 import { Address } from '@scifi/address';
+import { Customer } from './customer.type';
+import { AddressId } from './address-id.type';
+import { CustomerNewAddress } from './customer-new-address.type';
+import { UpdateCustomerRequest } from './udpate-customer-request.type';
+import { DeleteUserResponse } from './delete-user-response.type';
 
 @Injectable({
   providedIn: 'root',

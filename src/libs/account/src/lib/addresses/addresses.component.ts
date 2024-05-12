@@ -1,22 +1,20 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Address, AddressFormGroup } from '@scifi/address';
+import { AddressEmitData } from '@scifi/checkout/address-step/address-step.component';
+import { Status } from '@scifi/http';
+import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { Observable, Subscription } from 'rxjs';
+import { AccountActiveItem } from '../account-active-item.type';
 import {
   createOrUpdateAddress,
   deleteAddress,
   resetStatus,
   updateActiveItem,
-} from '@scifi/ngrx/account/account.actions';
-import {
-  selectActiveItem,
-  selectDeleteStatus,
-  selectUpdateStatus,
-} from '@scifi/ngrx/account/account.feature';
-import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+} from '../account.actions';
+import { selectActiveItem, selectDeleteStatus, selectUpdateStatus } from '../account.feature';
 import { AccountService } from '../account.service';
-import { AccountActiveItem, AddressId, AppState, Status } from '@scifi/types';
-import { Address, AddressFormGroup } from '@scifi/address';
-import { AddressEmitData } from '@scifi/checkout/address-step/address-step.component';
+import { AddressId } from '../address-id.type';
 
 @Component({
   selector: 'app-addresses',
@@ -39,7 +37,7 @@ export class AddressesComponent {
   shippingAddressFormGroup: AddressFormGroup | undefined;
   billingAddressFormGroup: AddressFormGroup | undefined;
 
-  constructor(private _store: Store<AppState>, private _accountService: AccountService) {}
+  constructor(private _store: Store, private _accountService: AccountService) {}
 
   ngOnInit() {
     this._subscription = this.loggedInUserId$.subscribe((id) => {

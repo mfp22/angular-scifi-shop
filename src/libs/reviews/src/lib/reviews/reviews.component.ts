@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { Status } from '@scifi/http';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   deleteReview,
@@ -14,11 +15,11 @@ import {
   selectReviewStatus,
   selectReviews,
 } from '@scifi/ngrx/reviews/reviews.feature';
-import { AppState, NewReviewRequest, Review, Status, UpdateReviewRequest } from '@scifi/types';
-import { Observable } from 'rxjs';
-import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
 import { Pagination } from '@scifi/pagination';
 import { Product } from '@scifi/product';
+import { NewReviewRequest, Review, UpdateReviewRequest } from '@scifi/types';
+import { Observable } from 'rxjs';
+import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
 
 @Component({
   selector: 'app-reviews',
@@ -38,7 +39,7 @@ export class ReviewsComponent {
     this._store.select(selectLoggedInUserId);
   readonly activeId$: Observable<number> = this._store.select(selectActiveId);
 
-  constructor(private _store: Store<AppState>, public dialog: MatDialog) {}
+  constructor(private _store: Store, public dialog: MatDialog) {}
 
   showDialog(review: NewReviewRequest | UpdateReviewRequest, operation: 'create' | 'update') {
     this._store.dispatch(resetReviewsStatus());

@@ -8,6 +8,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Status } from '@scifi/http';
 import { loadProducts } from '@scifi/ngrx/products/products.actions';
 import {
   selectLoadStatus,
@@ -16,7 +17,7 @@ import {
 } from '@scifi/ngrx/products/products.feature';
 import { Pagination } from '@scifi/pagination';
 import { Product } from '@scifi/product';
-import { AppState, ProductsUrlParams, Status } from '@scifi/types';
+import { ProductsUrlParams } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -43,7 +44,7 @@ export class ProductsPaginationComponent {
   public activeFilters: ProductsUrlParams = {} as ProductsUrlParams;
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _route: ActivatedRoute,
     private _router: Router,
     private _titleService: Title,

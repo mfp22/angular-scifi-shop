@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Status } from '@scifi/http';
 import {
   loadAllReviews,
   loadCustomerReviews,
@@ -9,7 +10,6 @@ import {
 } from '@scifi/ngrx/reviews/reviews.actions';
 import { selectLoadStatus, selectPagination } from '@scifi/ngrx/reviews/reviews.feature';
 import { Pagination } from '@scifi/pagination';
-import { AppState, Status } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -29,11 +29,7 @@ export class ReviewsPaginationComponent {
   currentLimit = 25;
   private _subscription = Subscription.EMPTY;
 
-  constructor(
-    private _store: Store<AppState>,
-    private _route: ActivatedRoute,
-    private _router: Router,
-  ) {}
+  constructor(private _store: Store, private _route: ActivatedRoute, private _router: Router) {}
 
   validateNumericalParam(param: 'page' | 'limit', value: string | null): number {
     if (!value || isNaN(Number(value)) || Number(value) === 0) {

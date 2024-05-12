@@ -4,8 +4,9 @@ import { Store } from '@ngrx/store';
 import { authenticateWithSSO } from '@scifi/ngrx/auth/auth.actions';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
-import { AppState, AuthCredentials, Customer, OAuthCredentials } from '@scifi/types';
+import { selectAccount } from '@scifi/account/account.feature';
+import { AuthCredentials, OAuthCredentials } from '@scifi/types';
+import { Customer } from '@scifi/account/customer.type';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class AuthService {
   public loggedInUserId: string | number | null = null;
   public accountData: Customer | null = null;
 
-  constructor(private _http: HttpClient, private _store: Store<AppState>) {
+  constructor(private _http: HttpClient, private _store: Store) {
     _store.select(selectLoggedInUserId).subscribe((id) => {
       this.loggedInUserId = id;
     });

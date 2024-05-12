@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ApiError } from '@scifi/types';
+import { ApiError } from '@scifi/http';
 
 export const showDialog = createAction('[App Component] Show Dialog');
 export const hideDialog = createAction('[App Component] Hide Dialog');

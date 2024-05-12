@@ -1,6 +1,5 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { AuthState } from '@scifi/types';
-import { deleteUserSuccess } from '../account/account.actions';
 import { httpError } from '../notification/notification.actions';
 import {
   authFailure,
@@ -16,6 +15,7 @@ import {
   signupRequest,
   signupSuccess,
 } from './auth.actions';
+import { deleteUserSuccess } from '@scifi/account/account.actions';
 
 const initialState: AuthState = {
   showOverlay: false,

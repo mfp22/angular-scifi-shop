@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { notify } from '@scifi/ngrx/notification/notification.actions';
 import { updateOrder } from '@scifi/ngrx/orders/orders.actions';
-import { AppState } from '@scifi/types';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
@@ -26,11 +25,7 @@ export class NewOrderRedirectComponent {
   );
   public queryParams: Params | undefined;
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _store: Store<AppState>,
-    private _router: Router,
-  ) {}
+  constructor(private _route: ActivatedRoute, private _store: Store, private _router: Router) {}
 
   ngOnInit() {
     this._subscription = this._dataStream$.subscribe(({ loggedInUserId, queryParams }) => {

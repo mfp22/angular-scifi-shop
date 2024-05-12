@@ -1,13 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import { Address } from '@scifi/address';
-import {
-  AccountActiveItem,
-  AddressId,
-  Customer,
-  CustomerNewAddress,
-  DeleteUserResponse,
-  UpdateCustomerRequest,
-} from '@scifi/types';
+import { Customer } from './customer.type';
+import { UpdateCustomerRequest } from './udpate-customer-request.type';
+import { CustomerNewAddress } from './customer-new-address.type';
+import { AddressId } from './address-id.type';
+import { DeleteUserResponse } from './delete-user-response.type';
+import { AccountActiveItem } from './account-active-item.type';
 
 export const loadAccount = createAction(
   '[Account Component] Load Account Data',
@@ -17,6 +15,7 @@ export const loadAccountSuccess = createAction(
   '[Account Component] Account Data Loaded - Success',
   props<Customer>(),
 );
+export const loadAccountFailure = createAction('[Account Component] Account Data Loaded - Failure');
 
 export const updateAccount = createAction(
   '[Account Component] Update Account - Loading',

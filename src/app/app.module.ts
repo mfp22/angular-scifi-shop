@@ -18,7 +18,7 @@ import { AccountModule } from '@scifi/account/account.module';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { CartModule } from '@scifi/cart/cart.module';
 import { CheckoutModule } from '@scifi/checkout/checkout.module';
-import { accountFeature } from '@scifi/ngrx/account/account.feature';
+import { accountFeature } from '@scifi/account/account.feature';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { notificationFeature } from '@scifi/ngrx/notification/notification.feature';

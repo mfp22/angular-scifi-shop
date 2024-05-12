@@ -4,19 +4,24 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
-import { resetStatus, updateAccount, updateActiveItem } from '@scifi/ngrx/account/account.actions';
+import { DialogComponent } from '@scifi/dialog/dialog.component';
+import { Status } from '@scifi/http';
+import { selectLoggedInUserId, selectSocialUser } from '@scifi/ngrx/auth/auth.feature';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { AccountActiveItem } from '../account-active-item.type';
+import { resetStatus, updateAccount, updateActiveItem } from '../account.actions';
 import {
   selectAccount,
+  selectActiveItem,
+  selectDeleteMsg,
+  selectDeleteStatus,
   selectLoadStatus,
   selectUpdateStatus,
-  selectDeleteStatus,
-  selectActiveItem,
-} from '@scifi/ngrx/account/account.feature';
-import { selectLoggedInUserId, selectSocialUser } from '@scifi/ngrx/auth/auth.feature';
+} from '../account.feature';
 import { AccountService } from '../account.service';
+import { Customer } from '../customer.type';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { AccountActiveItem, AppState, Customer, Status, UpdateCustomerRequest } from '@scifi/types';
+import { UpdateCustomerRequest } from '../udpate-customer-request.type';
 
 @Component({
   selector: 'app-account',
@@ -31,6 +36,7 @@ export class AccountComponent implements OnInit {
   readonly accountLoadStatus$: Observable<Status> = this._store.select(selectLoadStatus);
   readonly updateStatus$: Observable<Status> = this._store.select(selectUpdateStatus);
   readonly deleteStatus$: Observable<Status> = this._store.select(selectDeleteStatus);
+  readonly deleteMsg$ = this._store.select(selectDeleteMsg);
   readonly activeItem$: Observable<AccountActiveItem> = this._store.select(selectActiveItem);
 
   readonly dataStream$ = combineLatest([
@@ -45,8 +51,12 @@ export class AccountComponent implements OnInit {
     })),
   );
 
-  readonly statusStream$ = combineLatest([this.updateStatus$, this.deleteStatus$]).pipe(
-    map(([updateStatus, deleteStatus]) => ({ updateStatus, deleteStatus })),
+  readonly statusStream$ = combineLatest([
+    this.updateStatus$,
+    this.deleteStatus$,
+    this.deleteMsg$,
+  ]).pipe(
+    map(([updateStatus, deleteStatus, deleteMsg]) => ({ updateStatus, deleteStatus, deleteMsg })),
   );
 
   private _subscription = Subscription.EMPTY;
@@ -85,7 +95,7 @@ export class AccountComponent implements OnInit {
   public hide = true;
 
   constructor(
-    private _store: Store<AppState>,
+    private _store: Store,
     private _formBuilder: FormBuilder,
     private _accountService: AccountService,
     private _snackBar: MatSnackBar,
@@ -144,29 +154,42 @@ export class AccountComponent implements OnInit {
       },
     );
 
-    this._statusSubscription = this.statusStream$.subscribe(({ updateStatus, deleteStatus }) => {
-      this.updateStatus = updateStatus;
-      this.deleteStatus = deleteStatus;
+    this._statusSubscription = this.statusStream$.subscribe(
+      ({ updateStatus, deleteStatus, deleteMsg }) => {
+        this.updateStatus = updateStatus;
+        this.deleteStatus = deleteStatus;
 
-      if (updateStatus === 'success' || deleteStatus === 'success') {
-        let message =
-          this.activeItem === 'billingAddress'
-            ? 'Billing address '
-            : this.activeItem === 'shippingAddress'
-            ? 'Shipping address'
-            : this.activeItem === 'password'
-            ? 'Password '
-            : 'Account ';
-        if (updateStatus === 'success') message += 'updated successfully.';
-        if (deleteStatus === 'success') message += 'deleted successfully.';
-        this._snackBar.open(message, 'Dismiss', {
-          horizontalPosition: 'start',
-          verticalPosition: 'top',
-          duration: 8000,
-        });
-        this.passwordForm.reset();
-      }
-    });
+        if (deleteStatus === 'success') {
+          this.dialog.open(DialogComponent, {
+            disableClose: true,
+            data: {
+              title: 'You have successfully deleted your account.',
+              content: deleteMsg.msg,
+              deletedUser: deleteMsg.deletedUser,
+            },
+          });
+        }
+
+        if (updateStatus === 'success' || deleteStatus === 'success') {
+          let message =
+            this.activeItem === 'billingAddress'
+              ? 'Billing address '
+              : this.activeItem === 'shippingAddress'
+              ? 'Shipping address'
+              : this.activeItem === 'password'
+              ? 'Password '
+              : 'Account ';
+          if (updateStatus === 'success') message += 'updated successfully.';
+          if (deleteStatus === 'success') message += 'deleted successfully.';
+          this._snackBar.open(message, 'Dismiss', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 8000,
+          });
+          this.passwordForm.reset();
+        }
+      },
+    );
   }
 
   showErrorMessage(field: 'password' | 'passwordConfirm') {

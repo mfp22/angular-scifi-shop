@@ -2,21 +2,9 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 import { Address } from '@scifi/address';
 import { Pagination } from '@scifi/pagination';
 import { ExpressCheckoutItem, Product, SingleProduct } from '@scifi/product';
-
-export type Customer = {
-  id: number;
-  name: string;
-  email: string;
-  username: string;
-  joinDate: string;
-  phone: string | null;
-  billingAddressId: number | null;
-  shippingAddressId: number | null;
-  password: string;
-  avatar: string | null;
-  billingAddress?: Address | null;
-  shippingAddress?: Address | null;
-};
+import { Customer } from '@scifi/account/customer.type';
+import { Status } from '@scifi/http';
+import { DialogContent } from '@scifi/dialog/dialog-content.type';
 
 export type AuthCredentials = {
   name?: string;
@@ -77,15 +65,6 @@ export type UpdateReviewRequest = {
   rating?: Rating;
 };
 
-export type UpdateCustomerRequest = {
-  username?: string;
-  password?: string;
-  name?: string;
-  email?: string;
-  phone?: string | null;
-  avatar?: string | null;
-};
-
 export type Review = NewReviewRequest & {
   id: number;
   recommend: boolean | null;
@@ -113,21 +92,6 @@ export type FavoritesResponse = Pagination & {
 
 export type NewOrderResponse = Order & {
   billingAddress: Address;
-};
-
-export type CustomerNewAddress = {
-  newAddress: Address;
-  customer: Customer;
-};
-
-export type DeleteUserResponse = {
-  msg: string;
-  deletedUser: {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-  };
 };
 
 export type SingleOrderResponse = NewOrderResponse;
@@ -180,15 +144,6 @@ export type AuthState = {
   socialUser: SocialUser | null;
 };
 
-export type ApiError = {
-  error?: {
-    status: number;
-    info: string;
-    message?: string;
-    stack?: string;
-  };
-};
-
 export type StacktraceError = {
   error: {
     message: string;
@@ -196,27 +151,10 @@ export type StacktraceError = {
   };
 };
 
-export type DialogContent = ApiError & {
-  title: string;
-  content?: string;
-  buttons?: {
-    newOrder?: string;
-  };
-  deletedUser?: {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-  };
-};
-
 export type NotificationState = {
   showDialog: boolean;
   data: DialogContent | null;
 };
-
-export type Status = 'pending' | 'loading' | 'success' | 'error';
-export type AddressId = 'billingAddressId' | 'shippingAddressId';
 
 export type ProductsState = {
   pagination: Pagination;
@@ -301,21 +239,6 @@ export type WishlistState = {
   wishlist: Wishlist | null;
 };
 
-export type AccountActiveItem =
-  | 'billingAddress'
-  | 'shippingAddress'
-  | 'password'
-  | 'account'
-  | null;
-
-export type AccountState = {
-  account: Customer | null;
-  loadStatus: Status;
-  updateStatus: Status;
-  deleteStatus: Status;
-  activeItem: AccountActiveItem;
-};
-
 export type OrdersState = {
   orders: OrdersResponse | null;
   singleOrder: SingleOrderResponse | null;
@@ -332,12 +255,4 @@ export type CategoriesState = {
   suppliers: Supplier[] | null;
   categoriesLoadStatus: Status;
   suppliersLoadStatus: Status;
-};
-
-export type AppState = {
-  authSlice: AuthState;
-  accountSlice: AccountState;
-  categoriesSlice: CategoriesState;
-  cartSlice: CartState;
-  notificationSlice: NotificationState;
 };

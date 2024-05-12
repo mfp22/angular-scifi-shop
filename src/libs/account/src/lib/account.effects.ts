@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
-import { AccountService } from '@scifi/account/account.service';
 import {
   createOrUpdateAddress,
   createOrUpdateAddressSuccess,
@@ -10,15 +9,15 @@ import {
   deleteUser,
   deleteUserSuccess,
   loadAccount,
+  loadAccountFailure,
   loadAccountSuccess,
   updateAccount,
   updateAccountSuccess,
 } from './account.actions';
-import { dispatchErrorAction } from '..';
-import { notify } from '../notification/notification.actions';
+import { AccountService } from '..';
 import { Router } from '@angular/router';
-import { authFailure } from '../auth/auth.actions';
 import { of } from 'rxjs';
+import { dispatchErrorAction } from '@scifi/ngrx/index';
 
 @Injectable()
 export class AccountEffects {
@@ -32,7 +31,7 @@ export class AccountEffects {
           }),
           catchError(() => {
             window.localStorage.removeItem('userId');
-            return of(authFailure());
+            return of(loadAccountFailure());
           }),
         ),
       ),
@@ -93,19 +92,16 @@ export class AccountEffects {
     ),
   );
 
-  deleteUserNotification$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(deleteUserSuccess),
-      map((payload) => {
-        window.localStorage.removeItem('userId');
-        this._router.navigate(['/']);
-        return notify({
-          title: 'You have successfully deleted your account.',
-          content: payload.msg,
-          deletedUser: payload.deletedUser,
-        });
-      }),
-    ),
+  deleteUserNotification$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(deleteUserSuccess),
+        map((payload) => {
+          window.localStorage.removeItem('userId');
+          this._router.navigate(['/']);
+        }),
+      ),
+    { dispatch: false },
   );
 
   constructor(

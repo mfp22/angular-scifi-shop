@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { selectAccount } from '@scifi/ngrx/account/account.feature';
+import { selectAccount } from '@scifi/account/account.feature';
+import { Customer } from '@scifi/account/customer.type';
+import { Status } from '@scifi/http';
 import { selectCartItemsCount, selectLoadStatus } from '@scifi/ngrx/cart/cart.feature';
-import { AppState, Customer, Status } from '@scifi/types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart-page',
@@ -16,7 +17,7 @@ export class CartPageComponent {
     this._store.select(selectCartItemsCount);
   readonly accountData$: Observable<Customer | null> = this._store.select(selectAccount);
 
-  constructor(private _store: Store<AppState>) {}
+  constructor(private _store: Store) {}
 
   ngOnInit() {
     window.scrollTo({ top: 0 });
