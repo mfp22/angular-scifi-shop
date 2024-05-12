@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
 import { Customer } from '@scifi/account/customer.type';
+import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { notify } from '@scifi/dialog/notification.actions';
 import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';
-import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import {
   clearSingleOrder,
   deleteOrder,

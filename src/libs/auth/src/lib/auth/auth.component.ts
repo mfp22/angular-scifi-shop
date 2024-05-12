@@ -1,19 +1,15 @@
-import { Component } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { hideAuthOverlay, resetStatus } from '@scifi/ngrx/auth/auth.actions';
-import { MatTabChangeEvent } from '@angular/material/tabs';
-import {
-  selectAuthIsLoading,
-  selectAuthIsSuccess,
-  selectLoggedInUserId,
-} from '@scifi/ngrx/auth/auth.feature';
 import {
   AmazonLoginProvider,
   FacebookLoginProvider,
   SocialAuthService,
   SocialUser,
 } from '@abacritt/angularx-social-login';
+import { Component } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { hideAuthOverlay, resetStatus } from '../auth.actions';
+import { selectAuthIsLoading, selectAuthIsSuccess, selectLoggedInUserId } from '../auth.feature';
 import { AuthService } from '../auth.service';
 
 @Component({

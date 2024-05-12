@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { clearCurrentUser } from '@scifi/account/account.actions';
 import { Customer } from '@scifi/account/customer.type';
-import { AuthService } from '@scifi/auth/auth.service';
 import { httpError, notify } from '@scifi/dialog/notification.actions';
 import { ApiError } from '@scifi/http';
 import { of } from 'rxjs';
@@ -19,6 +18,7 @@ import {
   signupRequest,
   signupSuccess,
 } from './auth.actions';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthEffects {

@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AccountService } from '@scifi/account/account.service';
-import { loginRequest, signupRequest } from '@scifi/ngrx/auth/auth.actions';
-import { selectAuthIsLoading } from '@scifi/ngrx/auth/auth.feature';
-import { AuthCredentials } from '@scifi/types';
 import { Observable } from 'rxjs';
+import { AuthCredentials } from '../auth-credentials.type';
+import { loginRequest, signupRequest } from '../auth.actions';
+import { selectAuthIsLoading } from '../auth.feature';
 
 type AuthForm = FormGroup<{
   username: FormControl<string | null>;

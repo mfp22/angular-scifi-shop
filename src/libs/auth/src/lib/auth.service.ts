@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { authenticateWithSSO } from '@scifi/ngrx/auth/auth.actions';
 import { SocialUser } from '@abacritt/angularx-social-login';
-import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
-import { AuthCredentials, OAuthCredentials } from '@scifi/types';
 import { Customer } from '@scifi/account/customer.type';
+import { AuthCredentials } from './auth-credentials.type';
+import { authenticateWithSSO } from './auth.actions';
+import { selectLoggedInUserId } from './auth.feature';
+import { OAuthCredentials } from './oauth-credentials.type';
 
 @Injectable({
   providedIn: 'root',

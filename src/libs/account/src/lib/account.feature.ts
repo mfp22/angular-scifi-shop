@@ -16,7 +16,7 @@ import {
   updateAccountSuccess,
   updateActiveItem,
 } from './account.actions';
-import { AccountState } from './account.state';
+import { AccountState } from './account-state.type';
 import { CustomerNewAddress } from './customer-new-address.type';
 import { Customer } from './customer.type';
 

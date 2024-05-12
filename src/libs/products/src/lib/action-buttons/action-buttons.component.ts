@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
 import {
   addToCart,
   removeCartItem,
@@ -10,9 +9,10 @@ import {
   updateActiveId,
 } from '@scifi/ngrx/cart/cart.actions';
 import { selectCartItems } from '@scifi/ngrx/cart/cart.feature';
-import { ProductDialogComponent } from '../../../../product/src/lib/product-dialog/product-dialog.component';
-import { CartItem } from '@scifi/types';
 import { Product } from '@scifi/product';
+import { CartItem } from '@scifi/types';
+import { Observable, Subscription } from 'rxjs';
+import { ProductDialogComponent } from '../../../../product/src/lib/product-dialog/product-dialog.component';
 
 @Component({
   selector: 'app-action-buttons',

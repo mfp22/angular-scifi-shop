@@ -1,7 +1,7 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { deleteUserSuccess } from '@scifi/account/account.actions';
 import { forceRetry, httpError } from '@scifi/dialog/notification.actions';
-import { AuthState } from '@scifi/types';
+import { AuthState } from './auth-state.type';
 import {
   authFailure,
   authenticateWithSSO,

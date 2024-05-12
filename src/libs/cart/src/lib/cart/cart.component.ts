@@ -1,13 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, combineLatest, map } from 'rxjs';
-import {
-  selectCart,
-  selectActiveId,
-  selectLoadStatus,
-  selectUpdateStatus,
-  selectCartTotal,
-} from '@scifi/ngrx/cart/cart.feature';
+import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
+import { Status } from '@scifi/http';
 import {
   clearCart,
   modifyQuantity,
@@ -15,10 +10,15 @@ import {
   resetStatus,
   updateActiveId,
 } from '@scifi/ngrx/cart/cart.actions';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
+import {
+  selectActiveId,
+  selectCart,
+  selectCartTotal,
+  selectLoadStatus,
+  selectUpdateStatus,
+} from '@scifi/ngrx/cart/cart.feature';
 import { Cart } from '@scifi/types';
-import { Status } from '@scifi/http';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-cart',

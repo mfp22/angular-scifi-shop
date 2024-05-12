@@ -1,24 +1,8 @@
-import { SocialUser } from '@abacritt/angularx-social-login';
 import { Address } from '@scifi/address';
 import { Pagination } from '@scifi/pagination';
 import { ExpressCheckoutItem, Product, SingleProduct } from '@scifi/product';
 import { Customer } from '@scifi/account/customer.type';
 import { Status } from '@scifi/http';
-
-export type AuthCredentials = {
-  name?: string;
-  email?: string;
-  username: string;
-  password: string;
-};
-
-export type OAuthCredentials = {
-  name: string;
-  email: string;
-  authId: string;
-  provider: string;
-  thumbnail: string;
-};
 
 export type NewOrderRequest = {
   billingAddress: Address;
@@ -132,16 +116,6 @@ export type OrderSearchResponse = {
 };
 
 /* NgRx types for state management */
-export type AuthState = {
-  showOverlay: boolean;
-  currentUser: Customer | null;
-  loggedInUserId: number | string | null;
-  loginStatus: Status;
-  logoutStatus: Status;
-  signupStatus: Status;
-  logoutMsg: string | null;
-  socialUser: SocialUser | null;
-};
 
 export type StacktraceError = {
   error: {

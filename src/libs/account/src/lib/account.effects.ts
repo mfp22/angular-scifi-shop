@@ -96,7 +96,7 @@ export class AccountEffects {
     () =>
       this._actions$.pipe(
         ofType(deleteUserSuccess),
-        map((payload) => {
+        map(() => {
           window.localStorage.removeItem('userId');
           this._router.navigate(['/']);
         }),

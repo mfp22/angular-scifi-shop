@@ -1,10 +1,11 @@
 import { isDevMode } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { AccountState } from '@scifi/account/account-state.type';
 import { accountReducer } from '@scifi/account/account.feature';
-import { AccountState } from '@scifi/account/account.state';
+import { AuthState } from '@scifi/auth/auth-state.type';
+import { authReducer } from '@scifi/auth/auth.feature';
 import { NotificationState, notificationReducer } from '@scifi/dialog/notification.feature';
-import { AuthState, CartState, CategoriesState } from '@scifi/types';
-import { authReducer } from './auth/auth.feature';
+import { CartState, CategoriesState } from '@scifi/types';
 import { cartReducer } from './cart/cart.feature';
 import { categoriesReducer } from './categories/categories.feature';
 

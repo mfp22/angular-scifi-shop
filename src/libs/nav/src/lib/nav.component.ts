@@ -6,13 +6,13 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
 import { Customer } from '@scifi/account/customer.type';
-import { Status } from '@scifi/http';
-import { logoutRequest, showAuthOverlay } from '@scifi/ngrx/auth/auth.actions';
+import { logoutRequest, showAuthOverlay } from '@scifi/auth/auth.actions';
 import {
   selectAnyLoadingState,
   selectLoggedInUserId,
   selectLogoutStatus,
-} from '@scifi/ngrx/auth/auth.feature';
+} from '@scifi/auth/auth.feature';
+import { Status } from '@scifi/http';
 import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import {
   selectCategories,
