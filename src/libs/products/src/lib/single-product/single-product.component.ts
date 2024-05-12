@@ -26,16 +26,15 @@ import {
   selectReviewStatus,
   selectUpdateStatus as selectReviewUpdateStatus,
 } from '@scifi/ngrx/reviews/reviews.feature';
+import { Product, SingleProduct } from '@scifi/product';
 import { ReviewDialogComponent } from '@scifi/reviews/review-dialog/review-dialog.component';
 import {
   AppState,
   DialogContent,
   NewReviewRequest,
   OrderSearchResponse,
-  Product,
   Rating,
   Review,
-  SingleProduct,
   Status,
 } from '@scifi/types';
 import { Observable, Subscription, combineLatest, map, shareReplay } from 'rxjs';

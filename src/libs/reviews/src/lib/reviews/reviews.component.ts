@@ -14,17 +14,11 @@ import {
   selectReviewStatus,
   selectReviews,
 } from '@scifi/ngrx/reviews/reviews.feature';
-import {
-  AppState,
-  NewReviewRequest,
-  Product,
-  Review,
-  Status,
-  UpdateReviewRequest,
-} from '@scifi/types';
+import { AppState, NewReviewRequest, Review, Status, UpdateReviewRequest } from '@scifi/types';
 import { Observable } from 'rxjs';
 import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
 import { Pagination } from '@scifi/pagination';
+import { Product } from '@scifi/product';
 
 @Component({
   selector: 'app-reviews',

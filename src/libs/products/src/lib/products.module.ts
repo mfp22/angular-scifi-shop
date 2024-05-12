@@ -6,7 +6,7 @@ import { ProductsEffects } from '@scifi/ngrx/products/products.effects';
 import { MaterialModule } from '@scifi/material/material.module';
 import { SpinnerModule } from '@scifi/spinner/spinner.module';
 import { RouterModule } from '@angular/router';
-import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { ProductDialogComponent } from '@scifi/product';
 import { FormsModule } from '@angular/forms';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { StoreModule } from '@ngrx/store';

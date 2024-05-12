@@ -2,8 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { addExpressCheckoutItem } from '@scifi/ngrx/orders/orders.actions';
-import { AppState, Product } from '@scifi/types';
+import { Product } from '../product.type';
+import { addExpressCheckoutItemFromDialog } from '../product.actions';
 
 @Component({
   selector: 'app-product-dialog',
@@ -11,12 +11,12 @@ import { AppState, Product } from '@scifi/types';
   styleUrls: ['./product-dialog.component.sass'],
 })
 export class ProductDialogComponent {
-  quantity: number = 1;
+  quantity = 1;
 
   constructor(
     public dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { product: Product },
-    private _store: Store<AppState>,
+    private _store: Store,
     private _router: Router,
   ) {}
 
@@ -26,7 +26,7 @@ export class ProductDialogComponent {
 
   goToCheckout() {
     this._store.dispatch(
-      addExpressCheckoutItem({
+      addExpressCheckoutItemFromDialog({
         product: this.data.product,
         quantity: this.quantity,
       }),

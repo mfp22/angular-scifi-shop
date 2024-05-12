@@ -5,7 +5,8 @@ import { Observable, Subscription } from 'rxjs';
 import { selectCart, selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
 import { addExpressCheckoutItem } from '@scifi/ngrx/orders/orders.actions';
 import { selectExpressCheckoutItem } from '@scifi/ngrx/orders/orders.feature';
-import { AppState, Cart, ExpressCheckoutItem } from '@scifi/types';
+import { AppState, Cart } from '@scifi/types';
+import { ExpressCheckoutItem } from '@scifi/product';
 
 @Component({
   selector: 'app-order-items',

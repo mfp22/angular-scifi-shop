@@ -2,30 +2,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Pagination } from '@scifi/pagination';
-
-export type Product = {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  stock: number;
-  categoryName: string;
-  supplierName: string;
-  thumbnail: string;
-  numOfTimesOrdered: number;
-  totalUnitsOrdered?: number | null;
-  numOfReviews: number;
-  averageRating: string | null;
-};
-
-export type SingleProduct = Product & {
-  totalRatings: number;
-  averageRating?: string;
-};
-
-export type ProductsResponse = Pagination & {
-  products: Product[] | [];
-};
+import { ExpressCheckoutItem, Product, SingleProduct } from '@scifi/product';
 
 export type Customer = {
   id: number;
@@ -197,11 +174,6 @@ export type Category = {
 export type Supplier = Category & {
   location: string;
   establishYear: number;
-};
-
-export type ExpressCheckoutItem = {
-  product: Product;
-  quantity: number;
 };
 
 export type PaymentEvent = {

@@ -1,13 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  Category,
-  OrderSearchResponse,
-  ProductsResponse,
-  ProductsUrlParams,
-  SingleProduct,
-  Supplier,
-} from '@scifi/types';
+import { SingleProduct } from '@scifi/product';
+import { Category, OrderSearchResponse, ProductsUrlParams, Supplier } from '@scifi/types';
+import { ProductsResponse } from './products-response.type';
 
 @Injectable({
   providedIn: 'root',

@@ -28,7 +28,8 @@ import { CheckoutService } from '../checkout.service';
 import { selectExpressCheckoutItem } from '@scifi/ngrx/orders/orders.feature';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Address, AppState, Customer, ExpressCheckoutItem, PaymentEvent } from '@scifi/types';
+import { Address, AppState, Customer, PaymentEvent } from '@scifi/types';
+import { ExpressCheckoutItem } from '@scifi/product';
 
 @Component({
   selector: 'app-payment',

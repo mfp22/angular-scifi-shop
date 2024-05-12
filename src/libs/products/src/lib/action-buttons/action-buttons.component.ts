@@ -10,8 +10,9 @@ import {
   updateActiveId,
 } from '@scifi/ngrx/cart/cart.actions';
 import { selectCartItems } from '@scifi/ngrx/cart/cart.feature';
-import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
-import { AppState, CartItem, Product } from '@scifi/types';
+import { ProductDialogComponent } from '../../../../product/src/lib/product-dialog/product-dialog.component';
+import { AppState, CartItem } from '@scifi/types';
+import { Product } from '@scifi/product';
 
 @Component({
   selector: 'app-action-buttons',

@@ -6,7 +6,8 @@ import {
   updateActiveId,
   updateWishlist,
 } from '@scifi/ngrx/wishlist/wishlist.actions';
-import { AppState, Product, Wishlist, WishlistBasic, WishlistItem } from '@scifi/types';
+import { Product } from '@scifi/product';
+import { AppState, Wishlist, WishlistBasic, WishlistItem } from '@scifi/types';
 
 @Injectable({
   providedIn: 'root',

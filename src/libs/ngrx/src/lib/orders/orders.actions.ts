@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
+import { ExpressCheckoutItem } from '@scifi/product';
 import {
-  ExpressCheckoutItem,
   NewOrderRequest,
   NewOrderResponse,
   OrdersResponse,

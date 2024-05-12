@@ -15,7 +15,8 @@ import {
   selectProducts,
 } from '@scifi/ngrx/products/products.feature';
 import { Pagination } from '@scifi/pagination';
-import { AppState, Product, ProductsUrlParams, Status } from '@scifi/types';
+import { Product } from '@scifi/product';
+import { AppState, ProductsUrlParams, Status } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({

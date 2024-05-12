@@ -17,6 +17,7 @@ import {
   updateOrder,
   updateOrderSuccess,
 } from './orders.actions';
+import { addExpressCheckoutItemFromDialog } from '@scifi/product';
 
 const initialState: OrdersState = {
   orders: null,
@@ -63,7 +64,7 @@ export const ordersReducer = createReducer(
       newOrder: payload,
     };
   }),
-  on(addExpressCheckoutItem, (state, payload) => {
+  on(addExpressCheckoutItem, addExpressCheckoutItemFromDialog, (state, payload) => {
     return {
       ...state,
       expressCheckoutItem: payload,

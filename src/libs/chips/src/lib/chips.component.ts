@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@scifi/material/material.module';
 import { RouterModule } from '@angular/router';
-import { Product } from '@scifi/types';
+import { Product } from '@scifi/product';
 
 @Component({
   selector: 'app-chips',
