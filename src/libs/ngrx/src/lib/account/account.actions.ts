@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
+import { Address } from '@scifi/address';
 import {
   AccountActiveItem,
-  Address,
   AddressId,
   Customer,
   CustomerNewAddress,

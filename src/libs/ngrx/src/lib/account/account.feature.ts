@@ -15,7 +15,8 @@ import {
   updateActiveItem,
   resetStatus,
 } from './account.actions';
-import { AccountState, Address, Customer, CustomerNewAddress } from '@scifi/types';
+import { AccountState, Customer, CustomerNewAddress } from '@scifi/types';
+import { Address } from '@scifi/address';
 
 const initialState: AccountState = {
   account: null,

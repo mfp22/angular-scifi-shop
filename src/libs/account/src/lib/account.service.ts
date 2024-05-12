@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractControl, FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import {
-  Address,
   AddressId,
   Customer,
   CustomerNewAddress,
   DeleteUserResponse,
   UpdateCustomerRequest,
 } from '@scifi/types';
+import { Address } from '@scifi/address';
 
 @Injectable({
   providedIn: 'root',

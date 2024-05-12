@@ -7,16 +7,16 @@ import {
   selectDeleteStatus,
   selectUpdateStatus,
 } from '@scifi/ngrx/account/account.feature';
-import {
-  AccountActiveItem,
-  Address,
-  AddressEmitData,
-  AddressFormGroup,
-  AppState,
-  Status,
-} from '@scifi/types';
+import { AccountActiveItem, AppState, Status } from '@scifi/types';
+import { Address, AddressFormGroup } from '@scifi/address';
 
 type RequiredAddressField = 'addressLine1' | 'city' | 'postcode';
+
+export type AddressEmitData = {
+  address: Address;
+  type: 'billingAddress' | 'shippingAddress' | undefined;
+  useExisting: boolean;
+};
 
 @Component({
   selector: 'app-address-step',

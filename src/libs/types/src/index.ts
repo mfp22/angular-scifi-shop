@@ -1,6 +1,5 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
-import { HttpHeaders } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Address } from '@scifi/address';
 import { Pagination } from '@scifi/pagination';
 import { ExpressCheckoutItem, Product, SingleProduct } from '@scifi/product';
 
@@ -19,15 +18,6 @@ export type Customer = {
   shippingAddress?: Address | null;
 };
 
-export type Address = {
-  id?: number;
-  addressLine1: string;
-  addressLine2: string | null;
-  city: string;
-  county: string | null;
-  postcode: string;
-};
-
 export type AuthCredentials = {
   name?: string;
   email?: string;
@@ -42,20 +32,6 @@ export type OAuthCredentials = {
   provider: string;
   thumbnail: string;
 };
-
-export type AddressEmitData = {
-  address: Address;
-  type: 'billingAddress' | 'shippingAddress' | undefined;
-  useExisting: boolean;
-};
-
-export type AddressFormGroup = FormGroup<{
-  addressLine1: FormControl<string | null>;
-  addressLine2: FormControl<string | null>;
-  city: FormControl<string | null>;
-  county: FormControl<string | null>;
-  postcode: FormControl<string | null>;
-}>;
 
 export type NewOrderRequest = {
   billingAddress: Address;
