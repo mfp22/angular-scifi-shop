@@ -1,11 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { ExpressCheckoutItem } from '@scifi/product';
-import {
-  NewOrderRequest,
-  NewOrderResponse,
-  OrdersResponse,
-  SingleOrderResponse,
-} from '@scifi/types';
+import { NewOrderRequest } from './new-order-request.type';
+import { NewOrderResponse } from './new-order-response.type';
+import { OrdersResponse } from './order-response.type';
+import { SingleOrderResponse } from './single-order-response.type';
 
 export const loadOrders = createAction(
   '[Orders Component] Load Orders',

@@ -1,21 +1,20 @@
-import { inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrdersComponent } from './orders/orders.component';
-import { MaterialModule } from '@scifi/material/material.module';
-import { StoreModule } from '@ngrx/store';
-import { ordersFeature } from '@scifi/ngrx/orders/orders.feature';
-import { EffectsModule } from '@ngrx/effects';
-import { OrdersEffects } from '@scifi/ngrx/orders/orders.effects';
-import { SpinnerModule } from '@scifi/spinner/spinner.module';
-import { SingleOrderComponent } from './single-order/single-order.component';
+import { inject, NgModule } from '@angular/core';
 import { CanActivateFn, Router, RouterModule } from '@angular/router';
-import { NewOrderRedirectComponent } from './new-order-redirect/new-order-redirect.component';
-import { NgLetModule } from 'ng-let';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { AccountModule } from '@scifi/account/account.module';
-import { ReviewsModule } from '@scifi/reviews/reviews.module';
+import { AuthService } from '@scifi/account/auth.service';
+import { MaterialModule } from '@scifi/material/material.module';
 import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
+import { SpinnerModule } from '@scifi/spinner/spinner.module';
+import { NgLetModule } from 'ng-let';
+import { NewOrderRedirectComponent } from './new-order-redirect/new-order-redirect.component';
+import { OrdersEffects } from './orders.effects';
+import { ordersFeature } from './orders.feature';
+import { OrdersComponent } from './orders/orders.component';
+import { SingleOrderComponent } from './single-order/single-order.component';
 import { authenticationGuard } from '../../../../app/authenticationGuard';
-import { AuthService } from '@scifi/auth/auth.service';
 
 const newOrderGuard: CanActivateFn = () => {
   const loggedInUserId = inject(AuthService).loggedInUserId;
@@ -53,7 +52,6 @@ const newOrderGuard: CanActivateFn = () => {
       },
     ]),
     AccountModule,
-    ReviewsModule,
     PageNotFoundComponent,
     StoreModule.forFeature(ordersFeature),
     EffectsModule.forFeature(OrdersEffects),

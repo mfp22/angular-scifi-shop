@@ -3,8 +3,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { selectCart, selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
-import { addExpressCheckoutItem } from '@scifi/ngrx/orders/orders.actions';
-import { selectExpressCheckoutItem } from '@scifi/ngrx/orders/orders.feature';
+import { addExpressCheckoutItem } from '@scifi/orders/orders.actions';
+import { selectExpressCheckoutItem } from '@scifi/orders/orders.feature';
 import { Cart } from '@scifi/types';
 import { ExpressCheckoutItem } from '@scifi/product';
 

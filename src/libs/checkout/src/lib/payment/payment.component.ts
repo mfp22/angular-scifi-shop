@@ -19,7 +19,7 @@ import { Customer } from '@scifi/account/customer.type';
 import { Address } from '@scifi/address';
 import { notify } from '@scifi/dialog/notification.actions';
 import { selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
-import { selectExpressCheckoutItem } from '@scifi/ngrx/orders/orders.feature';
+import { selectExpressCheckoutItem } from '@scifi/orders/orders.feature';
 import { ExpressCheckoutItem } from '@scifi/product';
 import { PaymentEvent } from '@scifi/types';
 import {

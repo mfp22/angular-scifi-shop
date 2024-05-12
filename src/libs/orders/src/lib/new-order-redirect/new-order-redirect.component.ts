@@ -3,8 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { notify } from '@scifi/dialog/notification.actions';
-import { updateOrder } from '@scifi/ngrx/orders/orders.actions';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { updateOrder } from '../orders.actions';
 
 @Component({
   selector: 'app-new-order-redirect',

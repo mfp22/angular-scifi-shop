@@ -3,26 +3,23 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
-import { Customer } from '@scifi/account/customer.type';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
+import { Customer } from '@scifi/account/customer.type';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { notify } from '@scifi/dialog/notification.actions';
 import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';
-import {
-  clearSingleOrder,
-  deleteOrder,
-  loadSingleOrder,
-  resetStatus,
-} from '@scifi/ngrx/orders/orders.actions';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { NewOrderResponse } from '../new-order-response.type';
+import { Order } from '../order.type';
+import { clearSingleOrder, deleteOrder, loadSingleOrder, resetStatus } from '../orders.actions';
 import {
   selectDeleteStatus,
   selectLoadStatus,
   selectNewOrder,
   selectSingleOrder,
-} from '@scifi/ngrx/orders/orders.feature';
-import { NewOrderResponse, Order, SingleOrderResponse } from '@scifi/types';
-import { Observable, Subscription, combineLatest, map } from 'rxjs';
+} from '../orders.feature';
+import { SingleOrderResponse } from '../single-order-response.type';
 
 @Component({
   selector: 'app-single-order',

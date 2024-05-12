@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  NewOrderRequest,
-  NewOrderResponse,
-  OrdersResponse,
-  SingleOrderResponse,
-} from '@scifi/types';
+import { NewOrderRequest } from './new-order-request.type';
+import { NewOrderResponse } from './new-order-response.type';
+import { OrdersResponse } from './order-response.type';
+import { SingleOrderResponse } from './single-order-response.type';
 
 @Injectable({
   providedIn: 'root',

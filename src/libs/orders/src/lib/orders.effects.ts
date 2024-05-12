@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { OrdersService } from '@scifi/orders/orders.service';
+import { dispatchErrorAction } from '@scifi/dialog/notification.actions';
 import { catchError, exhaustMap, map } from 'rxjs';
 import {
   createOrder,
@@ -14,7 +14,7 @@ import {
   updateOrder,
   updateOrderSuccess,
 } from './orders.actions';
-import { dispatchErrorAction } from '@scifi/dialog/notification.actions';
+import { OrdersService } from './orders.service';
 
 @Injectable()
 export class OrdersEffects {

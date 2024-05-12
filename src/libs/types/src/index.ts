@@ -1,33 +1,7 @@
-import { Address } from '@scifi/address';
 import { Pagination } from '@scifi/pagination';
-import { ExpressCheckoutItem, Product, SingleProduct } from '@scifi/product';
+import { Product, SingleProduct } from '@scifi/product';
 import { Customer } from '@scifi/account/customer.type';
 import { Status } from '@scifi/http';
-
-export type NewOrderRequest = {
-  billingAddress: Address;
-  shippingAddress: Address;
-  item?: {
-    productId: number;
-    quantity: number;
-  };
-};
-
-export type Order = {
-  id: number;
-  customerId: number;
-  billingAddressId: number;
-  shippingAddressId: number;
-  status: string;
-  paymentMethod: string;
-  total: string;
-  createdAt: string;
-  shippingAddress: Address;
-  orderItems: {
-    quantity: number;
-    product: Product;
-  }[];
-};
 
 export type Rating = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -71,19 +45,6 @@ export type CustomerReviewsResponse = Pagination & {
 
 export type FavoritesResponse = Pagination & {
   favorites: Review[] | [];
-};
-
-export type NewOrderResponse = Order & {
-  billingAddress: Address;
-};
-
-export type SingleOrderResponse = NewOrderResponse;
-
-export type OrdersResponse = {
-  id: number;
-  name: string;
-  username: string;
-  orders: Order[] | [];
 };
 
 export type Category = {
@@ -205,17 +166,6 @@ export type WishlistState = {
   updateStatus: Status;
   activeId: number;
   wishlist: Wishlist | null;
-};
-
-export type OrdersState = {
-  orders: OrdersResponse | null;
-  singleOrder: SingleOrderResponse | null;
-  expressCheckoutItem: ExpressCheckoutItem | null;
-  newOrder: NewOrderResponse | null;
-  loadStatus: Status;
-  createStatus: Status;
-  updateStatus: Status;
-  deleteStatus: Status;
 };
 
 export type CategoriesState = {

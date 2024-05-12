@@ -4,15 +4,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { Status } from '@scifi/http';
-import { deleteOrder, loadOrders, resetStatus } from '@scifi/ngrx/orders/orders.actions';
+import { Observable, Subscription, map, shareReplay } from 'rxjs';
+import { NewOrderResponse } from '../new-order-response.type';
+import { OrdersResponse } from '../order-response.type';
+import { Order } from '../order.type';
+import { deleteOrder, loadOrders, resetStatus } from '../orders.actions';
 import {
   selectDeleteStatus,
   selectLoadStatus,
   selectNewOrder,
   selectOrders,
-} from '@scifi/ngrx/orders/orders.feature';
-import { NewOrderResponse, Order, OrdersResponse } from '@scifi/types';
-import { Observable, Subscription, map, shareReplay } from 'rxjs';
+} from '../orders.feature';
 
 @Component({
   selector: 'app-orders',

@@ -1,7 +1,8 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { httpError } from '@scifi/dialog/notification.actions';
 import { addExpressCheckoutItemFromDialog } from '@scifi/product';
-import { OrdersResponse, OrdersState } from '@scifi/types';
+import { OrdersResponse } from './order-response.type';
+import { OrdersState } from './orders-state.type';
 import {
   addExpressCheckoutItem,
   clearExpressCheckout,

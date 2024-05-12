@@ -7,14 +7,15 @@ import { Store } from '@ngrx/store';
 import { selectBillingAddress, selectShippingAddress } from '@scifi/account/account.feature';
 import { AccountService } from '@scifi/account/account.service';
 import { AddressEmitData } from '@scifi/account/address-step/address-step.component';
-import { Address } from '@scifi/address';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
+import { Address } from '@scifi/address';
 import { loadCart } from '@scifi/ngrx/cart/cart.actions';
 import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
-import { clearExpressCheckout, createOrder } from '@scifi/ngrx/orders/orders.actions';
-import { selectExpressCheckoutItem, selectNewOrder } from '@scifi/ngrx/orders/orders.feature';
+import { NewOrderResponse } from '@scifi/orders/new-order-response.type';
+import { clearExpressCheckout, createOrder } from '@scifi/orders/orders.actions';
+import { selectExpressCheckoutItem, selectNewOrder } from '@scifi/orders/orders.feature';
 import { ExpressCheckoutItem } from '@scifi/product';
-import { NewOrderResponse, PaymentEvent } from '@scifi/types';
+import { PaymentEvent } from '@scifi/types';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
