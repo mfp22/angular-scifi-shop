@@ -8,7 +8,8 @@ import {
   loadProductReviews,
 } from '@scifi/ngrx/reviews/reviews.actions';
 import { selectLoadStatus, selectPagination } from '@scifi/ngrx/reviews/reviews.feature';
-import { AppState, Pagination, Status } from '@scifi/types';
+import { Pagination } from '@scifi/pagination';
+import { AppState, Status } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({

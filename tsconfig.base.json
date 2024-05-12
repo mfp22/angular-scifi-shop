@@ -25,6 +25,7 @@
       "@scifi/ngrx/*": ["src/libs/ngrx/src/lib/*"],
       "@scifi/orders/*": ["src/libs/orders/src/lib/*"],
       "@scifi/page-not-found/*": ["src/libs/page-not-found/src/lib/*"],
+      "@scifi/pagination": ["src/libs/pagination/src/index.ts"],
       "@scifi/products/*": ["src/libs/products/src/lib/*"],
       "@scifi/reviews/*": ["src/libs/reviews/src/lib/*"],
       "@scifi/search/*": ["src/libs/search/src/lib/*"],

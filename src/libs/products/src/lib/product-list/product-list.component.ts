@@ -21,7 +21,8 @@ import {
   selectWishlist,
   selectUpdateStatus as selectWishlistUpdateStatus,
 } from '@scifi/ngrx/wishlist/wishlist.feature';
-import { AppState, Category, Pagination, Product, Status, Supplier, Wishlist } from '@scifi/types';
+import { Pagination } from '@scifi/pagination';
+import { AppState, Category, Product, Status, Supplier, Wishlist } from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 

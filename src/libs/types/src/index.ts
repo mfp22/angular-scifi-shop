@@ -1,6 +1,7 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Pagination } from '@scifi/pagination';
 
 export type Product = {
   id: number;
@@ -20,12 +21,6 @@ export type Product = {
 export type SingleProduct = Product & {
   totalRatings: number;
   averageRating?: string;
-};
-
-export type Pagination = {
-  page: number;
-  count: number;
-  totalResults: number;
 };
 
 export type ProductsResponse = Pagination & {

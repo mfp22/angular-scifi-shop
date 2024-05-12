@@ -12,7 +12,8 @@ import {
   selectReviews,
   selectUpdateStatus,
 } from '@scifi/ngrx/reviews/reviews.feature';
-import { AppState, Customer, DialogContent, Pagination, Review, Status } from '@scifi/types';
+import { Pagination } from '@scifi/pagination';
+import { AppState, Customer, DialogContent, Review, Status } from '@scifi/types';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
 
 @Component({

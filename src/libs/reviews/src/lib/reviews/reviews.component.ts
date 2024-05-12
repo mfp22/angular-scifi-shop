@@ -17,7 +17,6 @@ import {
 import {
   AppState,
   NewReviewRequest,
-  Pagination,
   Product,
   Review,
   Status,
@@ -25,6 +24,7 @@ import {
 } from '@scifi/types';
 import { Observable } from 'rxjs';
 import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
+import { Pagination } from '@scifi/pagination';
 
 @Component({
   selector: 'app-reviews',
