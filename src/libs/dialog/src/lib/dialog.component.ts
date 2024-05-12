@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { logoutRequest } from '@scifi/ngrx/auth/auth.actions';
-import { hideDialog } from '@scifi/ngrx/notification/notification.actions';
 import { DialogContent } from './dialog-content.type';
+import { forceRetry, hideDialog } from './notification.actions';
 
 @Component({
   selector: 'app-dialog',
@@ -27,7 +26,7 @@ export class DialogComponent {
   }
 
   forceRetry() {
-    this._store.dispatch(logoutRequest());
+    this._store.dispatch(forceRetry());
     window.location.reload();
   }
 }

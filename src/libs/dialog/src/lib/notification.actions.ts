@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ApiError } from '@scifi/http';
+import { of } from 'rxjs';
 
 export const showDialog = createAction('[App Component] Show Dialog');
 export const hideDialog = createAction('[App Component] Hide Dialog');
@@ -20,3 +21,7 @@ export const notify = createAction(
     };
   }>(),
 );
+
+export const forceRetry = createAction('[Dialog Component] Force Retry');
+
+export const dispatchErrorAction = ({ error }: { error: ApiError }) => of(httpError(error));

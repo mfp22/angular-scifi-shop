@@ -1,6 +1,6 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { httpError } from '@scifi/dialog/notification.actions';
 import { Cart, CartItemDetail, CartState } from '@scifi/types';
-import { httpError } from '../notification/notification.actions';
 import {
   addToCart,
   clearCart,

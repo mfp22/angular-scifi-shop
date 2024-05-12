@@ -1,7 +1,7 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { httpError } from '@scifi/dialog/notification.actions';
 import { Status } from '@scifi/http';
 import { ReviewsState } from '@scifi/types';
-import { httpError } from '../notification/notification.actions';
 import {
   createReview,
   createReviewSuccess,

@@ -6,10 +6,10 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
+import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
 import { selectActiveId, selectUpdateStatus } from '@scifi/ngrx/cart/cart.feature';
-import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import { loadSingleProduct, searchOrderHistory } from '@scifi/ngrx/products/products.actions';
 import {
   selectLoadStatus,

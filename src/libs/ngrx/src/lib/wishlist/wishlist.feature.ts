@@ -1,6 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { clearCurrentUser } from '@scifi/account/account.actions';
+import { httpError } from '@scifi/dialog/notification.actions';
 import { WishlistState } from '@scifi/types';
-import { httpError } from '../notification/notification.actions';
 import {
   loadWishlist,
   loadWishlistSuccess,
@@ -9,7 +10,6 @@ import {
   updateWishlist,
   updateWishlistSuccess,
 } from './wishlist.actions';
-import { clearCurrentUser } from '@scifi/account/account.actions';
 
 const initialState: WishlistState = {
   loadStatus: 'pending',

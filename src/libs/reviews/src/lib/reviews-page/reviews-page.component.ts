@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
 import { Customer } from '@scifi/account/customer.type';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
+import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';
-import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import { resetReviewsStatus } from '@scifi/ngrx/reviews/reviews.actions';
 import {
   selectCustomer,

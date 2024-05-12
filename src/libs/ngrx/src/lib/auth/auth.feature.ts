@@ -1,6 +1,7 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { deleteUserSuccess } from '@scifi/account/account.actions';
+import { forceRetry, httpError } from '@scifi/dialog/notification.actions';
 import { AuthState } from '@scifi/types';
-import { httpError } from '../notification/notification.actions';
 import {
   authFailure,
   authenticateWithSSO,
@@ -15,7 +16,6 @@ import {
   signupRequest,
   signupSuccess,
 } from './auth.actions';
-import { deleteUserSuccess } from '@scifi/account/account.actions';
 
 const initialState: AuthState = {
   showOverlay: false,
@@ -58,7 +58,7 @@ export const authReducer = createReducer(
       signupStatus: 'success' as const,
     };
   }),
-  on(logoutRequest, (state) => ({
+  on(logoutRequest, forceRetry, (state) => ({
     ...state,
     logoutStatus: 'loading' as const,
   })),

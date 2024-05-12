@@ -4,7 +4,6 @@ import { Pagination } from '@scifi/pagination';
 import { ExpressCheckoutItem, Product, SingleProduct } from '@scifi/product';
 import { Customer } from '@scifi/account/customer.type';
 import { Status } from '@scifi/http';
-import { DialogContent } from '@scifi/dialog/dialog-content.type';
 
 export type AuthCredentials = {
   name?: string;
@@ -149,11 +148,6 @@ export type StacktraceError = {
     message: string;
     stack: string;
   };
-};
-
-export type NotificationState = {
-  showDialog: boolean;
-  data: DialogContent | null;
 };
 
 export type ProductsState = {

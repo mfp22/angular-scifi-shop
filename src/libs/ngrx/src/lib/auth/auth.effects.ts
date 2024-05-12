@@ -5,10 +5,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { clearCurrentUser } from '@scifi/account/account.actions';
 import { Customer } from '@scifi/account/customer.type';
 import { AuthService } from '@scifi/auth/auth.service';
+import { httpError, notify } from '@scifi/dialog/notification.actions';
 import { ApiError } from '@scifi/http';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { httpError, notify } from '../notification/notification.actions';
 import {
   authenticateWithSSO,
   authenticateWithSSOSuccess,

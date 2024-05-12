@@ -5,10 +5,10 @@ import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
 import { Customer } from '@scifi/account/customer.type';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
+import { notify } from '@scifi/dialog/notification.actions';
+import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';
 import { selectLoggedInUserId } from '@scifi/ngrx/auth/auth.feature';
-import { notify } from '@scifi/ngrx/notification/notification.actions';
-import { selectData } from '@scifi/ngrx/notification/notification.feature';
 import {
   clearSingleOrder,
   deleteOrder,

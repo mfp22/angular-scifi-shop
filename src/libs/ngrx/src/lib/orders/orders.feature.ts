@@ -1,6 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { httpError } from '@scifi/dialog/notification.actions';
+import { addExpressCheckoutItemFromDialog } from '@scifi/product';
 import { OrdersResponse, OrdersState } from '@scifi/types';
-import { httpError } from '../notification/notification.actions';
 import {
   addExpressCheckoutItem,
   clearExpressCheckout,
@@ -17,7 +18,6 @@ import {
   updateOrder,
   updateOrderSuccess,
 } from './orders.actions';
-import { addExpressCheckoutItemFromDialog } from '@scifi/product';
 
 const initialState: OrdersState = {
   orders: null,

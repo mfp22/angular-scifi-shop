@@ -1,4 +1,6 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { Address } from '@scifi/address';
+import { httpError } from '@scifi/dialog/notification.actions';
 import {
   clearCurrentUser,
   createOrUpdateAddress,
@@ -9,16 +11,14 @@ import {
   deleteUserSuccess,
   loadAccount,
   loadAccountSuccess,
+  resetStatus,
   updateAccount,
   updateAccountSuccess,
   updateActiveItem,
-  resetStatus,
 } from './account.actions';
-import { Address } from '@scifi/address';
-import { Customer } from './customer.type';
-import { CustomerNewAddress } from './customer-new-address.type';
-import { httpError } from '@scifi/ngrx/notification/notification.actions';
 import { AccountState } from './account.state';
+import { CustomerNewAddress } from './customer-new-address.type';
+import { Customer } from './customer.type';
 
 const initialState: AccountState = {
   account: null,

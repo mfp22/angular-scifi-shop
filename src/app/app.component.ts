@@ -9,12 +9,12 @@ import { Customer } from '@scifi/account/customer.type';
 import { AuthService } from '@scifi/auth/auth.service';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
+import { selectData, selectShowDialog } from '@scifi/dialog/notification.feature';
 import { selectLoggedInUserId, selectShowOverlay } from '@scifi/ngrx/auth/auth.feature';
 import { loadCart } from '@scifi/ngrx/cart/cart.actions';
 import { loadCategories, loadSuppliers } from '@scifi/ngrx/categories/categories.actions';
-import { selectData, selectShowDialog } from '@scifi/ngrx/notification/notification.feature';
 import { loadWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
