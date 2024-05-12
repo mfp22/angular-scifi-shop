@@ -2,7 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { Status } from '@scifi/http';
 import { deleteOrder, loadOrders, resetStatus } from '@scifi/ngrx/orders/orders.actions';
 import {

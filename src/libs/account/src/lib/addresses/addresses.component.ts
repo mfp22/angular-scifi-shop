@@ -1,8 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Address, AddressFormGroup } from '@scifi/address';
-import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
-import { AddressEmitData } from '@scifi/account/address-step/address-step.component';
 import { Status } from '@scifi/http';
 import { Observable, Subscription } from 'rxjs';
 import { AccountActiveItem } from '../account-active-item.type';
@@ -15,6 +13,8 @@ import {
 import { selectActiveItem, selectDeleteStatus, selectUpdateStatus } from '../account.feature';
 import { AccountService } from '../account.service';
 import { AddressId } from '../address-id.type';
+import { AddressEmitData } from '../address-step/address-step.component';
+import { selectLoggedInUserId } from '../auth.feature';
 
 @Component({
   selector: 'app-addresses',

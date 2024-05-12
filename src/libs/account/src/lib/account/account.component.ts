@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { selectLoggedInUserId, selectSocialUser } from '@scifi/auth/auth.feature';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { Status } from '@scifi/http';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
@@ -19,6 +18,7 @@ import {
   selectUpdateStatus,
 } from '../account.feature';
 import { AccountService } from '../account.service';
+import { selectLoggedInUserId, selectSocialUser } from '../auth.feature';
 import { Customer } from '../customer.type';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { UpdateCustomerRequest } from '../udpate-customer-request.type';

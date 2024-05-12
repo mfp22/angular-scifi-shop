@@ -2,11 +2,11 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectAccount } from '@scifi/account/account.feature';
-import { Customer } from '@scifi/account/customer.type';
+import { selectAccount } from './account.feature';
 import { AuthCredentials } from './auth-credentials.type';
 import { authenticateWithSSO } from './auth.actions';
 import { selectLoggedInUserId } from './auth.feature';
+import { Customer } from './customer.type';
 import { OAuthCredentials } from './oauth-credentials.type';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class AuthService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
-    observe: 'response' as 'response',
+    observe: 'response' as const,
     withCredentials: true,
   };
   public loggedInUserId: string | number | null = null;

@@ -13,7 +13,6 @@
     "paths": {
       "@scifi/account/*": ["src/libs/account/src/lib/*"],
       "@scifi/address": ["src/libs/address/src/index.ts"],
-      "@scifi/auth/*": ["src/libs/auth/src/lib/*"],
       "@scifi/cart/*": ["src/libs/cart/src/lib/*"],
       "@scifi/checkout/*": ["src/libs/checkout/src/lib/*"],
       "@scifi/chips/*": ["src/libs/chips/src/lib/*"],

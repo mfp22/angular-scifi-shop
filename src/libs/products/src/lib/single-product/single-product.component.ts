@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';

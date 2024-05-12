@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AccountService } from '@scifi/account/account.service';
 import { Observable } from 'rxjs';
+import { AccountService } from '../account.service';
 import { AuthCredentials } from '../auth-credentials.type';
 import { loginRequest, signupRequest } from '../auth.actions';
 import { selectAuthIsLoading } from '../auth.feature';
@@ -20,7 +20,7 @@ type AuthForm = FormGroup<{
   templateUrl: './auth-form.component.html',
   styleUrls: ['./auth-form.component.sass'],
 })
-export class AuthFormComponent {
+export class AuthFormComponent implements OnInit {
   @Input() formType = 'Login';
   formField = ['', [Validators.required, Validators.pattern(/\S+/)]];
   passwordField = [

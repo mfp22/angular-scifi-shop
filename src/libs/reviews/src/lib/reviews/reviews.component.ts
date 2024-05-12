@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { Status } from '@scifi/http';
 import {
   deleteReview,

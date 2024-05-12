@@ -1,6 +1,6 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
-import { Customer } from '@scifi/account/customer.type';
 import { Status } from '@scifi/http';
+import { Customer } from './customer.type';
 
 export type AuthState = {
   showOverlay: boolean;

@@ -8,7 +8,7 @@ import { selectBillingAddress, selectShippingAddress } from '@scifi/account/acco
 import { AccountService } from '@scifi/account/account.service';
 import { AddressEmitData } from '@scifi/account/address-step/address-step.component';
 import { Address } from '@scifi/address';
-import { selectLoggedInUserId } from '@scifi/auth/auth.feature';
+import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { loadCart } from '@scifi/ngrx/cart/cart.actions';
 import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import { clearExpressCheckout, createOrder } from '@scifi/ngrx/orders/orders.actions';

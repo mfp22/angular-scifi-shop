@@ -1,15 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AccountActiveItem } from '@scifi/account/account-active-item.type';
-import {
-  selectActiveItem,
-  selectDeleteStatus,
-  selectUpdateStatus,
-} from '@scifi/account/account.feature';
 import { Address, AddressFormGroup } from '@scifi/address';
 import { Status } from '@scifi/http';
 import { Observable } from 'rxjs';
+import { AccountActiveItem } from '../account-active-item.type';
+import { selectActiveItem, selectDeleteStatus, selectUpdateStatus } from '../account.feature';
 
 type RequiredAddressField = 'addressLine1' | 'city' | 'postcode';
 

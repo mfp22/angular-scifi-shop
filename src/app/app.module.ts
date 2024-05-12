@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { accountFeature } from '@scifi/account/account.feature';
 import { AccountModule } from '@scifi/account/account.module';
-import { AuthModule } from '@scifi/auth/auth.module';
+import { AuthModule } from '@scifi/account/auth.module';
 import { CartModule } from '@scifi/cart/cart.module';
 import { CheckoutModule } from '@scifi/checkout/checkout.module';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
