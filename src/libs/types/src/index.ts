@@ -1,15 +1,6 @@
 import { Product } from '@scifi/product';
 import { Status } from '@scifi/http';
 
-/* NgRx types for state management */
-
-export type StacktraceError = {
-  error: {
-    message: string;
-    stack: string;
-  };
-};
-
 export type CartItemDetail = {
   quantity: number;
   product: Product;
