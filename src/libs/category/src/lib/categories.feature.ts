@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { httpError } from '@scifi/dialog/notification.actions';
-import { CategoriesState } from '@scifi/types';
+import { CategoriesState } from './categories-state.type';
 import {
   loadCategories,
   loadCategoriesSuccess,

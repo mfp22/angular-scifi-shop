@@ -3,19 +3,6 @@ import { Product, SingleProduct } from '@scifi/product';
 import { Status } from '@scifi/http';
 import { Review } from '@scifi/reviews/review.type';
 
-export type Category = {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: string;
-  products: number;
-};
-
-export type Supplier = Category & {
-  location: string;
-  establishYear: number;
-};
-
 export type PaymentEvent = {
   status: 'completed' | 'pending';
   paymentMethod: 'Card' | 'Klarna' | 'PayPal';
@@ -109,11 +96,4 @@ export type WishlistState = {
   updateStatus: Status;
   activeId: number;
   wishlist: Wishlist | null;
-};
-
-export type CategoriesState = {
-  categories: Category[] | null;
-  suppliers: Supplier[] | null;
-  categoriesLoadStatus: Status;
-  suppliersLoadStatus: Status;
 };

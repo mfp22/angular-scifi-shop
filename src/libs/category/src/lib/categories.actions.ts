@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Category, Supplier } from '@scifi/types';
+import { Category } from './category.type';
+import { Supplier } from './supplier.type';
 
 export const loadCategories = createAction('[Nav Component] Load Categories');
 export const loadSuppliers = createAction('[Nav Component] Load Suppliers');

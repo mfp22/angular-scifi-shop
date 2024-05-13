@@ -5,22 +5,22 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
-import { Customer } from '@scifi/account/customer.type';
 import { logoutRequest, showAuthOverlay } from '@scifi/account/auth.actions';
 import {
   selectAnyLoadingState,
   selectLoggedInUserId,
   selectLogoutStatus,
 } from '@scifi/account/auth.feature';
-import { Status } from '@scifi/http';
-import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
+import { Customer } from '@scifi/account/customer.type';
 import {
+  Category,
   selectCategories,
   selectCategoriesLoadStatus,
   selectSuppliers,
   selectSuppliersLoadStatus,
-} from '@scifi/ngrx/categories/categories.feature';
-import { Category } from '@scifi/types';
+} from '@scifi/category';
+import { Status } from '@scifi/http';
+import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 

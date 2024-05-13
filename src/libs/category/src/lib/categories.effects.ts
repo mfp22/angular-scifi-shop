@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { dispatchErrorAction } from '@scifi/dialog/notification.actions';
-import { ProductService } from '@scifi/products/product.service';
 import { catchError, exhaustMap, map } from 'rxjs';
 import {
   loadCategories,
@@ -9,6 +8,7 @@ import {
   loadSuppliers,
   loadSuppliersSuccess,
 } from './categories.actions';
+import { CategoriesService } from './categories.service';
 
 @Injectable()
 export class CategoriesEffects {
@@ -16,7 +16,7 @@ export class CategoriesEffects {
     this._actions$.pipe(
       ofType(loadCategories),
       exhaustMap(() =>
-        this._productsService.getCategories().pipe(
+        this.categoriesService.getCategories().pipe(
           map((categories) => loadCategoriesSuccess(categories)),
           catchError(dispatchErrorAction),
         ),
@@ -28,7 +28,7 @@ export class CategoriesEffects {
     this._actions$.pipe(
       ofType(loadSuppliers),
       exhaustMap(() =>
-        this._productsService.getSuppliers().pipe(
+        this.categoriesService.getSuppliers().pipe(
           map((suppliers) => loadSuppliersSuccess(suppliers)),
           catchError(dispatchErrorAction),
         ),
@@ -36,5 +36,5 @@ export class CategoriesEffects {
     ),
   );
 
-  constructor(private _actions$: Actions, private _productsService: ProductService) {}
+  constructor(private _actions$: Actions, private categoriesService: CategoriesService) {}
 }

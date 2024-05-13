@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SingleProduct } from '@scifi/product';
-import { Category, OrderSearchResponse, ProductsUrlParams, Supplier } from '@scifi/types';
+import { OrderSearchResponse, ProductsUrlParams } from '@scifi/types';
 import { ProductsResponse } from './products-response.type';
 
 @Injectable({
@@ -29,13 +29,5 @@ export class ProductService {
       `${this.baseUrl}/customers/${customerId}/orders?productId=${productId}`,
       { withCredentials: true },
     );
-  }
-
-  getCategories() {
-    return this._http.get<{ categories: Category[] }>(`${this.baseUrl}/categories`);
-  }
-
-  getSuppliers() {
-    return this._http.get<{ suppliers: Supplier[] }>(`${this.baseUrl}/suppliers`);
   }
 }

@@ -5,14 +5,14 @@ import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material
 import { Store } from '@ngrx/store';
 import { loadAccount } from '@scifi/account/account.actions';
 import { selectAccount } from '@scifi/account/account.feature';
-import { Customer } from '@scifi/account/customer.type';
 import { selectLoggedInUserId, selectShowOverlay } from '@scifi/account/auth.feature';
 import { AuthService } from '@scifi/account/auth.service';
+import { Customer } from '@scifi/account/customer.type';
+import { loadCategories, loadSuppliers } from '@scifi/category';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { selectData, selectShowDialog } from '@scifi/dialog/notification.feature';
 import { loadCart } from '@scifi/ngrx/cart/cart.actions';
-import { loadCategories, loadSuppliers } from '@scifi/ngrx/categories/categories.actions';
 import { loadWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 

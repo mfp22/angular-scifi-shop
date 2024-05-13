@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Status } from '@scifi/http';
 import {
+  Category,
+  Supplier,
   selectCategories,
   selectCategoriesLoadStatus,
   selectSuppliers,
   selectSuppliersLoadStatus,
-} from '@scifi/ngrx/categories/categories.feature';
-import { Category, Supplier } from '@scifi/types';
+} from '@scifi/category';
+import { Status } from '@scifi/http';
 import { Observable } from 'rxjs';
 
 @Component({

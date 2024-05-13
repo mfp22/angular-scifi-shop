@@ -5,12 +5,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
+import { Category, Supplier, selectCategories, selectSuppliers } from '@scifi/category';
 import { Status } from '@scifi/http';
 import {
   selectActiveId as selectActiveCartId,
   selectUpdateStatus as selectCartUpdateStatus,
 } from '@scifi/ngrx/cart/cart.feature';
-import { selectCategories, selectSuppliers } from '@scifi/ngrx/categories/categories.feature';
 import {
   selectLoadStatus,
   selectPagination,
@@ -24,7 +24,7 @@ import {
 } from '@scifi/ngrx/wishlist/wishlist.feature';
 import { Pagination } from '@scifi/pagination';
 import { Product } from '@scifi/product';
-import { Category, Supplier, Wishlist } from '@scifi/types';
+import { Wishlist } from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
