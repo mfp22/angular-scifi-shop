@@ -11,11 +11,6 @@ import {
   selectActiveId as selectActiveCartId,
   selectUpdateStatus as selectCartUpdateStatus,
 } from '@scifi/ngrx/cart/cart.feature';
-import {
-  selectLoadStatus,
-  selectPagination,
-  selectProducts,
-} from '@scifi/ngrx/products/products.feature';
 import { resetWishlistStatus } from '@scifi/ngrx/wishlist/wishlist.actions';
 import {
   selectActiveId as selectActiveWishlistId,
@@ -27,6 +22,7 @@ import { Product } from '@scifi/product';
 import { Wishlist } from '@scifi/types';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { selectLoadStatus, selectPagination, selectProducts } from '../products.feature';
 
 const placeholderProduct = {
   id: 2,

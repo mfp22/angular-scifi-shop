@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { dispatchErrorAction } from '@scifi/dialog/notification.actions';
-import { ProductService } from '@scifi/products/product.service';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { ProductService } from './product.service';
 import {
   loadProducts,
   loadProductsSuccess,

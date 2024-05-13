@@ -1,17 +1,5 @@
-import { Pagination } from '@scifi/pagination';
-import { Product, SingleProduct } from '@scifi/product';
+import { Product } from '@scifi/product';
 import { Status } from '@scifi/http';
-import { Review } from '@scifi/reviews/review.type';
-
-// Response returned from searching order history for a specific product id
-export type OrderSearchResponse = {
-  productId: number;
-  lastOrdered: {
-    orderId: number;
-    orderDate: string;
-  } | null;
-  review: Review | null;
-};
 
 /* NgRx types for state management */
 
@@ -20,30 +8,6 @@ export type StacktraceError = {
     message: string;
     stack: string;
   };
-};
-
-export type ProductsState = {
-  pagination: Pagination;
-  products: Product[] | [] | null;
-  singleProduct: SingleProduct | null;
-  searchTerm: string | null;
-  orderSearchResult: OrderSearchResponse | null;
-  loadStatus: Status;
-  searchStatus: Status;
-};
-
-export type ProductsUrlParams = {
-  page?: string | number;
-  limit?: string | number;
-  minPrice?: string | number;
-  maxPrice?: string | number;
-  category?: string;
-  supplier?: string;
-  product?: string;
-  hideOutOfStock?: boolean;
-  orderBy?: string;
-  order?: string;
-  avgRating?: string | number;
 };
 
 export type CartItemDetail = {

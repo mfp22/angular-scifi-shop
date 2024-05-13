@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { SingleProduct } from '@scifi/product';
-import { ProductsResponse } from '@scifi/products/products-response.type';
-import { OrderSearchResponse, ProductsUrlParams } from '@scifi/types';
+import { OrderSearchResponse } from './order-search-response.type';
+import { ProductsResponse } from './products-response.type';
+import { ProductsUrlParams } from './products-url-params.type';
 
 export const loadProducts = createAction(
   '[ProductList Component] Load Products',

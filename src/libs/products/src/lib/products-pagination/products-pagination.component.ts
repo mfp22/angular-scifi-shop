@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { ThemePalette } from '@angular/material/core';
 import { PageEvent } from '@angular/material/paginator';
@@ -9,23 +9,19 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Status } from '@scifi/http';
-import { loadProducts } from '@scifi/ngrx/products/products.actions';
-import {
-  selectLoadStatus,
-  selectPagination,
-  selectProducts,
-} from '@scifi/ngrx/products/products.feature';
 import { Pagination } from '@scifi/pagination';
 import { Product } from '@scifi/product';
-import { ProductsUrlParams } from '@scifi/types';
 import { Observable, Subscription } from 'rxjs';
+import { ProductsUrlParams } from '../products-url-params.type';
+import { loadProducts } from '../products.actions';
+import { selectLoadStatus, selectPagination, selectProducts } from '../products.feature';
 
 @Component({
   selector: 'app-products-pagination',
   templateUrl: './products-pagination.component.html',
   styleUrls: ['./products-pagination.component.sass'],
 })
-export class ProductsPaginationComponent {
+export class ProductsPaginationComponent implements OnInit, OnDestroy {
   @Output() toggleStyleEvent = new EventEmitter<MatButtonToggleChange>();
   @Input() showDisplayToggle = true;
   readonly pagination$: Observable<Pagination> = this._store.select(selectPagination);

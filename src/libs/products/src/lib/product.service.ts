@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SingleProduct } from '@scifi/product';
-import { OrderSearchResponse, ProductsUrlParams } from '@scifi/types';
+import { OrderSearchResponse } from './order-search-response.type';
 import { ProductsResponse } from './products-response.type';
+import { ProductsUrlParams } from './products-url-params.type';
 
 @Injectable({
   providedIn: 'root',

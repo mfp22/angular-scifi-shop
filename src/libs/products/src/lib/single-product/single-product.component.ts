@@ -10,13 +10,6 @@ import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';
 import { selectActiveId, selectUpdateStatus } from '@scifi/ngrx/cart/cart.feature';
-import { loadSingleProduct, searchOrderHistory } from '@scifi/ngrx/products/products.actions';
-import {
-  selectLoadStatus,
-  selectOrderSearchResult,
-  selectSearchStatus,
-  selectSingleProduct,
-} from '@scifi/ngrx/products/products.feature';
 import { Product, SingleProduct } from '@scifi/product';
 import { NewReviewRequest } from '@scifi/reviews/new-review-request.type';
 import { Rating } from '@scifi/reviews/rating.type';
@@ -29,8 +22,15 @@ import {
   selectReviewStatus,
   selectUpdateStatus as selectReviewUpdateStatus,
 } from '@scifi/reviews/reviews.feature';
-import { OrderSearchResponse } from '@scifi/types';
 import { Observable, Subscription, combineLatest, map, shareReplay } from 'rxjs';
+import { OrderSearchResponse } from '../order-search-response.type';
+import { loadSingleProduct, searchOrderHistory } from '../products.actions';
+import {
+  selectLoadStatus,
+  selectOrderSearchResult,
+  selectSearchStatus,
+  selectSingleProduct,
+} from '../products.feature';
 
 @Component({
   selector: 'app-single-product',

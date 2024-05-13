@@ -6,8 +6,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ChipsComponent } from '@scifi/chips/chips.component';
 import { MaterialModule } from '@scifi/material/material.module';
-import { ProductsEffects } from '@scifi/ngrx/products/products.effects';
-import { productsFeature } from '@scifi/ngrx/products/products.feature';
 import { WishlistEffects } from '@scifi/ngrx/wishlist/wishlist.effects';
 import { wishlistFeature } from '@scifi/ngrx/wishlist/wishlist.feature';
 import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
@@ -21,6 +19,8 @@ import { ActionButtonsComponent } from './action-buttons/action-buttons.componen
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductsPaginationComponent } from './products-pagination/products-pagination.component';
+import { ProductsEffects } from './products.effects';
+import { productsFeature } from './products.feature';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { authenticationGuard } from '../../../../app/authenticationGuard';
 
