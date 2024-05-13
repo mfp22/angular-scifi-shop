@@ -1,25 +1,28 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Status } from '@scifi/http';
+import { Observable, Subscription } from 'rxjs';
+import { NewReviewRequest } from '../new-review-request.type';
+import { Rating } from '../rating.type';
+import { Review } from '../review.type';
 import {
   createReview,
   deleteReview,
   resetReviewsStatus,
   updateActiveId,
   updateReview,
-} from '@scifi/ngrx/reviews/reviews.actions';
-import { selectReviewStatus } from '@scifi/ngrx/reviews/reviews.feature';
-import { NewReviewRequest, Rating, Review, UpdateReviewRequest } from '@scifi/types';
-import { Observable, Subscription } from 'rxjs';
+} from '../reviews.actions';
+import { selectReviewStatus } from '../reviews.feature';
+import { UpdateReviewRequest } from '../reviews.service';
 
 @Component({
   selector: 'app-review-dialog',
   templateUrl: './review-dialog.component.html',
   styleUrls: ['./review-dialog.component.sass'],
 })
-export class ReviewDialogComponent {
+export class ReviewDialogComponent implements OnInit, OnDestroy {
   reviewForm = this._formBuilder.group({
     title: [this.data.review.title, Validators.required],
     body: [this.data.review.body, Validators.required],

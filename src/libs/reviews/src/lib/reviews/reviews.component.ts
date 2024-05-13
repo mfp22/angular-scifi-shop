@@ -3,23 +3,21 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { Status } from '@scifi/http';
-import {
-  deleteReview,
-  resetReviewsStatus,
-  updateActiveId,
-} from '@scifi/ngrx/reviews/reviews.actions';
+import { Pagination } from '@scifi/pagination';
+import { Product } from '@scifi/product';
+import { Observable } from 'rxjs';
+import { NewReviewRequest } from '../new-review-request.type';
+import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
+import { Review } from '../review.type';
+import { deleteReview, resetReviewsStatus, updateActiveId } from '../reviews.actions';
 import {
   selectActiveId,
   selectLoadStatus,
   selectPagination,
   selectReviewStatus,
   selectReviews,
-} from '@scifi/ngrx/reviews/reviews.feature';
-import { Pagination } from '@scifi/pagination';
-import { Product } from '@scifi/product';
-import { NewReviewRequest, Review, UpdateReviewRequest } from '@scifi/types';
-import { Observable } from 'rxjs';
-import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
+} from '../reviews.feature';
+import { UpdateReviewRequest } from '../reviews.service';
 
 @Component({
   selector: 'app-reviews',

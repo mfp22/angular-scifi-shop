@@ -2,11 +2,11 @@ import { createAction, props } from '@ngrx/store';
 import {
   CustomerReviewsResponse,
   FavoritesResponse,
-  NewReviewRequest,
-  Review,
   ReviewsResponse,
   UpdateReviewRequest,
-} from '@scifi/types';
+} from './reviews.service';
+import { NewReviewRequest } from './new-review-request.type';
+import { Review } from './review.type';
 
 export const loadAllReviews = createAction(
   '[Reviews Component] Load All Reviews',

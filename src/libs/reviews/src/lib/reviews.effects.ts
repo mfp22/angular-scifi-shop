@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { dispatchErrorAction } from '@scifi/dialog/notification.actions';
-import { ReviewsService } from '@scifi/reviews/reviews.service';
 import { catchError, exhaustMap, map } from 'rxjs';
 import {
   createReview,
@@ -19,6 +18,7 @@ import {
   updateReview,
   updateReviewSuccess,
 } from './reviews.actions';
+import { ReviewsService } from './reviews.service';
 
 @Injectable()
 export class ReviewsEffects {

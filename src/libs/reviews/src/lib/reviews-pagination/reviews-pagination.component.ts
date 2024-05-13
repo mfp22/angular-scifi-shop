@@ -3,14 +3,10 @@ import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Status } from '@scifi/http';
-import {
-  loadAllReviews,
-  loadCustomerReviews,
-  loadProductReviews,
-} from '@scifi/ngrx/reviews/reviews.actions';
-import { selectLoadStatus, selectPagination } from '@scifi/ngrx/reviews/reviews.feature';
 import { Pagination } from '@scifi/pagination';
 import { Observable, Subscription } from 'rxjs';
+import { loadAllReviews, loadCustomerReviews, loadProductReviews } from '../reviews.actions';
+import { selectLoadStatus, selectPagination } from '../reviews.feature';
 
 @Component({
   selector: 'app-reviews-pagination',

@@ -1,51 +1,7 @@
 import { Pagination } from '@scifi/pagination';
 import { Product, SingleProduct } from '@scifi/product';
-import { Customer } from '@scifi/account/customer.type';
 import { Status } from '@scifi/http';
-
-export type Rating = 0 | 1 | 2 | 3 | 4 | 5;
-
-export type NewReviewRequest = {
-  customerId: number;
-  productId: number;
-  orderId: number;
-  title: string;
-  body: string;
-  rating: Rating;
-  recommend?: boolean;
-};
-
-export type UpdateReviewRequest = {
-  title?: string;
-  body?: string;
-  recommend?: boolean | null;
-  rating?: Rating;
-};
-
-export type Review = NewReviewRequest & {
-  id: number;
-  recommend: boolean | null;
-  createdAt?: string;
-  addedAt?: string;
-  product?: Product;
-  customer?: {
-    username: string;
-    avatar: string | null;
-  };
-};
-
-export type ReviewsResponse = Pagination & {
-  reviews: Review[] | [];
-};
-
-export type CustomerReviewsResponse = Pagination & {
-  customer: Customer;
-  reviews: Review[] | [];
-};
-
-export type FavoritesResponse = Pagination & {
-  favorites: Review[] | [];
-};
+import { Review } from '@scifi/reviews/review.type';
 
 export type Category = {
   id: number;
@@ -107,19 +63,6 @@ export type ProductsUrlParams = {
   orderBy?: string;
   order?: string;
   avgRating?: string | number;
-};
-
-export type ReviewsState = {
-  pagination: Pagination;
-  reviews: Review[] | [] | null;
-  customer: Customer | null;
-  favorites: Review[] | [] | null;
-  singleReview: Review | null;
-  activeId: number;
-  loadStatus: Status;
-  createStatus: Status;
-  updateStatus: Status;
-  deleteStatus: Status;
 };
 
 export type CartItemDetail = {

@@ -1,13 +1,30 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  CustomerReviewsResponse,
-  FavoritesResponse,
-  NewReviewRequest,
-  Review,
-  ReviewsResponse,
-  UpdateReviewRequest,
-} from '@scifi/types';
+import { NewReviewRequest } from './new-review-request.type';
+import { Review } from './review.type';
+import { Rating } from './rating.type';
+import { Pagination } from '@scifi/pagination';
+import { Customer } from '@scifi/account/customer.type';
+
+export type UpdateReviewRequest = {
+  title?: string;
+  body?: string;
+  recommend?: boolean | null;
+  rating?: Rating;
+};
+
+export type FavoritesResponse = Pagination & {
+  favorites: Review[] | [];
+};
+
+export type CustomerReviewsResponse = Pagination & {
+  customer: Customer;
+  reviews: Review[] | [];
+};
+
+export type ReviewsResponse = Pagination & {
+  reviews: Review[] | [];
+};
 
 @Injectable({
   providedIn: 'root',

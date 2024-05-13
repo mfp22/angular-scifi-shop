@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Review } from '@scifi/types';
+import { Review } from '../review.type';
 
 @Component({
   selector: 'app-rating',

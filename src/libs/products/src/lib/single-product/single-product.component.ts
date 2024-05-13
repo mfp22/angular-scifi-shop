@@ -17,20 +17,19 @@ import {
   selectSearchStatus,
   selectSingleProduct,
 } from '@scifi/ngrx/products/products.feature';
-import {
-  deleteReview,
-  resetReviewsStatus,
-  updateActiveId,
-} from '@scifi/ngrx/reviews/reviews.actions';
+import { Product, SingleProduct } from '@scifi/product';
+import { NewReviewRequest } from '@scifi/reviews/new-review-request.type';
+import { Rating } from '@scifi/reviews/rating.type';
+import { ReviewDialogComponent } from '@scifi/reviews/review-dialog/review-dialog.component';
+import { Review } from '@scifi/reviews/review.type';
+import { deleteReview, resetReviewsStatus, updateActiveId } from '@scifi/reviews/reviews.actions';
 import {
   selectCreateStatus,
   selectDeleteStatus,
   selectReviewStatus,
   selectUpdateStatus as selectReviewUpdateStatus,
-} from '@scifi/ngrx/reviews/reviews.feature';
-import { Product, SingleProduct } from '@scifi/product';
-import { ReviewDialogComponent } from '@scifi/reviews/review-dialog/review-dialog.component';
-import { NewReviewRequest, OrderSearchResponse, Rating, Review } from '@scifi/types';
+} from '@scifi/reviews/reviews.feature';
+import { OrderSearchResponse } from '@scifi/types';
 import { Observable, Subscription, combineLatest, map, shareReplay } from 'rxjs';
 
 @Component({

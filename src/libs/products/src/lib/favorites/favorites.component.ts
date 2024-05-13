@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
 import { Customer } from '@scifi/account/customer.type';
 import { Status } from '@scifi/http';
-import { loadFavorites } from '@scifi/ngrx/reviews/reviews.actions';
-import { selectFavorites, selectLoadStatus } from '@scifi/ngrx/reviews/reviews.feature';
-import { Review } from '@scifi/types';
+import { Review } from '@scifi/reviews/review.type';
+import { loadFavorites } from '@scifi/reviews/reviews.actions';
+import { selectFavorites, selectLoadStatus } from '@scifi/reviews/reviews.feature';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({

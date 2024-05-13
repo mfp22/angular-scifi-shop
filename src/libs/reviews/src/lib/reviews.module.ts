@@ -1,21 +1,21 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReviewsComponent } from './reviews/reviews.component';
-import { MaterialModule } from '@scifi/material/material.module';
-import { EffectsModule } from '@ngrx/effects';
-import { ReviewsEffects } from '@scifi/ngrx/reviews/reviews.effects';
-import { StoreModule } from '@ngrx/store';
-import { reviewsFeature } from '@scifi/ngrx/reviews/reviews.feature';
-import { NgLetModule } from 'ng-let';
-import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ReviewsPageComponent } from './reviews-page/reviews-page.component';
-import { SpinnerModule } from '@scifi/spinner/spinner.module';
-import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
-import { ReviewsPaginationComponent } from './reviews-pagination/reviews-pagination.component';
-import { RatingComponent } from './rating/rating.component';
-import { ChipsComponent } from '@scifi/chips/chips.component';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { ChipsComponent } from '@scifi/chips/chips.component';
+import { MaterialModule } from '@scifi/material/material.module';
+import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
+import { SpinnerModule } from '@scifi/spinner/spinner.module';
+import { NgLetModule } from 'ng-let';
+import { RatingComponent } from './rating/rating.component';
+import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
+import { ReviewsPageComponent } from './reviews-page/reviews-page.component';
+import { ReviewsPaginationComponent } from './reviews-pagination/reviews-pagination.component';
+import { ReviewsEffects } from './reviews.effects';
+import { reviewsFeature } from './reviews.feature';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 @NgModule({
   declarations: [

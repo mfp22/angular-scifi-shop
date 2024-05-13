@@ -7,17 +7,17 @@ import { Customer } from '@scifi/account/customer.type';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { selectData } from '@scifi/dialog/notification.feature';
 import { Status } from '@scifi/http';
-import { resetReviewsStatus } from '@scifi/ngrx/reviews/reviews.actions';
+import { Pagination } from '@scifi/pagination';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { Review } from '../review.type';
+import { resetReviewsStatus } from '../reviews.actions';
 import {
   selectCustomer,
   selectDeleteStatus,
   selectPagination,
   selectReviews,
   selectUpdateStatus,
-} from '@scifi/ngrx/reviews/reviews.feature';
-import { Pagination } from '@scifi/pagination';
-import { Review } from '@scifi/types';
-import { Observable, Subscription, combineLatest, map } from 'rxjs';
+} from '../reviews.feature';
 
 @Component({
   selector: 'app-reviews-page',
