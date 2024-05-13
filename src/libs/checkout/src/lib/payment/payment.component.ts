@@ -21,7 +21,7 @@ import { notify } from '@scifi/dialog/notification.actions';
 import { selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
 import { selectExpressCheckoutItem } from '@scifi/orders/orders.feature';
 import { ExpressCheckoutItem } from '@scifi/product';
-import { PaymentEvent } from '@scifi/types';
+import { PaymentEvent } from '../payment.type';
 import {
   Appearance,
   PaymentIntentResult,

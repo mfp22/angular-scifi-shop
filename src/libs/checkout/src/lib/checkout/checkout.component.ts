@@ -15,7 +15,7 @@ import { NewOrderResponse } from '@scifi/orders/new-order-response.type';
 import { clearExpressCheckout, createOrder } from '@scifi/orders/orders.actions';
 import { selectExpressCheckoutItem, selectNewOrder } from '@scifi/orders/orders.feature';
 import { ExpressCheckoutItem } from '@scifi/product';
-import { PaymentEvent } from '@scifi/types';
+import { PaymentEvent } from '../payment.type';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({

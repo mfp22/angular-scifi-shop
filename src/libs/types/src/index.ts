@@ -3,12 +3,6 @@ import { Product, SingleProduct } from '@scifi/product';
 import { Status } from '@scifi/http';
 import { Review } from '@scifi/reviews/review.type';
 
-export type PaymentEvent = {
-  status: 'completed' | 'pending';
-  paymentMethod: 'Card' | 'Klarna' | 'PayPal';
-  total: number;
-};
-
 // Response returned from searching order history for a specific product id
 export type OrderSearchResponse = {
   productId: number;
