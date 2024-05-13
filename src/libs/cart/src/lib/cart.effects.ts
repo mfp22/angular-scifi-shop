@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { CartService } from '@scifi/cart/cart.service';
 import { dispatchErrorAction } from '@scifi/dialog/notification.actions';
-import { Cart } from '@scifi/types';
 import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs/operators';
 import {
   addToCart,
@@ -15,6 +13,8 @@ import {
   updateCartSuccess,
 } from './cart.actions';
 import { selectCartItems } from './cart.feature';
+import { CartService } from './cart.service';
+import { Cart } from './cart.type';
 
 @Injectable()
 export class CartEffects {

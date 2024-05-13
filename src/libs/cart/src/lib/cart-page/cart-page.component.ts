@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
 import { Customer } from '@scifi/account/customer.type';
 import { Status } from '@scifi/http';
-import { selectCartItemsCount, selectLoadStatus } from '@scifi/ngrx/cart/cart.feature';
 import { Observable } from 'rxjs';
+import { selectCartItemsCount, selectLoadStatus } from '../cart.feature';
 
 @Component({
   selector: 'app-cart-page',

@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Observable, Subscription, EMPTY } from 'rxjs';
+import { EMPTY, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart-sidebar',
   templateUrl: './cart-sidebar.component.html',
   styleUrls: ['./cart-sidebar.component.sass'],
 })
-export class CartSidebarComponent implements AfterViewInit {
+export class CartSidebarComponent implements AfterViewInit, OnDestroy {
   @Input() events: Observable<void> = EMPTY;
   @ViewChild(MatSidenav) cart: MatSidenav | undefined;
   private _eventsSubscription: Subscription = Subscription.EMPTY;

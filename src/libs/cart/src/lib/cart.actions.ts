@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Cart, CartItem } from '@scifi/types';
+import { CartItem } from './cart-item.type';
+import { Cart } from './cart.type';
 
 export const loadCart = createAction('[Cart Component] Load Cart', props<{ customerId: number }>());
 

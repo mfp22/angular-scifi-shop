@@ -12,6 +12,7 @@ import {
   selectLogoutStatus,
 } from '@scifi/account/auth.feature';
 import { Customer } from '@scifi/account/customer.type';
+import { selectCartItemsCount } from '@scifi/cart/cart.feature';
 import {
   Category,
   selectCategories,
@@ -20,7 +21,6 @@ import {
   selectSuppliersLoadStatus,
 } from '@scifi/category';
 import { Status } from '@scifi/http';
-import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 

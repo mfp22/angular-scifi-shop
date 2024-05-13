@@ -1,31 +1,6 @@
 import { Product } from '@scifi/product';
 import { Status } from '@scifi/http';
 
-export type CartItemDetail = {
-  quantity: number;
-  product: Product;
-};
-
-export type Cart = {
-  id: number;
-  name: string;
-  username: string;
-  cartItems: CartItemDetail[] | [];
-};
-
-export type CartItem = {
-  productId: number;
-  customerId: number;
-  quantity: number;
-};
-
-export type CartState = {
-  loadStatus: Status;
-  updateStatus: Status;
-  activeId: number;
-  cart: Cart | null;
-};
-
 export type WishlistItem = {
   productId: number;
   customerId: number;

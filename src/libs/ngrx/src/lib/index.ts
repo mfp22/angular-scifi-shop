@@ -4,10 +4,10 @@ import { AccountState } from '@scifi/account/account-state.type';
 import { accountReducer } from '@scifi/account/account.feature';
 import { AuthState } from '@scifi/account/auth-state.type';
 import { authReducer } from '@scifi/account/auth.feature';
+import { CartState } from '@scifi/cart/cart-state.type';
+import { cartReducer } from '@scifi/cart/cart.feature';
 import { CategoriesState, categoriesReducer } from '@scifi/category';
 import { NotificationState, notificationReducer } from '@scifi/dialog/notification.feature';
-import { CartState } from '@scifi/types';
-import { cartReducer } from './cart/cart.feature';
 
 export type AppState = {
   authSlice: AuthState;

@@ -17,11 +17,10 @@ import { Store } from '@ngrx/store';
 import { selectAccount } from '@scifi/account/account.feature';
 import { Customer } from '@scifi/account/customer.type';
 import { Address } from '@scifi/address';
+import { selectCartTotal } from '@scifi/cart/cart.feature';
 import { notify } from '@scifi/dialog/notification.actions';
-import { selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
 import { selectExpressCheckoutItem } from '@scifi/orders/orders.feature';
 import { ExpressCheckoutItem } from '@scifi/product';
-import { PaymentEvent } from '../payment.type';
 import {
   Appearance,
   PaymentIntentResult,
@@ -32,6 +31,7 @@ import {
 import { StripePaymentElementComponent, StripeService } from 'ngx-stripe';
 import { Observable, Subscription, combineLatest, map, shareReplay } from 'rxjs';
 import { CheckoutService } from '../checkout.service';
+import { PaymentEvent } from '../payment.type';
 
 @Component({
   selector: 'app-payment',

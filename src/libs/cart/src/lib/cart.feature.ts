@@ -1,6 +1,7 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { httpError } from '@scifi/dialog/notification.actions';
-import { Cart, CartItemDetail, CartState } from '@scifi/types';
+import { CartItemDetail } from './cart-item-detail.type';
+import { CartState } from './cart-state.type';
 import {
   addToCart,
   clearCart,
@@ -12,6 +13,7 @@ import {
   updateActiveId,
   updateCartSuccess,
 } from './cart.actions';
+import { Cart } from './cart.type';
 
 const initialState: CartState = {
   cart: null,

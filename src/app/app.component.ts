@@ -8,11 +8,11 @@ import { selectAccount } from '@scifi/account/account.feature';
 import { selectLoggedInUserId, selectShowOverlay } from '@scifi/account/auth.feature';
 import { AuthService } from '@scifi/account/auth.service';
 import { Customer } from '@scifi/account/customer.type';
+import { loadCart } from '@scifi/cart/cart.actions';
 import { loadCategories, loadSuppliers } from '@scifi/category';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { selectData, selectShowDialog } from '@scifi/dialog/notification.feature';
-import { loadCart } from '@scifi/ngrx/cart/cart.actions';
 import { loadWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 

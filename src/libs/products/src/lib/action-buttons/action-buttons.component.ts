@@ -1,25 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
-import {
-  addToCart,
-  removeCartItem,
-  resetStatus,
-  updateActiveId,
-} from '@scifi/ngrx/cart/cart.actions';
-import { selectCartItems } from '@scifi/ngrx/cart/cart.feature';
-import { Product } from '@scifi/product';
-import { CartItem } from '@scifi/types';
+import { CartItem } from '@scifi/cart/cart-item.type';
+import { addToCart, removeCartItem, resetStatus, updateActiveId } from '@scifi/cart/cart.actions';
+import { selectCartItems } from '@scifi/cart/cart.feature';
+import { Product, ProductDialogComponent } from '@scifi/product';
 import { Observable, Subscription } from 'rxjs';
-import { ProductDialogComponent } from '../../../../product/src/lib/product-dialog/product-dialog.component';
 
 @Component({
   selector: 'app-action-buttons',
   templateUrl: './action-buttons.component.html',
   styleUrls: ['./action-buttons.component.sass'],
 })
-export class ActionButtonsComponent {
+export class ActionButtonsComponent implements OnInit, OnDestroy {
   @Input() product: Product | undefined;
   readonly cart$: Observable<CartItem[] | [] | null> = this._store.select(selectCartItems);
   private readonly _loggedInUserId$: Observable<number | string | null> =

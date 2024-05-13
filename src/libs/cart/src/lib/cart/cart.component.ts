@@ -3,22 +3,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { Status } from '@scifi/http';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import {
   clearCart,
   modifyQuantity,
   removeCartItem,
   resetStatus,
   updateActiveId,
-} from '@scifi/ngrx/cart/cart.actions';
+} from '../cart.actions';
 import {
   selectActiveId,
   selectCart,
   selectCartTotal,
   selectLoadStatus,
   selectUpdateStatus,
-} from '@scifi/ngrx/cart/cart.feature';
-import { Cart } from '@scifi/types';
-import { Observable, Subscription, combineLatest, map } from 'rxjs';
+} from '../cart.feature';
+import { Cart } from '../cart.type';
 
 @Component({
   selector: 'app-cart',

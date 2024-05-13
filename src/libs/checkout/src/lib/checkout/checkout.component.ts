@@ -9,14 +9,14 @@ import { AccountService } from '@scifi/account/account.service';
 import { AddressEmitData } from '@scifi/account/address-step/address-step.component';
 import { selectLoggedInUserId } from '@scifi/account/auth.feature';
 import { Address } from '@scifi/address';
-import { loadCart } from '@scifi/ngrx/cart/cart.actions';
-import { selectCartItemsCount } from '@scifi/ngrx/cart/cart.feature';
+import { loadCart } from '@scifi/cart/cart.actions';
+import { selectCartItemsCount } from '@scifi/cart/cart.feature';
 import { NewOrderResponse } from '@scifi/orders/new-order-response.type';
 import { clearExpressCheckout, createOrder } from '@scifi/orders/orders.actions';
 import { selectExpressCheckoutItem, selectNewOrder } from '@scifi/orders/orders.feature';
 import { ExpressCheckoutItem } from '@scifi/product';
-import { PaymentEvent } from '../payment.type';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import { PaymentEvent } from '../payment.type';
 
 @Component({
   selector: 'app-checkout',

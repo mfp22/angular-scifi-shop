@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { selectCart, selectCartTotal } from '@scifi/ngrx/cart/cart.feature';
+import { selectCart, selectCartTotal } from '@scifi/cart/cart.feature';
+import { Cart } from '@scifi/cart/cart.type';
 import { addExpressCheckoutItem } from '@scifi/orders/orders.actions';
 import { selectExpressCheckoutItem } from '@scifi/orders/orders.feature';
-import { Cart } from '@scifi/types';
 import { ExpressCheckoutItem } from '@scifi/product';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order-items',

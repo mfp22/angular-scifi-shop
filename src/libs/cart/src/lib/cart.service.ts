@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { selectAccount } from '@scifi/account/account.feature';
-import { Cart, CartItem } from '@scifi/types';
+import { Injectable } from '@angular/core';
+import { CartItem } from './cart-item.type';
+import { Cart } from './cart.type';
 
 @Injectable({
   providedIn: 'root',
