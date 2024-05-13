@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Wishlist, WishlistBasic } from '@scifi/types';
+import { WishlistBasic } from './wishlist-basic.type';
+import { Wishlist } from './wishlist.type';
 
 export const loadWishlist = createAction(
   '[Wishlist Component] Load Wishlist',

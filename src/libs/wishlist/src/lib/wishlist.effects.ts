@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { dispatchErrorAction } from '@scifi/dialog/notification.actions';
-import { Wishlist } from '@scifi/types';
-import { WishlistService } from '@scifi/wishlist/wishlist.service';
 import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs';
 import {
   loadWishlist,
@@ -12,6 +10,8 @@ import {
   updateWishlistSuccess,
 } from './wishlist.actions';
 import { selectWishlist } from './wishlist.feature';
+import { Wishlist } from './wishlist.type';
+import { WishlistService } from './wishlist.service';
 
 @Injectable()
 export class WishlistEffects {

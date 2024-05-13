@@ -21,10 +21,10 @@ import { FooterComponent } from '@scifi/footer/footer.component';
 import { HomeComponent } from '@scifi/home/home.component';
 import { MaterialModule } from '@scifi/material/material.module';
 import { NavComponent } from '@scifi/nav/nav.component';
-import { metaReducers, reducers } from '@scifi/ngrx/index';
 import { SearchComponent } from '@scifi/search/search.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { metaReducers, reducers } from './app.reducer';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavComponent, DialogComponent],

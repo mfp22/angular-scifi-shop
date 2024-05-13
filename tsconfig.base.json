@@ -24,7 +24,6 @@
       "@scifi/http": ["src/libs/http/src/index.ts"],
       "@scifi/material/*": ["src/libs/material/src/lib/*"],
       "@scifi/nav/*": ["src/libs/nav/src/lib/*"],
-      "@scifi/ngrx/*": ["src/libs/ngrx/src/lib/*"],
       "@scifi/orders/*": ["src/libs/orders/src/lib/*"],
       "@scifi/page-not-found/*": ["src/libs/page-not-found/src/lib/*"],
       "@scifi/pagination": ["src/libs/pagination/src/index.ts"],
@@ -33,7 +32,6 @@
       "@scifi/reviews/*": ["src/libs/reviews/src/lib/*"],
       "@scifi/search/*": ["src/libs/search/src/lib/*"],
       "@scifi/spinner/*": ["src/libs/spinner/src/lib/*"],
-      "@scifi/types": ["src/libs/types/src/index.ts"],
       "@scifi/wishlist/*": ["src/libs/wishlist/src/lib/*"]
     }
   }

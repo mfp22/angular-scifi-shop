@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WishlistComponent } from './wishlist/wishlist.component';
-import { StoreModule } from '@ngrx/store';
-import { wishlistFeature } from '@scifi/ngrx/wishlist/wishlist.feature';
+import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { WishlistEffects } from '@scifi/ngrx/wishlist/wishlist.effects';
+import { StoreModule } from '@ngrx/store';
+import { ChipsComponent } from '@scifi/chips/chips.component';
 import { MaterialModule } from '@scifi/material/material.module';
 import { SpinnerModule } from '@scifi/spinner/spinner.module';
 import { NgLetModule } from 'ng-let';
 import { AppRoutingModule } from '../../../../app/app-routing.module';
-import { ChipsComponent } from '@scifi/chips/chips.component';
+import { WishlistEffects } from './wishlist.effects';
+import { wishlistFeature } from './wishlist.feature';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 @NgModule({
   declarations: [WishlistComponent],

@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,16 +11,16 @@ import {
 } from '@scifi/cart/cart.feature';
 import { Category, Supplier, selectCategories, selectSuppliers } from '@scifi/category';
 import { Status } from '@scifi/http';
-import { resetWishlistStatus } from '@scifi/ngrx/wishlist/wishlist.actions';
+import { Pagination } from '@scifi/pagination';
+import { Product } from '@scifi/product';
+import { resetWishlistStatus } from '@scifi/wishlist/wishlist.actions';
 import {
   selectActiveId as selectActiveWishlistId,
   selectWishlist,
   selectUpdateStatus as selectWishlistUpdateStatus,
-} from '@scifi/ngrx/wishlist/wishlist.feature';
-import { Pagination } from '@scifi/pagination';
-import { Product } from '@scifi/product';
-import { Wishlist } from '@scifi/types';
+} from '@scifi/wishlist/wishlist.feature';
 import { WishlistService } from '@scifi/wishlist/wishlist.service';
+import { Wishlist } from '@scifi/wishlist/wishlist.type';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import { selectLoadStatus, selectPagination, selectProducts } from '../products.feature';
 
@@ -45,7 +45,7 @@ const placeholderProduct = {
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.sass'],
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('scrollRef') scrollRef: ElementRef | undefined;
   loggedInUserId$: Observable<string | number | null> = this._store.select(selectLoggedInUserId);
   wishlist$: Observable<Wishlist | null> = this._store.select(selectWishlist);

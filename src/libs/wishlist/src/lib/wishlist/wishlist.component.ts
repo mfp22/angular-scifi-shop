@@ -3,16 +3,16 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Status } from '@scifi/http';
-import { resetWishlistStatus } from '@scifi/ngrx/wishlist/wishlist.actions';
+import { Observable, Subscription, map, shareReplay } from 'rxjs';
+import { resetWishlistStatus } from '../wishlist.actions';
 import {
   selectActiveId,
   selectLoadStatus,
   selectUpdateStatus,
   selectWishlist,
-} from '@scifi/ngrx/wishlist/wishlist.feature';
-import { Wishlist } from '@scifi/types';
-import { Observable, Subscription, map, shareReplay } from 'rxjs';
+} from '../wishlist.feature';
 import { WishlistService } from '../wishlist.service';
+import { Wishlist } from '../wishlist.type';
 
 @Component({
   selector: 'app-wishlist',

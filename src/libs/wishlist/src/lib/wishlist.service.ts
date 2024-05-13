@@ -1,13 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  resetWishlistStatus,
-  updateActiveId,
-  updateWishlist,
-} from '@scifi/ngrx/wishlist/wishlist.actions';
 import { Product } from '@scifi/product';
-import { Wishlist, WishlistBasic, WishlistItem } from '@scifi/types';
+import { WishlistBasic } from './wishlist-basic.type';
+import { WishlistItem } from './wishlist-item.type';
+import { resetWishlistStatus, updateActiveId, updateWishlist } from './wishlist.actions';
+import { Wishlist } from './wishlist.type';
 
 @Injectable({
   providedIn: 'root',

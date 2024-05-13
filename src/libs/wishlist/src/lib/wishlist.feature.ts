@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { clearCurrentUser } from '@scifi/account/account.actions';
 import { httpError } from '@scifi/dialog/notification.actions';
-import { WishlistState } from '@scifi/types';
+import { WishlistState } from './wishlist-state.type';
 import {
   loadWishlist,
   loadWishlistSuccess,

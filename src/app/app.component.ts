@@ -13,7 +13,7 @@ import { loadCategories, loadSuppliers } from '@scifi/category';
 import { DialogContent } from '@scifi/dialog/dialog-content.type';
 import { DialogComponent } from '@scifi/dialog/dialog.component';
 import { selectData, selectShowDialog } from '@scifi/dialog/notification.feature';
-import { loadWishlist } from '@scifi/ngrx/wishlist/wishlist.actions';
+import { loadWishlist } from '@scifi/wishlist/wishlist.actions';
 import { Observable, Subscription, combineLatest, map } from 'rxjs';
 
 @Component({
