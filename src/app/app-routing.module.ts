@@ -1,37 +1,11 @@
-import { inject, NgModule } from '@angular/core';
-import { CanActivateFn, Router, RouterModule, Routes } from '@angular/router';
-import { ProductListComponent } from '@scifi/products/product-list/product-list.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '@scifi/home/home.component';
 import { AccountComponent } from '@scifi/account/account/account.component';
 import { CheckoutComponent } from '@scifi/checkout/checkout/checkout.component';
-import { OrdersComponent } from '@scifi/orders/orders/orders.component';
-import { SingleOrderComponent } from '@scifi/orders/single-order/single-order.component';
 import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
-import { NewOrderRedirectComponent } from '@scifi/orders/new-order-redirect/new-order-redirect.component';
-import { SingleProductComponent } from '@scifi/products/single-product/single-product.component';
-import { WishlistComponent } from '@scifi/wishlist/wishlist/wishlist.component';
 import { CartPageComponent } from '@scifi/cart/cart-page/cart-page.component';
-import { FavoritesComponent } from '@scifi/products/favorites/favorites.component';
-import { ReviewsPageComponent } from '@scifi/reviews/reviews-page/reviews-page.component';
-import { AuthService } from '@scifi/auth/auth.service';
-
-const authenticationGuard: CanActivateFn = () => {
-  const customerAccount = inject(AuthService).accountData;
-  if (!customerAccount) {
-    return inject(Router).createUrlTree(['/']);
-  } else {
-    return true;
-  }
-};
-
-const newOrderGuard: CanActivateFn = () => {
-  const loggedInUserId = inject(AuthService).loggedInUserId;
-  if (!loggedInUserId) {
-    return inject(Router).createUrlTree(['/']);
-  } else {
-    return true;
-  }
-};
+import { authenticationGuard } from './authenticationGuard';
 
 const routes: Routes = [
   {
@@ -41,11 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    component: ProductListComponent,
-  },
-  {
-    path: 'products/:id',
-    component: SingleProductComponent,
+    loadChildren: () => import('@scifi/products/products.module').then((m) => m.ProductsModule),
   },
   {
     path: 'account',
@@ -61,38 +31,15 @@ const routes: Routes = [
   },
   {
     path: 'wishlist',
-    title: 'My wishlist',
-    component: WishlistComponent,
-    canActivate: [authenticationGuard],
-  },
-  {
-    path: 'favorites',
-    title: 'My favorites',
-    component: FavoritesComponent,
-    canActivate: [authenticationGuard],
+    loadChildren: () => import('@scifi/wishlist/wishlist.module').then((m) => m.WishlistModule),
   },
   {
     path: 'reviews',
-    title: 'Product reviews',
-    component: ReviewsPageComponent,
+    loadChildren: () => import('@scifi/reviews/reviews.module').then((m) => m.ReviewsModule),
   },
   {
     path: 'orders',
-    title: 'My orders',
-    component: OrdersComponent,
-    canActivate: [authenticationGuard],
-  },
-  {
-    path: 'orders/new',
-    title: 'New order',
-    component: NewOrderRedirectComponent,
-    canActivate: [newOrderGuard],
-  },
-  {
-    path: 'orders/:id',
-    title: 'Single order',
-    component: SingleOrderComponent,
-    canActivate: [authenticationGuard],
+    loadChildren: () => import('@scifi/orders/orders.module').then((m) => m.OrdersModule),
   },
   {
     path: 'checkout',

@@ -32,7 +32,13 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     SpinnerModule,
     PageNotFoundComponent,
-    RouterModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        title: 'Product reviews',
+        component: ReviewsComponent,
+      },
+    ]),
     ChipsComponent,
     StoreModule.forFeature(reviewsFeature),
     EffectsModule.forFeature(ReviewsEffects),

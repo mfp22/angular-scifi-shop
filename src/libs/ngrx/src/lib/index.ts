@@ -8,19 +8,11 @@ import { cartReducer } from './cart/cart.feature';
 import { categoriesReducer } from './categories/categories.feature';
 import { httpError } from './notification/notification.actions';
 import { notificationReducer } from './notification/notification.feature';
-import { ordersReducer } from './orders/orders.feature';
-import { productsReducer } from './products/products.feature';
-import { reviewsReducer } from './reviews/reviews.feature';
-import { wishlistReducer } from './wishlist/wishlist.feature';
 
 export const reducers: ActionReducerMap<AppState> = {
   authSlice: authReducer,
   accountSlice: accountReducer,
-  productsSlice: productsReducer,
-  ordersSlice: ordersReducer,
   cartSlice: cartReducer,
-  wishlistSlice: wishlistReducer,
-  reviewsSlice: reviewsReducer,
   notificationSlice: notificationReducer,
   categoriesSlice: categoriesReducer,
 };

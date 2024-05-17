@@ -23,6 +23,7 @@
     "@angular/router": "^16.1.0",
     "@ngrx/effects": "^16.2.0",
     "@ngrx/store": "^16.2.0",
+    "@ngrx/store-devtools": "16.2",
     "@stripe/stripe-js": "^1.54.2",
     "igniteui-webcomponents": "^4.3.1",
     "ng-let": "^16.0.2",

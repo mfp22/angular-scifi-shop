@@ -23,6 +23,7 @@ import { reviewsFeature } from '@scifi/ngrx/reviews/reviews.feature';
 import { ReviewsEffects } from '@scifi/ngrx/reviews/reviews.effects';
 import { ChipsComponent } from '@scifi/chips/chips.component';
 import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.component';
+import { authenticationGuard } from '../../../../app/authenticationGuard';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,22 @@ import { PageNotFoundComponent } from '@scifi/page-not-found/page-not-found.comp
     EffectsModule.forFeature(ProductsEffects),
     EffectsModule.forFeature(ReviewsEffects),
     EffectsModule.forFeature(WishlistEffects),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ProductListComponent,
+      },
+      {
+        path: 'favorites',
+        title: 'My favorites',
+        component: FavoritesComponent,
+        canActivate: [authenticationGuard],
+      },
+      {
+        path: ':id',
+        component: SingleProductComponent,
+      },
+    ]),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

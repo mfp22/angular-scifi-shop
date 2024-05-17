@@ -396,9 +396,5 @@ export type AppState = {
   accountSlice: AccountState;
   categoriesSlice: CategoriesState;
   cartSlice: CartState;
-  wishlistSlice: WishlistState;
-  productsSlice: ProductsState;
-  ordersSlice: OrdersState;
-  reviewsSlice: ReviewsState;
   notificationSlice: NotificationState;
 };
