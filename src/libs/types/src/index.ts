@@ -272,6 +272,10 @@ export type NotificationState = {
   data: DialogContent | null;
 };
 
+export type CounterState = {
+  count: number;
+};
+
 export type Status = 'pending' | 'loading' | 'success' | 'error';
 export type AddressId = 'billingAddressId' | 'shippingAddressId';
 

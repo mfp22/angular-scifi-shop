@@ -16,6 +16,7 @@
       "@scifi/cart/*": ["src/libs/cart/src/lib/*"],
       "@scifi/checkout/*": ["src/libs/checkout/src/lib/*"],
       "@scifi/chips/*": ["src/libs/chips/src/lib/*"],
+      "@scifi/counter": ["src/libs/counter/src/index.ts"],
       "@scifi/dialog/*": ["src/libs/dialog/src/lib/*"],
       "@scifi/footer/*": ["src/libs/footer/src/lib/*"],
       "@scifi/home/*": ["src/libs/home/src/lib/*"],
