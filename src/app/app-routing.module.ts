@@ -14,8 +14,8 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'counter',
-    title: 'Counter',
+    path: 'counter2',
+    title: 'Counter 2',
     loadChildren: () => import('@scifi/counter').then((m) => m.CounterModule),
   },
   {

@@ -3,18 +3,18 @@ import { CounterState } from './counter-state.type';
 import { decrement, increment } from './counter.actions';
 
 const initialState: CounterState = {
-  count: 0,
+  count2: 0,
 };
 
 export const counterReducer = createReducer(
   initialState,
-  on(increment, (state) => ({ count: state.count + 1 })),
-  on(decrement, (state) => ({ count: state.count - 1 })),
+  on(increment, (state) => ({ count2: state.count2 + 1 })),
+  on(decrement, (state) => ({ count2: state.count2 - 1 })),
 );
 
 export const counterFeature = createFeature({
-  name: 'count',
+  name: 'count2',
   reducer: counterReducer,
 });
 
-export const { selectCount } = counterFeature;
+export const { selectCount2 } = counterFeature;

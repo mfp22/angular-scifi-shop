@@ -3,7 +3,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store, StoreModule } from '@ngrx/store';
 import { decrement, increment } from './counter.actions';
-import { counterFeature, selectCount } from './counter.feature';
+import { counterFeature, selectCount2 } from './counter.feature';
 
 @Component({
   selector: 'lib-counter',
@@ -13,7 +13,7 @@ import { counterFeature, selectCount } from './counter.feature';
   styleUrls: ['./counter.component.css'],
 })
 export class CounterComponent {
-  count$ = this.store.select(selectCount);
+  count2$ = this.store.select(selectCount2);
 
   increment = () => this.store.dispatch(increment());
   decrement = () => this.store.dispatch(decrement());

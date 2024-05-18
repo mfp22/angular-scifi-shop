@@ -1,3 +1,3 @@
 export type CounterState = {
-  count: number;
+  count2: number;
 };
