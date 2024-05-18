@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store, StoreModule } from '@ngrx/store';
-import { decrement, increment } from '@scifi/ngrx/counter/counter.actions';
-import { counterFeature, selectCount } from '@scifi/ngrx/counter/counter.feature';
+import { decrement, increment } from './counter.actions';
+import { counterFeature, selectCount } from './counter.feature';
 
 @Component({
   selector: 'lib-counter',

@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { CounterState } from '@scifi/types';
+import { CounterState } from './counter-state.type';
 import { decrement, increment } from './counter.actions';
 
 const initialState: CounterState = {
